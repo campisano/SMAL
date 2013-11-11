@@ -1,10 +1,18 @@
 package br.com.smal.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Posicao {
      
-	private Integer id;
+	@Id
+	@GeneratedValue
+	private Long id;
 	private int fila;
-
+    private int coluna;
+	
 	public int getFila() {
 		return fila;
 	}
@@ -13,11 +21,19 @@ public class Posicao {
 		this.fila = fila;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
 	}
 }

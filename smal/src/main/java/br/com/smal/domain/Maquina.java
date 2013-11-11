@@ -1,14 +1,21 @@
 package br.com.smal.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Maquina {
 
-	private Integer patrimonio;
+	@Id
+	private Long id;
 
-	public Integer getPatrimonio() {
-		return patrimonio;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPatrimonio(Integer patrimonio) {
-		this.patrimonio = patrimonio;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+
 }
