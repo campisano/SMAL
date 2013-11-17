@@ -2,8 +2,10 @@ package br.com.smal.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "maquina")
 public class Maquina {
 
 	@Id
@@ -16,6 +18,4 @@ public class Maquina {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 }

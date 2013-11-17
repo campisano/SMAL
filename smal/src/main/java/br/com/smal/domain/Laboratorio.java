@@ -8,13 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "laboratorio")
 public class Laboratorio {
-	
-    @Id
-    @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private Long id;
+
 	public List<Posicao> getPosicao() {
 		return posicao;
 	}
@@ -26,9 +29,9 @@ public class Laboratorio {
 	private String nome;
 
 	@OneToMany
-	@JoinColumn(name="ID_LABORATORIO" , referencedColumnName="ID")
+	@JoinColumn(name = "ID_LABORATORIO", referencedColumnName = "ID")
 	private List<Posicao> posicao = new ArrayList<Posicao>();
-	
+
 	public String getNome() {
 		return nome;
 	}

@@ -3,16 +3,18 @@ package br.com.smal.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "posicao")
 public class Posicao {
-     
+
 	@Id
 	@GeneratedValue
 	private Long id;
 	private int fila;
-    private int coluna;
-	
+	private int coluna;
+
 	public int getFila() {
 		return fila;
 	}

@@ -3,8 +3,10 @@ package br.com.smal.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "subproblema")
 public class Subproblema {
 
 	@Id
@@ -18,6 +20,4 @@ public class Subproblema {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 }

@@ -6,11 +6,11 @@ import javax.persistence.Persistence;
 
 public class JpaUtil {
 
-	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mobicare");
-	
-	public EntityManager getEntityManager(){
-		
+	private static EntityManagerFactory entityManagerFactory = Persistence
+			.createEntityManagerFactory("smal-persistence-unit");
+
+	public EntityManager getEntityManager() {
+
 		return entityManagerFactory.createEntityManager();
 	}
-	
 }

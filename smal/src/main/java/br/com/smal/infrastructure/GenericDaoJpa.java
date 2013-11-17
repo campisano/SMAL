@@ -5,47 +5,66 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+/*
+@Repository
 public class GenericDaoJpa<T> {
-	
-    private static EntityManager em;
-	
 
 	Logger logger = Logger.getLogger(GenericDaoJpa.class.getName());
-	
-	public GenericDaoJpa(){
-		GenericDaoJpa.em = new JpaUtil().getEntityManager();
-		
+
+	protected EntityManager entityManager;
+
+	public EntityManager getEntityManager() {
+		return entityManager;
 	}
 
+	@PersistenceContext
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+*/
+
+public class GenericDaoJpa<T> {
+
+	private static EntityManager entityManager;
+
+	Logger logger = Logger.getLogger(GenericDaoJpa.class.getName());
+
+	public GenericDaoJpa() {
+		GenericDaoJpa.entityManager = new JpaUtil().getEntityManager();
+
+	}
 	
 	public boolean incluir(T entidade) {
 		EntityTransaction tx = null;
 		try {
-			tx = em.getTransaction();
+			tx = entityManager.getTransaction();
 			tx.begin();
-			em.persist(entidade);
+			entityManager.persist(entidade);
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null && tx.isActive())
 				tx.rollback();
-			throw new DAOException("Erro na inclus�o de objeto.", ex);
+			throw new DAOException("Erro na inclusão de objeto.", ex);
 		}
 		return true;
 	}
 
-	public boolean excluir(T entidade) {
+	public boolean excluir(Class<T> c, Long id) {
 		EntityTransaction tx = null;
 		try {
-			tx = em.getTransaction();
+			tx = entityManager.getTransaction();
 			tx.begin();
-			em.remove(entidade);
+			T entidade = entityManager.find(c, id);
+			entityManager.remove(entidade);
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null && tx.isActive())
 				tx.rollback();
-			throw new DAOException("Erro durante a exclus�o.", ex);
+			throw new DAOException("Erro durante a exclusão.", ex);
 		}
 		return true;
 	}
@@ -53,35 +72,44 @@ public class GenericDaoJpa<T> {
 	public boolean alterar(T entidade) {
 		EntityTransaction tx = null;
 		try {
-			
-			tx = em.getTransaction();
+			tx = entityManager.getTransaction();
 			tx.begin();
-			entidade = em.merge(entidade);
+			entidade = entityManager.merge(entidade);
 			tx.commit();
-	
 		} catch (Exception ex) {
 			if (tx != null && tx.isActive())
 				tx.rollback();
-			throw new DAOException("Erro durante a inclus�o.", ex);
+			throw new DAOException("Erro durante a inclusão.", ex);
 		}
 		return true;
 	}
 
+	public T obterPorId(Class<T> c, Object id) throws DAOException {
+		T entidade = null;
+
+		try {
+			logger.info("Resgatando entidade cujo id é " + id + " da classe: "
+					+ c.getName());
+			entidade = entityManager.find(c, id);
+		} catch (RuntimeException ex) {
+			throw new DAOException("Erro durante a pesquisa de objeto.", ex);
+		}
+		return entidade;
+	}
 
 	public List<T> obterTodos(Class<T> c) {
-
 		logger.info("Resgatando todos as entidades da classe: " + c.getName());
 
 		String entityName;
 
-		entityName = c.getName().substring(c.getName().lastIndexOf('.') + 1).toLowerCase();
-				
+		entityName = c.getName().substring(c.getName().lastIndexOf('.') + 1);
+
 		return obterEntidades("SELECT e FROM " + entityName + " e");
 	}
 
 	public List<T> obterEntidades(String queryString,
 			final Object... positionalParams) {
-		Query query = em.createQuery(queryString);
+		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 		for (Object p : positionalParams) {
 			query.setParameter(++i, p);
@@ -93,20 +121,14 @@ public class GenericDaoJpa<T> {
 	}
 
 	public T obterEntidade(String queryString, final Object... positionalParams) {
-		Query query = em.createQuery(queryString);
+		Query query = entityManager.createQuery(queryString);
 		int i = 0;
 		for (Object p : positionalParams) {
 			query.setParameter(++i, p);
 		}
-		
 		@SuppressWarnings("unchecked")
 		T entidade = (T) query.getSingleResult();
 
 		return entidade;
 	}
-
-	
-	
-
-	
 }
