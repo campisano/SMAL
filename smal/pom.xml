@@ -1,119 +1,245 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.smal</groupId>
-  <artifactId>smal</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>mobicare Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-<repositories>
-    <repository>
-        <id>maven2-repository.dev.java.net</id>
-        <name>Java.net Repository for Maven</name>
-        <url>http://download.java.net/maven/2</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-    <repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-</repositories>
-             
- <dependencies>
-  <!-- Postgres SQL -->
-   	 <dependency>
-	  	<groupId>postgresql</groupId>
-	 	<artifactId>postgresql</artifactId>
-		<version>9.1-901.jdbc4</version>
-	 </dependency>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.smal</groupId>
+	<artifactId>smal</artifactId>
+	<packaging>war</packaging>
+	<version>0.1</version>
+	<name>Smal</name>
+	<url>http://maven.apache.org</url>
 
-		<!-- PrimeFaces -->
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.6</java.version>
+
+		<!-- Optional deploy -->
+		<catalina.version>6.0.37</catalina.version>
+
+		<!-- Optional testing -->
+		<junit.version>4.11</junit.version>
+		<spring-test.version>3.2.5.RELEASE</spring-test.version>
+
+		<!-- Spring -->
+		<spring-core.version>3.2.5.RELEASE</spring-core.version>
+		<spring-context.version>3.2.5.RELEASE</spring-context.version>
+		<spring-web.version>3.2.5.RELEASE</spring-web.version>
+		<spring-orm.version>3.2.5.RELEASE</spring-orm.version>
+		<spring-tx.version>3.2.5.RELEASE</spring-tx.version>
+		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
+
+		<!-- Logging -->
+		<log4j.version>1.2.17</log4j.version>
+		<slf4j-api.version>1.7.5</slf4j-api.version>
+		<slf4j-simple.version>1.7.5</slf4j-simple.version>
+
+		<!-- Database -->
+		<derby.version>10.10.1.1</derby.version>
+		<hsqldb.version>2.3.1</hsqldb.version>
+		<hibernate-entitymanager.version>3.4.0.GA</hibernate-entitymanager.version>
+		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+
+		<!-- Jersey -->
+		<jersey-server.version>1.17.1</jersey-server.version>
+		<jersey-servlet.version>1.17.1</jersey-servlet.version>
+		<jersey-json.version>1.17.1</jersey-json.version>
+
+		<!-- Jersey + Spring -->
+		<jersey-spring.version>1.17.1</jersey-spring.version>
+	</properties>
+
+	<build>
+		<finalName>smal</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Optional deploy -->
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>3.3</version>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>catalina</artifactId>
+			<version>${catalina.version}</version>
+			<type>jar</type>
+			<scope>test</scope>
 		</dependency>
- 
-    <dependency>
-        <groupId>com.sun.faces</groupId>
-        <artifactId>jsf-api</artifactId>
-        <version>2.1.0-b03</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.sun.faces</groupId>
-        <artifactId>jsf-impl</artifactId>
-        <version>2.1.0-b03</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-        <version>1.2</version>
-    </dependency>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>2.5</version>
-    </dependency>
+
+		<!-- Optional testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-test.version}</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-core.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-context.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-web.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-orm.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-tx.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j-simple.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<!-- Database -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>${derby.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
+			<type>jar</type>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<scope>compile</scope>
-			<version>1.0.1.Final</version>
+			<version>${hibernate-jpa.version}</version>
+			<type>jar</type>
 		</dependency>
- 
+
+		<!-- Jersey -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
-			<version>4.0.0.Final</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey-server.version}</version>
+			<type>jar</type>
 		</dependency>
- 
+
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<scope>compile</scope>
-			<version>1.0.0.GA</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>${jersey-servlet.version}</version>
+			<type>jar</type>
 		</dependency>
- 
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<scope>compile</scope>
-			<version>4.2.0.Final</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>${jersey-json.version}</version>
+			<type>jar</type>
 		</dependency>
- 
+
+		<!-- Jersey + Spring -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<scope>runtime</scope>
-			<version>4.0.0.Final</version>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-spring</artifactId>
+			<version>${jersey-spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>compile</scope>
-			<version>1.6.4</version>
-		</dependency>
-        <dependency> 
-         <groupId>org.slf4j</groupId>
-         <artifactId>slf4j-log4j12</artifactId>
-         <version>1.7.5</version>
-        </dependency>
-        <dependency>
-	     <groupId>com.googlecode.json-simple</groupId>
-    	 <artifactId>json-simple</artifactId>
-	     <version>1.1</version>
-        </dependency>
-         
- </dependencies>
-  <build>
-    <finalName>smal</finalName>
-  </build>
+
+	</dependencies>
 </project>

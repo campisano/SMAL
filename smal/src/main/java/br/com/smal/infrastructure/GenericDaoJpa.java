@@ -1,4 +1,4 @@
-package br.com.smal.infra;
+package br.com.smal.infrastructure;
 
 import java.util.List;
 import java.util.logging.Logger;

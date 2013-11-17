@@ -1,4 +1,4 @@
-package br.com.smal.infra;
+package br.com.smal.infrastructure;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

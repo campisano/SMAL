@@ -1,4 +1,4 @@
-package br.com.smal.infra;
+package br.com.smal.infrastructure;
 
 public class DAOException extends RuntimeException {
 
