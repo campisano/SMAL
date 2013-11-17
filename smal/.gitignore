@@ -1,6 +1,4 @@
-/target
-/log
-/db
-/target
-/target
-/target
+target
+log
+db
+derby.log
