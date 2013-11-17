@@ -1,6 +1,14 @@
+SMAL
+====
 
-from campisano.org
+Projeto de Engenharia de Software CEFET-RJ
 
+
+
+Vademecum
+====
+
+from www.campisano.org/wiki/en/Struts2Spring3Hibernate4
 mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp -DgroupId=br.cefet-rj.smal -DartifactId=smal -Dversion=0.1 -DinteractiveMode=false
 
 cd smal/
