@@ -68,15 +68,9 @@ public class UsuarioTest {
 
 		entityManager.getTransaction().begin();
 		try {
-			Usuario user = new Usuario();
-
-			user.setMatricula(Long.toString(new Date().getTime()));
+			Usuario user = null;
 
 			entityManager.persist(user);
-
-			if (true) {
-				throw new Exception();
-			}
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

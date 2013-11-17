@@ -20,6 +20,7 @@ public class LaboratorioTest {
 
 	@Autowired
 	private LaboratorioRepositorio laboratorioRepositorio;
+	private static ApplicationContext context;
 
 	public void setLaboratorioRepositorio(
 			LaboratorioRepositorio laboratorioRepositorio) {
@@ -27,7 +28,7 @@ public class LaboratorioTest {
 	}
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
+		context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
 		LaboratorioRepositorio laboratorioRepositorio = context
 				.getBean(LaboratorioRepositorio.class);

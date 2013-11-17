@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
+//import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Repository;
 /*
 @Repository
 public class GenericDaoJpa<T> {
