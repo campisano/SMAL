@@ -12,6 +12,7 @@ function LaboratoriosViewModel() {
 
 	// incluir
 	self.incluir = function(laboratorio) {
+		self.notificar("Incluindo...", JSON.stringify(ko.toJSON(laboratorio)));
 		$.ajax("/smal/json/laboratorio/incluir", {
 			cache : false,
 			type : "POST",
@@ -33,6 +34,7 @@ function LaboratoriosViewModel() {
 
 	// obterTodos
 	self.obterTodos = function() {
+		self.notificar("Obtendo todos...", "");
 		$.ajax("/smal/json/laboratorio/obterTodos", {
 			cache : false,
 			type : "GET",
@@ -58,6 +60,7 @@ function LaboratoriosViewModel() {
 
 	// alterar
 	self.alterar = function(laboratorio) {
+		self.notificar("Alterando...", JSON.stringify(ko.toJSON(laboratorio)));
 		$.ajax("/smal/json/laboratorio/alterar", {
 			cache : false,
 			type : "POST",
@@ -80,6 +83,7 @@ function LaboratoriosViewModel() {
 
 	// excluir
 	self.excluir = function(laboratorio) {
+		self.notificar("Excluindo...", JSON.stringify(ko.toJSON(laboratorio)));
 		$.ajax("/smal/json/laboratorio/excluir", {
 			cache : false,
 			type : "POST",
@@ -116,7 +120,7 @@ function LaboratoriosViewModel() {
 	// notificar
 	self.notificar = function(title, mensagem) {
 		$.notific8(mensagem, {
-			life : 5000,
+			sticky : true,
 			heading : title,
 			theme : "ebony",
 			horizontalEdge : "bottom",
