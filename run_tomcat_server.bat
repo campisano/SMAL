@@ -27,7 +27,9 @@
 @SET PATH=%PATH%;%M2%
 
 :MAVEN_OK
-@ECHO Maven home path defined
+
+@ECHO Maven home path defined: "%M2_HOME%"
+
 
 
 @IF NOT "%JAVA_HOME%"=="" GOTO JAVA_OK
@@ -47,7 +49,8 @@
 @SET PATH=%PATH%;%JAVA_HOME%\bin
 
 :JAVA_OK
-@ECHO Java home path defined
+
+@ECHO Java home path defined: "%JAVA_HOME%"
 
 
 
