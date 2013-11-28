@@ -78,6 +78,7 @@ public class UsuarioJSONService {
 			}
 
 			usuario_salvo.setNome(usuario.getNome());
+			usuario_salvo.setMatricula(usuario.getMatricula());
 
 			if (usuarioRepositorio.alterar(usuario_salvo)) {
 				return new RespostaJSON<Object>(true, usuario_salvo);
