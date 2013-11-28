@@ -28,6 +28,10 @@ public class Usuario {
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Chamado> chamados = new ArrayList<Chamado>();
+	
+	private String nome;
+	
+	private String matricula;
 
 	public Long getId() {
 		return id;
@@ -53,5 +57,15 @@ public class Usuario {
 		this.chamados.add(chamado);
 	}
 
-	private String matricula;
+
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	
 }

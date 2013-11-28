@@ -120,7 +120,7 @@ function LaboratoriosViewModel() {
 	// notificar
 	self.notificar = function(title, mensagem) {
 		$.notific8(mensagem, {
-			sticky : true,
+			life : 5000,
 			heading : title,
 			theme : "ebony",
 			horizontalEdge : "bottom",
