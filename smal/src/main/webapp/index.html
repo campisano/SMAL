@@ -1,11 +1,110 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta http-equiv="refresh" content="0; url=laboratorio.html" />
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="css/layout.css" rel="stylesheet" />
+    <!-- core -->
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+    <script src="scripts/knockout-3.0.0.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("a.nav").click(function (e) {
+                var that = $(this);
+                changePage(this.href, that.attr("preload-text"), that.attr("preload-img"));
+                return false;
+            });
+        });
+
+        $(window).bind('popstate', function () {
+            refreshPage();
+        });
+
+        document.onkeydown = function () {
+            switch (event.keyCode) {
+                case 116: //F5 button
+                    event.returnValue = false;
+                    event.keyCode = 0;
+                    refreshPage();
+                    return false;
+                case 82: //R button
+                    if (event.ctrlKey) {
+                        event.returnValue = false;
+                        event.keyCode = 0;
+                        refreshPage();
+                        return false;
+                    }
+            }
+        }
+
+        function refreshPage() {
+            var preload = $('#preload');
+            var content = $("#content");
+            preload.addClass('in');
+            setTimeout(function () {
+                $.get(location.pathname, function (data) {
+                    content.html(data);
+                    preload.removeClass('in');
+                });
+            }, 800);
+        }
+
+        function changePage(url, text, image) {
+            var content = $("#content");
+            var preload = $('#preload');
+            if (image != undefined)
+                preload.find("img").attr('src', image);
+            if (text != undefined)
+                preload.find('h1').text(text);
+            preload.addClass('in');
+            setTimeout(function () {
+                $.get(url, function (data) {
+                    content.html(data);
+                    preload.removeClass('in');
+                });
+            }, 800);
+        }
+    </script>
 </head>
 <body>
+    <header>
+        <div id="logo_wrapper" align="center">
+            <img src="/smal/img/smal.png" />
+        </div>
+        <span id="main_search_wrapper">
+            <input type="search" id="main_search_input" />
+            <input type="image" id="main_search_submit" src="/smal/img/main_search_icon.png" />
+        </span>
+    </header>
+    <div id="main">
+        <aside id="main_menu">
+            <nav>
+                <a class="nav" preload-text="Tickets" preload-img="/smal/img/ticket_icon.png" href="/smal/tickets.html">
+                    <img src="/smal/img/ticket_min_icon.png" />
+                    Tickets
+                </a>
+                <a class="nav" preload-text="Usuários" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
+                    <img src="/smal/img/usuario_min_icon.png" />
+                    Usuários
+                </a>
+                <a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
+                    <img src="/smal/img/laboratorio_min_icon.png" />
+                    Laboratórios
+                </a>
+                <a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
+                    <img src="/smal/img/laboratorio_min_icon.png" />
+                    Problemas
+                </a>
+            </nav>
+        </aside>
+        <div id="content">teste</div>
+    </div>
+    <div id="preload">
+        <div>
+            <img src="/img/laboratorio_icon.png" />
+            <h1></h1>
+        </div>
+    </div>
 </body>
 </html>

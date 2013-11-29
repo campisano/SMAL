@@ -1,0 +1,34 @@
+#new_ticket_wrapper
+{
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.08);
+}
+
+#new_ticket_description_wrapper
+{
+    padding: 8px;
+}
+
+#new_ticket_description
+{
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    resize: none;
+    width: 100%;
+}
+
+    #new_ticket_description:focus
+    {
+        outline: none;
+    }
+
+#new_ticket_options_wrapper
+{
+    background: #f9f9f9;
+    padding: 8px;
+    border-top: 1px solid #f5f5f5;
+}

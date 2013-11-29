@@ -1,0 +1,19 @@
+
+<script src="scripts/app/laboratorios.datacontext.js"></script>
+<script src="scripts/app/laboratorios.viewmodel.js"></script>
+<script>
+    $(document).ready(function () {
+        ko.applyBindings(window.app.viewmodel, document.getElementById('laboratorios_view'));
+    });
+</script>
+<div id="laboratorios_view" class="default_content_wrapper">
+    <h1>laboratorios</h1>
+    <table class="default_table" data-bind="foreach: laboratorios">
+        <tr>
+            <td><a data-bind="text: id"></a></td>
+            <td><span data-bind="text: nome"></span></td>
+            <td><a>Alterar</a></td>
+            <td><a>Excluir</a></td>
+        </tr>
+    </table>
+</div>
