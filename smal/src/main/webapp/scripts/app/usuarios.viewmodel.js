@@ -1,4 +1,4 @@
-﻿var usu = {};
+var usu = {};
 window.app = window.app || {};
 window.app.viewmodel = (function () {
     var self = this;

@@ -1,4 +1,4 @@
-﻿window.app = window.app || {};
+window.app = window.app || {};
 window.app.datacontext = {
 	obterTodos: function (list) {
 		$.ajax("/smal/json/laboratorio/obterTodos", {
