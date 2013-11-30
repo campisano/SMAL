@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<title>Laboratorios</title>
+	<!-- JSON compatibility library https://github.com/douglascrockford/JSON-js/ -->
+	<script type="text/javascript" src="lib/JSON-js/json2.js"></script>
+	
+	<!-- Javascript library http://jquery.com/ -->
+	<script type="text/javascript" src="lib/jquery/jquery-1.10.2.min.js"></script>
+	
+	<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
+	<script type="text/javascript" src="lib/notific8/jquery.notific8.min.js"></script>
+	<link rel="Stylesheet" href="lib/notific8/jquery.notific8.min.css" />
+	
+	<!-- MVVM library http://knockoutjs.com/ -->
+	<script type="text/javascript" src="lib/knockout/knockout-3.0.0.js"></script>
+	
+	<!-- page views and models css -->
+	<script type="text/javascript" src="model/laboratorioModel.js"></script>
+	<script type="text/javascript" src="controller/laboratoriosController.js"></script>
+	
+	<!-- page css -->
+	<link rel="Stylesheet" href="css/coderunner.css" />
+	<link rel="Stylesheet" href="css/loadingsaving.css" />
+	</head>
+<body>
+	<h3>Laboratorios</h3>
+
+	<form data-bind="submit: incluiLaboratorio">
+		Inclui novo laboratorio: <input type="text" name="nome"
+			placeholder="Informa o nome do laboratorio" />
+		<button type="submit">Inclui</button>
+	</form>
+
+	<ul
+		data-bind="foreach: laboratorios, visible: laboratorios().length > 0">
+		<li><input data-bind="value: nome" /> <a href="#"
+			data-bind="click: $parent.alterar">Altera</a> <a href="#"
+			data-bind="click: $parent.excluir">Exclui</a></li>
+	</ul>
+
+	Existem
+	<b data-bind="text: laboratorios().length">&nbsp;</b> laboratorios
+
+	<script type="text/javascript">
+		ko.applyBindings(new LaboratoriosViewModel());
+	</script>
+</body>
+</html>
