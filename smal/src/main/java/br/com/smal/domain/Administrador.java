@@ -3,36 +3,19 @@ package br.com.smal.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "administrador")
-public class Administrador {
-
-	@Id
-	@GeneratedValue
-	private Long id;
+@DiscriminatorValue("administrador")
+public class Administrador extends Tecnico {
 
 	@OneToMany
 	private List<Chamado> chamados = new ArrayList<Chamado>();
 
-	private String nome;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
 
 	public List<Chamado> getChamados() {
 		return chamados;
@@ -40,9 +23,5 @@ public class Administrador {
 
 	public void addChamados(Chamado chamado) {
 		this.chamados.add(chamado);
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 }
