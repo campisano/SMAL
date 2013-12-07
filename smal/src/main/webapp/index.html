@@ -1,4 +1,4 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
@@ -40,31 +40,38 @@
         }
 
         function refreshPage() {
-            var preload = $('#preload');
-            var content = $("#content");
-            preload.addClass('in');
-            setTimeout(function () {
-                $.get(location.pathname, function (data) {
-                    content.html(data);
-                    preload.removeClass('in');
-                });
-            }, 800);
+            if(location.pathname != '/smal/index.html') {
+	            var preload = $('#preload');
+	            var content = $("#content");
+	            preload.addClass('in');
+	            setTimeout(function () {
+	                $.get(location.pathname, function (data) {
+	                    content.html(data);
+	                    preload.removeClass('in');
+	                });
+	            }, 800);
+            }
+            else {
+            	changePage('/smal/tickets.html',undefined,undefined);
+            }
         }
 
         function changePage(url, text, image) {
-            var content = $("#content");
-            var preload = $('#preload');
-            if (image != undefined)
-                preload.find("img").attr('src', image);
-            if (text != undefined)
-                preload.find('h1').text(text);
-            preload.addClass('in');
-            setTimeout(function () {
-                $.get(url, function (data) {
-                    content.html(data);
-                    preload.removeClass('in');
-                });
-            }, 800);
+            if(url != '/smal/index.html') {
+	            var content = $("#content");
+	            var preload = $('#preload');
+	            if (image != undefined)
+	                preload.find("img").attr('src', image);
+	            if (text != undefined)
+	                preload.find('h1').text(text);
+	            preload.addClass('in');
+	            setTimeout(function () {
+	                $.get(url, function (data) {
+	                    content.html(data);
+	                    preload.removeClass('in');
+	                });
+	            }, 800);
+            }
         }
     </script>
 </head>
@@ -77,6 +84,10 @@
             <input type="search" id="main_search_input" />
             <input type="image" id="main_search_submit" src="/smal/img/main_search_icon.png" />
         </span>
+        <div id="user_info_wrapper">
+        	<span>Pedro Mor</span>
+        	<img src="/smal/img/usuario_login_min.png">
+       	</div>
     </header>
     <div id="main">
         <aside id="main_menu">
@@ -85,21 +96,22 @@
                     <img src="/smal/img/ticket_min_icon.png" />
                     Tickets
                 </a>
-                <a class="nav" preload-text="Usu√°rios" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
+                <a class="nav" preload-text="Usu·rios" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
                     <img src="/smal/img/usuario_min_icon.png" />
-                    Usu√°rios
+                    Usu·rios
                 </a>
-                <a class="nav" preload-text="Laborat√≥rios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
+                <a class="nav" preload-text="LaboratÛrios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
                     <img src="/smal/img/laboratorio_min_icon.png" />
-                    Laborat√≥rios
+                    LaboratÛrios
                 </a>
-                <a class="nav" preload-text="Laborat√≥rios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
+                <a class="nav" preload-text="LaboratÛrios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
                     <img src="/smal/img/laboratorio_min_icon.png" />
                     Problemas
                 </a>
             </nav>
         </aside>
-        <div id="content">teste</div>
+        <div id="content">
+        </div>
     </div>
     <div id="preload">
         <div>

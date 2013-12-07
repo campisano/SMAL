@@ -7,6 +7,13 @@ body {
     overflow: hidden;
 }   
 
+a
+{
+	color: #3498db;
+	font-weight: blod;
+	text-decoration: none;
+}
+
 header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -325,4 +332,30 @@ body {
 	border: none;
 	border-radius: 2px;
 	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+#user_info_wrapper
+{
+	float: right;
+	line-height: 32px;
+	color: #fff;
+	padding: 4px;
+}
+
+#user_info_wrapper > span
+{
+	line-height: 32px;
+	display: inline-block;
+	float: left;
+}
+
+#user_info_wrapper > img 
+{
+	width: 32px;
+	height: 32px;
+	background: rgba(255,255,255,.4);
+	border-radius: 2px;
+	float: right;
+	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	margin-left: 8px;
 }

@@ -1,0 +1,34 @@
+<html>
+	<head>
+    <link href='/smal/css/login.css' rel='stylesheet' type='text/css'>
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+    <script>
+    $(document).ready(function() { 
+    	$("#btn_login").click(function() {
+        	$("#preload").addClass("in");
+        	setTimeout(function() {
+			window.location = "/smal/index.html";
+        	},600);
+       	});
+    });
+    </script>
+	</head>
+	<body>
+		<div id="login_wrapper">
+			<table id="login_table">
+				<tr>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td><input type="password"></td>
+				</tr>
+				<tr>
+					<td>
+						<input id="btn_login" type="submit" value="Entrar">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+<div id="preload"></div>
+</html>
