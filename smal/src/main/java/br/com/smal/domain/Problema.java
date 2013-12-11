@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,18 +18,8 @@ public class Problema {
 	@GeneratedValue
 	private Long id;
 	private String nome;
-
-	@OneToMany
-	@JoinColumn(name = "ID_PROBLEMA", referencedColumnName = "ID")
+	@OneToMany(mappedBy = "problema", fetch = FetchType.LAZY)
 	private List<Subproblema> subproblemas = new ArrayList<Subproblema>();
-
-	public List<Subproblema> getSubproblemas() {
-		return subproblemas;
-	}
-
-	public void setSubproblemas(List<Subproblema> subproblemas) {
-		this.subproblemas = subproblemas;
-	}
 
 	public Long getId() {
 		return id;
@@ -45,5 +35,13 @@ public class Problema {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Subproblema> getSubproblemas() {
+		return subproblemas;
+	}
+
+	public void setSubproblemas(List<Subproblema> subproblemas) {
+		this.subproblemas = subproblemas;
 	}
 }

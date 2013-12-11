@@ -13,5 +13,4 @@ public enum Status {
 	public int getValor() {
 		return valor;
 	}
-
 }

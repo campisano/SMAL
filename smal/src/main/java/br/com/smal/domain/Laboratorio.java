@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,20 +17,17 @@ public class Laboratorio {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	public List<Posicao> getPosicao() {
-		return posicao;
-	}
-
-	public void addPosicao(Posicao posicao) {
-		this.posicao.add(posicao);
-	}
-
 	private String nome;
+	@OneToMany(mappedBy = "laboratorio", fetch = FetchType.LAZY)
+	private List<Posicao> posicoes = new ArrayList<Posicao>();
 
-	@OneToMany
-	@JoinColumn(name = "ID_LABORATORIO", referencedColumnName = "ID")
-	private List<Posicao> posicao = new ArrayList<Posicao>();
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -40,11 +37,11 @@ public class Laboratorio {
 		this.nome = nome;
 	}
 
-	public Long getId() {
-		return id;
+	public List<Posicao> getPosicoes() {
+		return posicoes;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPosicao(List<Posicao> posicoes) {
+		this.posicoes = posicoes;
 	}
 }

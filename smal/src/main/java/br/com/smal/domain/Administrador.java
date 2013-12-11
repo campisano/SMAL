@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -13,15 +14,14 @@ import javax.persistence.Table;
 @DiscriminatorValue("administrador")
 public class Administrador extends Tecnico {
 
-	@OneToMany
-	private List<Chamado> chamados = new ArrayList<Chamado>();
+	@OneToMany(mappedBy = "designador", fetch = FetchType.LAZY)
+	private List<Chamado> designacoes = new ArrayList<Chamado>();
 
-
-	public List<Chamado> getChamados() {
-		return chamados;
+	public List<Chamado> getDesignacoes() {
+		return designacoes;
 	}
 
-	public void addChamados(Chamado chamado) {
-		this.chamados.add(chamado);
+	public void setDesignacoes(List<Chamado> designacoes) {
+		this.designacoes = designacoes;
 	}
 }

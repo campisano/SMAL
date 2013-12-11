@@ -5,15 +5,13 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "usuario")
@@ -24,14 +22,10 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@OneToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Chamado> chamados = new ArrayList<Chamado>();
-	
 	private String nome;
-	
 	private String matricula;
+	@OneToMany(mappedBy = "abridor", fetch = FetchType.LAZY)
+	private List<Chamado> aberturas = new ArrayList<Chamado>();
 
 	public Long getId() {
 		return id;
@@ -39,6 +33,14 @@ public class Usuario {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getMatricula() {
@@ -49,23 +51,11 @@ public class Usuario {
 		this.matricula = matricula;
 	}
 
-	public List<Chamado> getChamados() {
-		return chamados;
+	public List<Chamado> getAberturas() {
+		return aberturas;
 	}
 
-	public void addChamados(Chamado chamado) {
-		this.chamados.add(chamado);
+	public void setAberturas(List<Chamado> aberturas) {
+		this.aberturas = aberturas;
 	}
-
-
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	
 }

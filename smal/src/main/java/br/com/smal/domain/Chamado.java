@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,45 +17,51 @@ public class Chamado {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@Enumerated(EnumType.STRING)
-	private Status status;
-
-	private int protocolo;
-	private Date dataHoraAbertura;
-	private Date dataHoraFechamento;
+	private Long protocolo;
+	private Date data_hora_abertura;
+	private Date data_hora_fechamento;
 	private String descricao;
+	@ManyToOne(optional = false)
+	private Usuario abridor;
+	@ManyToOne(optional = true)
+	private Tecnico atendente;
+	@ManyToOne(optional = true)
+	private Administrador designador;
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
+	@ManyToOne(optional = false)
+	private Subproblema subproblema;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getProtocolo() {
+	public long getProtocolo() {
 		return protocolo;
 	}
 
-	public void setProtocolo(int protocolo) {
+	public void setProtocolo(long protocolo) {
 		this.protocolo = protocolo;
 	}
 
 	public Date getDataHoraAbertura() {
-		return dataHoraAbertura;
+		return data_hora_abertura;
 	}
 
-	public void setDataHoraAbertura(Date dataHoraAbertura) {
-		this.dataHoraAbertura = dataHoraAbertura;
+	public void setDataHoraAbertura(Date data_hora_abertura) {
+		this.data_hora_abertura = data_hora_abertura;
 	}
 
 	public Date getDataHoraFechamento() {
-		return dataHoraFechamento;
+		return data_hora_fechamento;
 	}
 
-	public void setDataHoraFechamento(Date dataHoraFechamento) {
-		this.dataHoraFechamento = dataHoraFechamento;
+	public void setDataHoraFechamento(Date data_hora_fechamento) {
+		this.data_hora_fechamento = data_hora_fechamento;
 	}
 
 	public String getDescricao() {
@@ -63,5 +70,45 @@ public class Chamado {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Usuario getAbridor() {
+		return abridor;
+	}
+
+	public void setAbridor(Usuario abridor) {
+		this.abridor = abridor;
+	}
+
+	public Tecnico getAtendente() {
+		return atendente;
+	}
+
+	public void setAtendente(Tecnico atendente) {
+		this.atendente = atendente;
+	}
+
+	public Administrador getDesignador() {
+		return designador;
+	}
+
+	public void setDesignador(Administrador designador) {
+		this.designador = designador;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Subproblema getSubproblema() {
+		return subproblema;
+	}
+
+	public void setSubproblema(Subproblema subproblema) {
+		this.subproblema = subproblema;
 	}
 }

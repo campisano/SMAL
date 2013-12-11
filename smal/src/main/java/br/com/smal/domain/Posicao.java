@@ -1,6 +1,5 @@
 package br.com.smal.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,10 +16,35 @@ public class Posicao {
 	private Long id;
 	private int fila;
 	private int coluna;
-	
-	@OneToOne(cascade={CascadeType.ALL})
-	Maquina maquina;
-	
+	@OneToOne(optional = true)
+	private Maquina maquina;
+	@ManyToOne(optional = false)
+	private Laboratorio laboratorio;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getFila() {
+		return fila;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+
+	public void setFila(int fila) {
+		this.fila = fila;
+	}
+
 	public Maquina getMaquina() {
 		return maquina;
 	}
@@ -35,32 +59,5 @@ public class Posicao {
 
 	public void setLaboratorio(Laboratorio laboratorio) {
 		this.laboratorio = laboratorio;
-	}
-
-	@ManyToOne
-	Laboratorio laboratorio;
-
-	public int getFila() {
-		return fila;
-	}
-
-	public void setFila(int fila) {
-		this.fila = fila;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public int getColuna() {
-		return coluna;
-	}
-
-	public void setColuna(int coluna) {
-		this.coluna = coluna;
 	}
 }
