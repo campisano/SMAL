@@ -1,4 +1,11 @@
 <link href="css/ticket.css" rel="stylesheet" />
+<script src="scripts/app/ticket.datacontext.js"></script>
+<script src="scripts/app/ticket.viewmodel.js"></script>
+<script>
+    $(document).ready(function () {
+        ko.applyBindings(window.app.viewmodel, document.getElementById('ticket_view'));
+    });
+</script>
 <div id="ticket_view" class="default_content_wrapper">
     <span class="item_status status_red" style="float: right;">Aberto</span>
     <h1>
@@ -14,26 +21,20 @@
     </section>
     <section>
         <h2>Atendimentos</h2>
-        <ul class="comments_list">
+        <ul class="comments_list" data-bind="foreach: tickets">
             <li>
                 <div class="comment_item">
-                    <span class="comment_user_name">pedromontemor</span><br />
-                    <div class="comment_description">Testando monitor.</div>
-                </div>
-            </li>
-            <li>
-                <div class="comment_item">
-                    <span class="comment_user_name">pedromontemor</span><br />
-                    <div class="comment_description">Testando monitor.</div>
+                    <span class="comment_user_name" data-bind="text: username"></span><br />
+                    <div class="comment_description"><span data-bind="text: description"></span></div>
                 </div>
             </li>
         </ul>
         <div id="new_comment_wrapper">
             <div id="new_comment_description_wrapper">
-                <textarea id="new_comment_description" placeholder="Descreva aqui o atendimento que foi realizado"></textarea>
+                <textarea id="new_comment_description" placeholder="Descreva aqui o atendimento que foi realizado" data-bind="value: newTicketDescription"></textarea>
             </div>
             <div id="new_comment_options_wrapper">
-                <a class="btn btn_green btn_add">Novo Atendimento</a>
+                <a class="btn btn_green btn_add" data-bind="click: inserirAtendimento">Novo Atendimento</a>
                 <a class="btn btn_red">Limpar</a>
             </div>
         </div>

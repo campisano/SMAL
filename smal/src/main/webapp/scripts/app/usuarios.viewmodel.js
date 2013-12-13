@@ -1,6 +1,5 @@
-var usu = {};
-window.app = window.app || {};
-window.app.viewmodel = (function () {
+var ticket = { name: "pedromontemor", tipo: "Aluno"};
+window.app.viewmodel = (function (datacontext) {
     var self = this;
-    this.usuarios = ko.observableArray([usu, usu, usu, usu, usu]);
-});
+    this.usuarios = ko.observableArray([ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket, ticket]);
+})(window.app.datacontext);

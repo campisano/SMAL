@@ -3,16 +3,35 @@
 <script>
     $(document).ready(function () {
         ko.applyBindings(window.app.viewmodel, document.getElementById('laboratorios_view'));
+		$("#novo_laboratorio_trigger").unbind("click");
+		$("#novo_laboratorio_trigger").pBox();
     });
 </script>
 <div id="laboratorios_view" class="default_content_wrapper">
+    <nav id="sub_menu">
+        <a id="novo_laboratorio_trigger" class="btn btn_verde btn_add" href="#novo_laboratorio_box">Novo Laboratório</a>
+    </nav>
     <h1>laboratorios</h1>
     <table class="default_table" data-bind="foreach: laboratorios">
+		<thead>
+			<tr>
+				<th>Laboratório</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
         <tr>
-            <td><a data-bind="text: id"></a></td>
             <td><span data-bind="text: nome"></span></td>
-            <td><a>Alterar</a></td>
             <td><a>Excluir</a></td>
         </tr>
     </table>
+</div>
+
+<div id="novo_laboratorio_box">
+	<input type="text" placeholder="Nome do laboratório"><input type="submit" value="Inserir">
 </div>
