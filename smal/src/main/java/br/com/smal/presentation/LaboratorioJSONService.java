@@ -1,5 +1,7 @@
 package br.com.smal.presentation;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,14 +11,16 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.smal.controller.LaboratorioController;
+import br.com.smal.controller.OperationResult;
+import br.com.smal.controller.OperationResultObject;
 import br.com.smal.domain.Laboratorio;
-import br.com.smal.persistence.LaboratorioRepositorio;
 
 @Component
 @Path("/laboratorio")
 public class LaboratorioJSONService {
 	@Autowired
-	LaboratorioRepositorio laboratorioRepositorio;
+	LaboratorioController laboratorioController;
 
 	@Path("/incluir")
 	@POST
@@ -29,10 +33,12 @@ public class LaboratorioJSONService {
 						"Erro : para uma inclusão, id deve ser nulo.");
 			}
 
-			if (laboratorioRepositorio.incluir(laboratorio)) {
+			OperationResult result = laboratorioController.incluir(laboratorio);
+
+			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, laboratorio);
 			} else {
-				return new RespostaJSON<Object>(false, "Erro interno :(");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
@@ -45,8 +51,14 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> obter(Laboratorio laboratorio) {
 		try {
-			return new RespostaJSON<Object>(true,
-					laboratorioRepositorio.obter(laboratorio.getId()));
+			OperationResultObject<Laboratorio> result = laboratorioController
+					.obter(laboratorio.getId());
+
+			if (result.isSuccess()) {
+				return new RespostaJSON<Object>(true, result.getObject());
+			} else {
+				return new RespostaJSON<Object>(false, result.getMessage());
+			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -57,8 +69,14 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> obterTodos() {
 		try {
-			return new RespostaJSON<Object>(true,
-					laboratorioRepositorio.obterTodos());
+			OperationResultObject<List<Laboratorio>> result = laboratorioController
+					.obterTodos();
+
+			if (result.isSuccess()) {
+				return new RespostaJSON<Object>(true, result.getObject());
+			} else {
+				return new RespostaJSON<Object>(false, result.getMessage());
+			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -70,20 +88,24 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> alterar(Laboratorio laboratorio) {
 		try {
-			Laboratorio laboratorio_salvo = laboratorioRepositorio
-					.obter(laboratorio.getId().longValue());
+			OperationResultObject<Laboratorio> result_obter = laboratorioController
+					.obter(laboratorio.getId());
 
-			if (laboratorio_salvo == null) {
+			if (!result_obter.isSuccess()) {
 				return new RespostaJSON<Object>(false,
-						"laboratorio inexistente");
+						result_obter.getMessage());
 			}
 
+			Laboratorio laboratorio_salvo = result_obter.getObject();
 			laboratorio_salvo.setNome(laboratorio.getNome());
 
-			if (laboratorioRepositorio.alterar(laboratorio_salvo)) {
+			OperationResult result = laboratorioController
+					.alterar(laboratorio_salvo);
+
+			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, laboratorio_salvo);
 			} else {
-				return new RespostaJSON<Object>(false, "erro");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
@@ -96,10 +118,13 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> excluir(Laboratorio laboratorio) {
 		try {
-			if (laboratorioRepositorio.excluir(laboratorio.getId().longValue())) {
+			OperationResult result = laboratorioController.excluir(laboratorio
+					.getId());
+
+			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, null);
 			} else {
-				return new RespostaJSON<Object>(false, "erro");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
