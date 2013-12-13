@@ -2,7 +2,6 @@ package br.com.smal.persistence;
 
 import java.util.List;
 
-import br.com.smal.domain.Laboratorio;
 import br.com.smal.domain.Maquina;
 
 public interface MaquinaDao {

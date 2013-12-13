@@ -17,6 +17,7 @@ import br.com.smal.persistence.UsuarioRepositorio;
 public class UsuarioJSONService {
 	@Autowired
 	UsuarioRepositorio usuarioRepositorio;
+
 	@Path("/incluir")
 	@POST
 	@Consumes("application/json; charset=UTF-8")
@@ -69,8 +70,7 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> alterar(Usuario usuario) {
 		try {
-			Usuario usuario_salvo = usuarioRepositorio
-					.obter(usuario.getId().longValue());
+			Usuario usuario_salvo = usuarioRepositorio.obter(usuario.getId());
 
 			if (usuario_salvo == null) {
 				return new RespostaJSON<Object>(false,
@@ -96,7 +96,7 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> excluir(Usuario usuario) {
 		try {
-			if (usuarioRepositorio.excluir(usuario.getId().longValue())) {
+			if (usuarioRepositorio.excluir(usuario.getId())) {
 				return new RespostaJSON<Object>(true, null);
 			} else {
 				return new RespostaJSON<Object>(false, "erro");
@@ -106,18 +106,3 @@ public class UsuarioJSONService {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

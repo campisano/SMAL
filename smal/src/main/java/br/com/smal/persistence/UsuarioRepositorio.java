@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.smal.domain.Laboratorio;
 import br.com.smal.domain.Usuario;
 
 @Component
@@ -17,7 +16,6 @@ public class UsuarioRepositorio {
 	public List<Usuario> obterTodos() {
 		return usuarioDao.obterTodos();
 	}
-	
 
 	public Usuario obter(long id) {
 		return usuarioDao.obter(id);
