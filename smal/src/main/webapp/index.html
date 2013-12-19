@@ -1,125 +1,125 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>SMAL</title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link href="css/layout.css" rel="stylesheet" />
-    <link href="pbox/pbox.css" rel="stylesheet" />
-    <!-- core -->
-    <script src="pbox/pbox.js"></script>
-    <script src="scripts/jquery-1.10.2.min.js"></script>
-    <script src="scripts/knockout-3.0.0.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>SMAL</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href="css/layout.css" rel="stylesheet" />
+	<link href="pbox/pbox.css" rel="stylesheet" />
+	<!-- core -->
+	<script src="pbox/pbox.js"></script>
+	<script src="scripts/jquery-1.10.2.min.js"></script>
+	<script src="scripts/knockout-3.0.0.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $("a.nav").click(function (e) {
-                var that = $(this);
-                changePage(this.href, that.attr("preload-text"), that.attr("preload-img"));
-                return false;
-            });
-        });
+	<script>
+		$(document).ready(function () {
+			$("a.nav").click(function (e) {
+				var that = $(this);
+				changePage(this.href, that.attr("preload-text"), that.attr("preload-img"));
+				return false;
+			});
+		});
 
-        $(window).bind('popstate', function () {
-            refreshPage();
-        });
+		$(window).bind('popstate', function () {
+			refreshPage();
+		});
 
-        document.onkeydown = function () {
-            switch (event.keyCode) {
-                case 116: //F5 button
-                    event.returnValue = false;
-                    event.keyCode = 0;
-                    refreshPage();
-                    return false;
-                case 82: //R button
-                    if (event.ctrlKey) {
-                        event.returnValue = false;
-                        event.keyCode = 0;
-                        refreshPage();
-                        return false;
-                    }
-            }
-        }
+		document.onkeydown = function () {
+			switch (event.keyCode) {
+				case 116: //F5 button
+					event.returnValue = false;
+					event.keyCode = 0;
+					refreshPage();
+					return false;
+				case 82: //R button
+					if (event.ctrlKey) {
+						event.returnValue = false;
+						event.keyCode = 0;
+						refreshPage();
+						return false;
+					}
+			}
+		}
 
-        function refreshPage() {
-            if(location.pathname != '/smal/index.html') {
-	            var preload = $('#preload');
-	            var content = $("#content");
-	            preload.addClass('in');
-	            setTimeout(function () {
-	                $.get(location.pathname, function (data) {
-	                    content.html(data);
-	                    preload.removeClass('in');
-	                });
-	            }, 800);
-            }
-            else {
-            	changePage('/smal/tickets.html',undefined,undefined);
-            }
-        }
+		function refreshPage() {
+			if(location.pathname != '/smal/index.html') {
+				var preload = $('#preload');
+				var content = $("#content");
+				preload.addClass('in');
+				setTimeout(function () {
+					$.get(location.pathname, function (data) {
+						content.html(data);
+						preload.removeClass('in');
+					});
+				}, 800);
+			}
+			else {
+				changePage('/smal/tickets.html',undefined,undefined);
+			}
+		}
 
-        function changePage(url, text, image) {
-            if(url != '/smal/index.html') {
-	            var content = $("#content");
-	            var preload = $('#preload');
-	            if (image != undefined)
-	                preload.find("img").attr('src', image);
-	            if (text != undefined)
-	                preload.find('h1').text(text);
-	            preload.addClass('in');
-	            setTimeout(function () {
-	                $.get(url, function (data) {
-	                    content.html(data);
-	                    preload.removeClass('in');
-	                });
-	            }, 800);
-            }
-        }
-    </script>
+		function changePage(url, text, image) {
+			if(url != '/smal/index.html') {
+				var content = $("#content");
+				var preload = $('#preload');
+				if (image != undefined)
+					preload.find("img").attr('src', image);
+				if (text != undefined)
+					preload.find('h1').text(text);
+				preload.addClass('in');
+				setTimeout(function () {
+					$.get(url, function (data) {
+						content.html(data);
+						preload.removeClass('in');
+					});
+				}, 800);
+			}
+		}
+	</script>
 </head>
 <body>
-    <header>
-        <div id="logo_wrapper" align="center">
-            <img src="/smal/img/smal.png" />
-        </div>
-        <span id="main_search_wrapper">
-            <input type="search" id="main_search_input" />
-            <input type="image" id="main_search_submit" src="/smal/img/main_search_icon.png" />
-        </span>
-        <div id="user_info_wrapper">
-        	<span>Pedro Mor</span>
-        	<img src="/smal/img/usuario_login_min.png">
-       	</div>
-    </header>
-    <div id="main">
-        <aside id="main_menu">
-            <nav>
-                <a class="nav" preload-text="Tickets" preload-img="/smal/img/ticket_icon.png" href="/smal/tickets.html">
-                    <img src="/smal/img/ticket_min_icon.png" />
-                    Tickets
-                </a>
-                <a class="nav" preload-text="Usuários" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
-                    <img src="/smal/img/usuario_min_icon.png" />
-                    Usuários
-                </a>
-                <a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
-                    <img src="/smal/img/laboratorio_min_icon.png" />
-                    Laboratórios
-                </a>
-                <a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
-                    <img src="/smal/img/laboratorio_min_icon.png" />
-                    Problemas
-                </a>
-            </nav>
-        </aside>
-        <div id="content">
-        </div>
-    </div>
-    <div id="preload">
-        <div>
-            <img src="/smal/img/laboratorio_icon.png" />
-            <h1></h1>
-        </div>
-    </div>
+	<header>
+		<div id="logo_wrapper" align="center">
+			<img src="/smal/img/smal.png" />
+		</div>
+		<span id="main_search_wrapper">
+			<input type="search" id="main_search_input" />
+			<input type="image" id="main_search_submit" src="/smal/img/main_search_icon.png" />
+		</span>
+		<div id="user_info_wrapper">
+			<span>Pedro Mor</span>
+			<img src="/smal/img/usuario_login_min.png">
+	   	</div>
+	</header>
+	<div id="main">
+		<aside id="main_menu">
+			<nav>
+				<a class="nav" preload-text="Tickets" preload-img="/smal/img/ticket_icon.png" href="/smal/tickets.html">
+					<img src="/smal/img/ticket_min_icon.png" />
+					Tickets
+				</a>
+				<a class="nav" preload-text="UsuÃ¡rios" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
+					<img src="/smal/img/usuario_min_icon.png" />
+					UsuÃ¡rios
+				</a>
+				<a class="nav" preload-text="LaboratÃ³rios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
+					<img src="/smal/img/laboratorio_min_icon.png" />
+					LaboratÃ³rios
+				</a>
+				<a class="nav" preload-text="LaboratÃ³rios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
+					<img src="/smal/img/laboratorio_min_icon.png" />
+					Problemas
+				</a>
+			</nav>
+		</aside>
+		<div id="content">
+		</div>
+	</div>
+	<div id="preload">
+		<div>
+			<img src="/smal/img/laboratorio_icon.png" />
+			<h1></h1>
+		</div>
+	</div>
 </body>
 </html>

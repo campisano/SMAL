@@ -1,14 +1,14 @@
 <script src="scripts/app/problemas.datacontext.js"></script>
 <script src="scripts/app/problemas.viewmodel.js"></script>
 <script>
-    $(document).ready(function () {
-        ko.applyBindings(window.app.viewmodel, document.getElementById('problemas_view'));
-    });
+	$(document).ready(function () {
+		ko.applyBindings(window.app.viewmodel, document.getElementById('problemas_view'));
+	});
 </script>
 <div id="problemas_view" class="default_content_wrapper">
-	    <nav id="sub_menu">
-        <a class="ticket_anchor btn btn_verde btn_add" href="/smal/novo_ticket.html">Novo Problema</a>
-    </nav>
+		<nav id="sub_menu">
+		<a class="ticket_anchor btn btn_verde btn_add" href="/smal/novo_ticket.html">Novo Problema</a>
+	</nav>
 	<h1>Problemas</h1>
 	<table class="default_table">
 		<thead>
