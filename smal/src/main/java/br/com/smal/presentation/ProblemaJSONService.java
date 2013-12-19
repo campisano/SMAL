@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.smal.domain.Problema;
 import br.com.smal.persistence.ProblemaRepositorio;
+import br.com.smal.util.RespostaJSON;
 
 @Component
 @Path("/problema")

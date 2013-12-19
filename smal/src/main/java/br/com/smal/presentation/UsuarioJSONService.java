@@ -11,10 +11,11 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.smal.OperationResult;
-import br.com.smal.OperationResultObject;
 import br.com.smal.controller.UsuarioController;
 import br.com.smal.domain.Usuario;
+import br.com.smal.util.OperationResult;
+import br.com.smal.util.OperationResultObject;
+import br.com.smal.util.RespostaJSON;
 
 @Component
 @Path("/usuario")

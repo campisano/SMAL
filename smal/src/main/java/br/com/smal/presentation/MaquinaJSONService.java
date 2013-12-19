@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.smal.domain.Maquina;
 import br.com.smal.persistence.MaquinaRepositorio;
+import br.com.smal.util.RespostaJSON;
 
 @Component
 @Path("/maquina")

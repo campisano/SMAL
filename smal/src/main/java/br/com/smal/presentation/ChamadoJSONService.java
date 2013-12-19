@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.smal.domain.Chamado;
 import br.com.smal.persistence.ChamadoRepositorio;
+import br.com.smal.util.RespostaJSON;
 
 @Component
 @Path("/chamado")

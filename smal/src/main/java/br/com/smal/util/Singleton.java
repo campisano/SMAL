@@ -1,4 +1,4 @@
-package br.com.smal;
+package br.com.smal.util;
 
 public class Singleton<T> {
 
