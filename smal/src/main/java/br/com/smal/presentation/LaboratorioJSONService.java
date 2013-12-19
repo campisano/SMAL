@@ -11,9 +11,9 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.smal.OperationResult;
+import br.com.smal.OperationResultObject;
 import br.com.smal.controller.LaboratorioController;
-import br.com.smal.controller.OperationResult;
-import br.com.smal.controller.OperationResultObject;
 import br.com.smal.domain.Laboratorio;
 
 @Component

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.smal.OperationResult;
+import br.com.smal.OperationResultObject;
 import br.com.smal.domain.Laboratorio;
 import br.com.smal.persistence.LaboratorioRepositorio;
 

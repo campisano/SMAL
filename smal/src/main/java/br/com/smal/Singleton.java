@@ -1,4 +1,4 @@
-package br.com.smal.controller;
+package br.com.smal;
 
 public class Singleton<T> {
 
