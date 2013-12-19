@@ -15,9 +15,6 @@ public class LaboratorioController {
 	@Autowired
 	LaboratorioRepositorio laboratorioRepositorio;
 
-	private LaboratorioController() {
-	}
-
 	public OperationResult incluir(Laboratorio laboratorio) {
 
 		List<Laboratorio> list = laboratorioRepositorio.obterTodos();
@@ -35,7 +32,7 @@ public class LaboratorioController {
 		}
 	}
 
-	public OperationResultObject<Laboratorio> obter(Long id) {
+	public OperationResultObject<Laboratorio> obter(long id) {
 		Laboratorio lab = laboratorioRepositorio.obter(id);
 
 		if (lab != null) {
@@ -57,7 +54,17 @@ public class LaboratorioController {
 		}
 	}
 
-	public OperationResult alterar(Laboratorio laboratorio_salvo) {
+	public OperationResult alterar(Laboratorio laboratorio) {
+
+		Laboratorio laboratorio_salvo = laboratorioRepositorio
+				.obter(laboratorio.getId());
+
+		if (laboratorio_salvo == null) {
+			return new OperationResult(false, "Erro interno.");
+		}
+
+		laboratorio_salvo.setNome(laboratorio.getNome());
+
 		if (laboratorioRepositorio.alterar(laboratorio_salvo)) {
 			return new OperationResult(true, "");
 		} else {
@@ -65,7 +72,7 @@ public class LaboratorioController {
 		}
 	}
 
-	public OperationResult excluir(Long id) {
+	public OperationResult excluir(long id) {
 		if (laboratorioRepositorio.excluir(id)) {
 			return new OperationResult(true, "");
 		} else {

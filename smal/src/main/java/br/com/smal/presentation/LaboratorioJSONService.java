@@ -88,22 +88,10 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> alterar(Laboratorio laboratorio) {
 		try {
-			OperationResultObject<Laboratorio> result_obter = laboratorioController
-					.obter(laboratorio.getId());
-
-			if (!result_obter.isSuccess()) {
-				return new RespostaJSON<Object>(false,
-						result_obter.getMessage());
-			}
-
-			Laboratorio laboratorio_salvo = result_obter.getObject();
-			laboratorio_salvo.setNome(laboratorio.getNome());
-
-			OperationResult result = laboratorioController
-					.alterar(laboratorio_salvo);
+			OperationResult result = laboratorioController.alterar(laboratorio);
 
 			if (result.isSuccess()) {
-				return new RespostaJSON<Object>(true, laboratorio_salvo);
+				return new RespostaJSON<Object>(true, laboratorio);
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}
