@@ -1,50 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-	<meta charset="utf-8">
-	<title>Problemas</title>
-	<!-- JSON compatibility library https://github.com/douglascrockford/JSON-js/ -->
-	<script type="text/javascript" src="lib/JSON-js/json2.js"></script>
-	
-	<!-- Javascript library http://jquery.com/ -->
-	<script type="text/javascript" src="lib/jquery/jquery-1.10.2.min.js"></script>
-	
-	<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
-	<script type="text/javascript" src="lib/notific8/jquery.notific8.min.js"></script>
-	<link rel="Stylesheet" href="lib/notific8/jquery.notific8.min.css" />
-	
-	<!-- MVVM library http://knockoutjs.com/ -->
-	<script type="text/javascript" src="lib/knockout/knockout-3.0.0.js"></script>
-	
-	<!-- page views and models css -->
-	<script type="text/javascript" src="model/problemaModel.js"></script>
-	<script type="text/javascript" src="controller/problemasController.js"></script>
-	
-	<!-- page css -->
-	<link rel="Stylesheet" href="css/coderunner.css" />
-	<link rel="Stylesheet" href="css/loadingsaving.css" />
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Problemas</title>
+		<!-- JSON compatibility library https://github.com/douglascrockford/JSON-js/ -->
+		<script type="text/javascript" src="lib/JSON-js/json2.js"></script>
+		
+		<!-- Javascript library http://jquery.com/ -->
+		<script type="text/javascript" src="lib/jquery/jquery-1.10.2.min.js"></script>
+		
+		<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
+		<script type="text/javascript" src="lib/notific8/jquery.notific8.min.js"></script>
+		<link rel="Stylesheet" href="lib/notific8/jquery.notific8.min.css" />
+		
+		<!-- MVVM library http://knockoutjs.com/ -->
+		<script type="text/javascript" src="lib/knockout/knockout-3.0.0.js"></script>
+		
+		<!-- page views and models css -->
+		<script type="text/javascript" src="model/problemaModel.js"></script>
+		<script type="text/javascript" src="controller/problemasController.js"></script>
+		
+		<!-- page css -->
+		<link rel="Stylesheet" href="css/coderunner.css" />
+		<link rel="Stylesheet" href="css/loadingsaving.css" />
 	</head>
-<body>
-	<h3>Problemas</h3>
-
-	<form data-bind="submit: incluiProblema">
-		Inclui novo problema: <input type="text" name="nome"
-			placeholder="Informa o nome do problema" />
-		<button type="submit">Inclui</button>
-	</form>
-
-	<ul
-		data-bind="foreach: problemas, visible: problemas().length > 0">
-		<li><input data-bind="value: nome" /> <a href="#"
-			data-bind="click: $parent.alterar">Altera</a> <a href="#"
-			data-bind="click: $parent.excluir">Exclui</a></li>
-	</ul>
-
-	Existem
-	<b data-bind="text: problemas().length">&nbsp;</b> problemas
-
-	<script type="text/javascript">
-		ko.applyBindings(new ProblemasViewModel());
-	</script>
-</body>
+	<body>
+		<h3>Problemas</h3>
+	
+		<form data-bind="submit: incluiProblema">
+			Inclui novo problema: <input type="text" name="nome"
+				placeholder="Informa o nome do problema" />
+			<button type="submit">Inclui</button>
+		</form>
+	
+		<ul
+			data-bind="foreach: problemas, visible: problemas().length > 0">
+			<li><input data-bind="value: nome" /> <a href="#"
+				data-bind="click: $parent.alterar">Altera</a> <a href="#"
+				data-bind="click: $parent.excluir">Exclui</a></li>
+		</ul>
+	
+		Existem
+		<b data-bind="text: problemas().length">&nbsp;</b> problemas
+	
+		<script type="text/javascript">
+			ko.applyBindings(new ProblemasViewModel());
+		</script>
+	</body>
 </html>
