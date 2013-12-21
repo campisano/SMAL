@@ -29,7 +29,8 @@ public class UsuarioJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> incluir(Usuario usuario , @Context HttpServletRequest req ) {
+	public RespostaJSON<Object> incluir(Usuario usuario,
+			@Context HttpServletRequest req) {
 		try {
 			if (usuario.getId() != null) {
 				return new RespostaJSON<Object>(false,
@@ -40,7 +41,7 @@ public class UsuarioJSONService {
 
 			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, usuario);
-				
+
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}

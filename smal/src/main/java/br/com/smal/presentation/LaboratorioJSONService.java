@@ -29,12 +29,6 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> incluir(Laboratorio laboratorio) {
 		try {
-			
-			if (laboratorio.getId() != null) {
-				return new RespostaJSON<Object>(false,
-						"Erro : para uma inclusão, id deve ser nulo.");
-			}
-
 			OperationResult result = laboratorioController.incluir(laboratorio);
 
 			if (result.isSuccess()) {
@@ -90,10 +84,11 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> alterar(Laboratorio laboratorio) {
 		try {
-			OperationResult result = laboratorioController.alterar(laboratorio);
+			OperationResult result = laboratorioController.alterar(
+					laboratorio.getId(), laboratorio);
 
 			if (result.isSuccess()) {
-				return new RespostaJSON<Object>(true, laboratorio);
+				return new RespostaJSON<Object>(true, null);
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}

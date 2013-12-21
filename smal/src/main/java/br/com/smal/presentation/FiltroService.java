@@ -15,52 +15,29 @@ import org.springframework.stereotype.Component;
 import br.com.smal.persistence.TecnicoRepositorio;
 import br.com.smal.util.RespostaJSON;
 
-
+@SuppressWarnings("serial")
 @Component
 @Path("/entrando")
-public class FiltroService extends HttpServlet{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	
-	
+public class FiltroService extends HttpServlet {
+
 	@Autowired
 	TecnicoRepositorio tecnicoRepositorio;
-	
-	
+
 	@Path("/filtro")
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> logar(@Context HttpServletRequest req){
-		
+	public RespostaJSON<Object> logar(@Context HttpServletRequest req) {
+
 		HttpSession session = req.getSession(true);
-	
-		
-        Object 	valorSessao = session.getAttribute("autorizacao");	
-		
-		
-		if(valorSessao!=null && valorSessao!="Nao Autorizado" ){
-			
+		Object valorSessao = session.getAttribute("autorizacao");
+
+		if (valorSessao != null && valorSessao != "Nao Autorizado") {
 			System.out.println("Usuário Logado");
 			String usuarioLogado = "Usuário ainda está logado..";
-			
 			return new RespostaJSON<Object>(true, usuarioLogado);
-			
-		}else{
-			
-				
-				return new RespostaJSON<Object>(false, "Usuário Deslogado");
-			}
-			
-		
-		
-	 
-	}	
-
-
-
+		} else {
+			return new RespostaJSON<Object>(false, "Usuário Deslogado");
+		}
+	}
 }
