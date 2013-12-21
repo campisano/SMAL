@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import br.com.smal.domain.Administrador;
 import br.com.smal.domain.Tecnico;
 import br.com.smal.persistence.TecnicoRepositorio;
+import br.com.smal.util.RespostaJSON;
 
 
 

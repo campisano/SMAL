@@ -9,29 +9,29 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.smal.domain.Maquina;
-import br.com.smal.persistence.MaquinaRepositorio;
+import br.com.smal.domain.Chamado;
+import br.com.smal.persistence.ChamadoRepositorio;
 import br.com.smal.util.RespostaJSON;
 
 @Component
-@Path("/maquina")
-public class MaquinaJSONService {
+@Path("/chamado")
+public class ChamadoJSONService {
 	@Autowired
-	MaquinaRepositorio maquinaRepositorio;
+	ChamadoRepositorio chamadoRepositorio;
 
 	@Path("/incluir")
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> incluir(Maquina maquina) {
+	public RespostaJSON<Object> incluir(Chamado chamado) {
 		try {
-			if (maquina.getId() != null) {
+			if (chamado.getId() != null) {
 				return new RespostaJSON<Object>(false,
 						"Erro : para uma inclusão, id deve ser nulo.");
 			}
 
-			if (maquinaRepositorio.incluir(maquina)) {
-				return new RespostaJSON<Object>(true, maquina);
+			if (chamadoRepositorio.incluir(chamado)) {
+				return new RespostaJSON<Object>(true, chamado);
 			} else {
 				return new RespostaJSON<Object>(false, "Erro interno :(");
 			}
@@ -44,10 +44,10 @@ public class MaquinaJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> obter(Maquina maquina) {
+	public RespostaJSON<Object> obter(Chamado chamado) {
 		try {
 			return new RespostaJSON<Object>(true,
-					maquinaRepositorio.obter(maquina.getId()));
+					chamadoRepositorio.obter(chamado.getId()));
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -59,7 +59,7 @@ public class MaquinaJSONService {
 	public RespostaJSON<Object> obterTodos() {
 		try {
 			return new RespostaJSON<Object>(true,
-					maquinaRepositorio.obterTodos());
+					chamadoRepositorio.obterTodos());
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -69,18 +69,18 @@ public class MaquinaJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> alterar(Maquina maquina) {
+	public RespostaJSON<Object> alterar(Chamado chamado) {
 		try {
-			Maquina maquina_salvo = maquinaRepositorio.obter(maquina.getId());
+			Chamado chamado_salvo = chamadoRepositorio.obter(chamado.getId());
 
-			if (maquina_salvo == null) {
-				return new RespostaJSON<Object>(false, "maquina inexistente");
+			if (chamado_salvo == null) {
+				return new RespostaJSON<Object>(false, "chamado inexistente");
 			}
 
-			maquina_salvo.setPatrimonio(maquina.getPatrimonio());
+			chamado_salvo.setDescricao(chamado.getDescricao());
 
-			if (maquinaRepositorio.alterar(maquina_salvo)) {
-				return new RespostaJSON<Object>(true, maquina_salvo);
+			if (chamadoRepositorio.alterar(chamado_salvo)) {
+				return new RespostaJSON<Object>(true, chamado_salvo);
 			} else {
 				return new RespostaJSON<Object>(false, "erro");
 			}
@@ -93,9 +93,9 @@ public class MaquinaJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> excluir(Maquina maquina) {
+	public RespostaJSON<Object> excluir(Chamado chamado) {
 		try {
-			if (maquinaRepositorio.excluir(maquina.getId())) {
+			if (chamadoRepositorio.excluir(chamado.getId())) {
 				return new RespostaJSON<Object>(true, null);
 			} else {
 				return new RespostaJSON<Object>(false, "erro");

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -33,6 +34,8 @@ public class Usuario {
 	
 	private String matricula;
     
+	@OneToMany(mappedBy = "abridor", fetch = FetchType.LAZY)
+	private List<Chamado> aberturas = new ArrayList<Chamado>();
 
 	
 	public Long getId() {

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.smal.persistence.TecnicoRepositorio;
+import br.com.smal.util.RespostaJSON;
 
 
 @Component

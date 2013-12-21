@@ -1,6 +1,8 @@
 package br.com.smal.presentation;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,14 +13,18 @@ import javax.ws.rs.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.smal.controller.UsuarioController;
 import br.com.smal.domain.Usuario;
-import br.com.smal.persistence.UsuarioRepositorio;
+import br.com.smal.util.OperationResult;
+import br.com.smal.util.OperationResultObject;
+import br.com.smal.util.RespostaJSON;
 
 @Component
 @Path("/usuario")
 public class UsuarioJSONService {
 	@Autowired
-	UsuarioRepositorio usuarioRepositorio;
+	UsuarioController usuarioController;
+
 	@Path("/incluir")
 	@POST
 	@Consumes("application/json; charset=UTF-8")
@@ -30,11 +36,13 @@ public class UsuarioJSONService {
 						"Erro : para uma inclusão, id deve ser nulo.");
 			}
 
-			if (usuarioRepositorio.incluir(usuario)) {
+			OperationResult result = usuarioController.incluir(usuario);
+
+			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, usuario);
 				
 			} else {
-				return new RespostaJSON<Object>(false, "Erro interno :(");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
@@ -47,8 +55,14 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> obter(Usuario usuario) {
 		try {
-			return new RespostaJSON<Object>(true,
-					usuarioRepositorio.obter(usuario.getId()));
+			OperationResultObject<Usuario> result = usuarioController
+					.obter(usuario.getId());
+
+			if (result.isSuccess()) {
+				return new RespostaJSON<Object>(true, result.getObject());
+			} else {
+				return new RespostaJSON<Object>(false, result.getMessage());
+			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -59,8 +73,14 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> obterTodos() {
 		try {
-			return new RespostaJSON<Object>(true,
-					usuarioRepositorio.obterTodos());
+			OperationResultObject<List<Usuario>> result = usuarioController
+					.obterTodos();
+
+			if (result.isSuccess()) {
+				return new RespostaJSON<Object>(true, result.getObject());
+			} else {
+				return new RespostaJSON<Object>(false, result.getMessage());
+			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
@@ -72,21 +92,12 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> alterar(Usuario usuario) {
 		try {
-			Usuario usuario_salvo = usuarioRepositorio
-					.obter(usuario.getId().longValue());
+			OperationResult result = usuarioController.alterar(usuario);
 
-			if (usuario_salvo == null) {
-				return new RespostaJSON<Object>(false,
-						"laboratorio inexistente");
-			}
-
-			usuario_salvo.setNome(usuario.getNome());
-			usuario_salvo.setMatricula(usuario.getMatricula());
-
-			if (usuarioRepositorio.alterar(usuario_salvo)) {
-				return new RespostaJSON<Object>(true, usuario_salvo);
+			if (result.isSuccess()) {
+				return new RespostaJSON<Object>(true, usuario);
 			} else {
-				return new RespostaJSON<Object>(false, "erro");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
@@ -99,28 +110,15 @@ public class UsuarioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> excluir(Usuario usuario) {
 		try {
-			if (usuarioRepositorio.excluir(usuario.getId().longValue())) {
+			OperationResult result = usuarioController.excluir(usuario.getId());
+
+			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, null);
 			} else {
-				return new RespostaJSON<Object>(false, "erro");
+				return new RespostaJSON<Object>(false, result.getMessage());
 			}
 		} catch (Exception ex) {
 			return new RespostaJSON<Object>(false, "Erro:\n" + ex.getMessage());
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

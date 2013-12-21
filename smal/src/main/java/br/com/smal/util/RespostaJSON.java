@@ -1,4 +1,4 @@
-package br.com.smal.presentation;
+package br.com.smal.util;
 
 public class RespostaJSON<T> {
 
