@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 @Table(name = "subproblema")
 public class Subproblema {
@@ -42,7 +40,6 @@ public class Subproblema {
 		this.nome = nome;
 	}
 
-	@JsonIgnore
 	public Problema getProblema() {
 		return problema;
 	}
@@ -51,7 +48,6 @@ public class Subproblema {
 		this.problema = problema;
 	}
 
-	@JsonIgnore
 	public List<Chamado> getChamados() {
 		return chamados;
 	}

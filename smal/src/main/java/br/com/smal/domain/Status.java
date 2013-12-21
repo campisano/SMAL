@@ -1,8 +1,5 @@
 package br.com.smal.domain;
 
-//TEste 2 
-// status testing merge with git
-
 public enum Status {
 
 	ABERTO(1), EM_ANDAMENTO(2), RESOLVIDO(3), NAO_RESOLVIDO(4);

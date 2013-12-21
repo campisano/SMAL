@@ -6,8 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @Entity
 @Table(name = "maquina")
 public class Maquina {
@@ -34,8 +32,7 @@ public class Maquina {
 	public void setPatrimonio(String patrimonio) {
 		this.patrimonio = patrimonio;
 	}
-	
-	@JsonIgnore
+
 	public Posicao getPosicao() {
 		return posicao;
 	}

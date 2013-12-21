@@ -7,8 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import br.com.smal.domain.id.PosicaoId;
 
 @Entity
@@ -41,7 +39,6 @@ public class Posicao {
 		this.fila = fila;
 	}
 
-	@JsonIgnore
 	public Maquina getMaquina() {
 		return maquina;
 	}
@@ -50,7 +47,6 @@ public class Posicao {
 		this.maquina = maquina;
 	}
 
-	@JsonIgnore
 	public Laboratorio getLaboratorio() {
 		return laboratorio;
 	}
