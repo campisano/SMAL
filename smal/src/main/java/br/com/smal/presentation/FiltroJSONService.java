@@ -18,7 +18,7 @@ import br.com.smal.util.RespostaJSON;
 @SuppressWarnings("serial")
 @Component
 @Path("/entrando")
-public class FiltroService extends HttpServlet {
+public class FiltroJSONService extends HttpServlet {
 
 	@Autowired
 	TecnicoRepositorio tecnicoRepositorio;
