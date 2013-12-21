@@ -1,5 +1,6 @@
 package br.com.smal.presentation;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -7,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,7 @@ public class UsuarioJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> incluir(Usuario usuario) {
+	public RespostaJSON<Object> incluir(Usuario usuario , @Context HttpServletRequest req ) {
 		try {
 			if (usuario.getId() != null) {
 				return new RespostaJSON<Object>(false,
@@ -38,6 +40,7 @@ public class UsuarioJSONService {
 
 			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, usuario);
+				
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}

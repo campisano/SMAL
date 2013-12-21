@@ -29,6 +29,7 @@ public class LaboratorioJSONService {
 	@Produces("application/json; charset=UTF-8")
 	public RespostaJSON<Object> incluir(Laboratorio laboratorio) {
 		try {
+			
 			if (laboratorio.getId() != null) {
 				return new RespostaJSON<Object>(false,
 						"Erro : para uma inclusão, id deve ser nulo.");

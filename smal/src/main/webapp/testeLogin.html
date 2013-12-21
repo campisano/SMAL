@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+    <script src="scripts/knockout-3.0.0.js"></script>
+    <script src="scripts/app/global.js"></script>
+    
+  </head>
+  <body>
+  
+    <h2>Pagiana de Login Teste</h2>
+
+    <button value="Teste" onClick="ajaxTeste()">Teste</button>
+    
+    <button value="Logout" onClick="ajaxLogout()">Logout</button>
+    
+    <script type="text/javascript">
+    
+    
+    function Vote(nome, matricula) {
+        this.nome = nome;
+        this.matricula = matricula;
+      
+       
+    }
+    
+  
+    
+     function ajaxTeste() {
+		vote = new Vote("daniel","22222");
+		
+			$.ajax({
+		            type: "POST",
+	                contentType: "application/json; charset=utf-8",
+	                url: "/smal/json/login/logar",
+	                data: JSON.stringify(vote),
+	                dataType: "json"
+	                
+			});
+	    }
+     
+     
+     function ajaxLogout() {
+    	 vote = new Vote("daniel","22222");
+ 		
+ 			$.ajax({
+ 		            type: "POST",
+ 	                contentType: "application/json; charset=utf-8",
+ 	                url: "/smal/json/login/logout",
+ 	                data: JSON.stringify(vote),
+ 	                dataType: "json"
+ 	                
+ 			});
+ 	    }
+     
+     
+     
+    
+    </script>
+  </body>
+</html>
