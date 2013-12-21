@@ -10,22 +10,22 @@ import javax.persistence.Query;
 
 //import org.springframework.stereotype.Repository;
 /*
-@Repository
-public class GenericDaoJpa<T> {
+ @Repository
+ public class GenericDaoJpa<T> {
 
-	Logger logger = Logger.getLogger(GenericDaoJpa.class.getName());
+ Logger logger = Logger.getLogger(GenericDaoJpa.class.getName());
 
-	protected EntityManager entityManager;
+ protected EntityManager entityManager;
 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
+ public EntityManager getEntityManager() {
+ return entityManager;
+ }
 
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-*/
+ @PersistenceContext
+ public void setEntityManager(EntityManager entityManager) {
+ this.entityManager = entityManager;
+ }
+ */
 
 public class GenericDaoJpa<T> {
 
@@ -37,7 +37,7 @@ public class GenericDaoJpa<T> {
 		GenericDaoJpa.entityManager = new JpaUtil().getEntityManager();
 
 	}
-	
+
 	public boolean incluir(T entidade) {
 		EntityTransaction tx = null;
 		try {
@@ -53,7 +53,7 @@ public class GenericDaoJpa<T> {
 		return true;
 	}
 
-	public boolean excluir(Class<T> c, Long id) {
+	public boolean excluir(Class<T> c, Object id) {
 		EntityTransaction tx = null;
 		try {
 			tx = entityManager.getTransaction();

@@ -54,10 +54,17 @@ public class LaboratorioController {
 		}
 	}
 
-	public OperationResult alterar(Laboratorio laboratorio) {
+	public OperationResult alterar(long id, Laboratorio laboratorio) {
 
-		Laboratorio laboratorio_salvo = laboratorioRepositorio
-				.obter(laboratorio.getId());
+		List<Laboratorio> list = laboratorioRepositorio.obterTodos();
+
+		for (Laboratorio lab : list) {
+			if (lab.getNome().equals(laboratorio.getNome())) {
+				return new OperationResult(false, "Nome existente.");
+			}
+		}
+
+		Laboratorio laboratorio_salvo = laboratorioRepositorio.obter(id);
 
 		if (laboratorio_salvo == null) {
 			return new OperationResult(false, "Erro interno.");

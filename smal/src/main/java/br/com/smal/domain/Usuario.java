@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -51,6 +53,7 @@ public class Usuario {
 		this.matricula = matricula;
 	}
 
+	@JsonIgnore
 	public List<Chamado> getAberturas() {
 		return aberturas;
 	}

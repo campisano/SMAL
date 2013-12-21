@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "administrador")
 @DiscriminatorValue("administrador")
@@ -17,6 +19,7 @@ public class Administrador extends Tecnico {
 	@OneToMany(mappedBy = "designador", fetch = FetchType.LAZY)
 	private List<Chamado> designacoes = new ArrayList<Chamado>();
 
+	@JsonIgnore
 	public List<Chamado> getDesignacoes() {
 		return designacoes;
 	}

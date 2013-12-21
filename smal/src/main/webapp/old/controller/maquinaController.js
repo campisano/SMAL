@@ -3,17 +3,17 @@ function MaquinasViewModel() {
 	var self = this;
 
 	// BIND DATA
+	self.laboratorio = ko.observable();
 	self.maquinas = ko.observableArray([]);
-	self.nomeNovoMaquina = ko.observable();
 
 	// ==============
 	// CRUD FUNCTIONS
 	// ==============
 
-	// incluir
+	// cadastrarMaquina
 	self.incluir = function(maquina) {
 		self.notificar("Incluindo...", JSON.stringify(ko.toJSON(maquina)));
-		$.ajax("/smal/json/maquina/incluir", {
+		$.ajax("/smal/json/maquina/cadastrarMaquina", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
@@ -21,7 +21,6 @@ function MaquinasViewModel() {
 			success : function(result) {
 				if (result.sucesso) {
 					self.notificar("Incluido:", JSON.stringify(result));
-					self.obterTodos();
 				} else {
 					self.notificar("Erro na inclusão:", result.mensagem);
 				}
@@ -31,7 +30,7 @@ function MaquinasViewModel() {
 			}
 		});
 	};
-
+/*
 	// obterTodos
 	self.obterTodos = function() {
 		self.notificar("Obtendo todos...", "");
@@ -102,17 +101,55 @@ function MaquinasViewModel() {
 			}
 		});
 	};
+	
+
+*/
+	// listarMaquinas
+	self.listar = function(laboratorio) {
+		self.notificar("Listar máquinas de laboratório...", "");
+		$.ajax("/smal/json/maquina/listarMaquinas", {
+			cache : false,
+			type : "POST",
+			contentType : "application/json",
+			data : ko.toJSON(laboratorio),
+			success : function(result) {
+				if (result.sucesso) {
+					var mappedMaquinas = $.map(result.mensagem, function(
+							item) {
+						return new Maquina(item);
+					});
+					self.maquinas(mappedMaquinas);
+					self.notificar("Obtidos:", JSON.stringify(result));
+				} else {
+					self.notificar("Erro na obrenção:", result.mensagem);
+				}
+			},
+			failure : function(result) {
+				self.notificar("Erro na obtenção:", JSON.stringify(result));
+			}
+		});
+	};
 
 	// ==================
 	// OTHER FUNCTIONS
 	// ==================
 
-	// incluiMaquina
+	// listaMaquinas
+	self.listaMaquinas = function(form) {
+		self.laboratorio = form.laboratorioId.value;
+		var data = {
+			laboratorioId : form.laboratorioId.value
+		};
+		self.listar(data);
+	};
 
+	// incluiMaquina
 	self.incluiMaquina = function(form) {
 		var data = {
-			id : null,
-			patrimonio : form.patrimonio.value
+			patrimonio : form.patrimonio.value,
+			laboratorioId : form.laboratorioId.value,
+			fila : form.fila.value,
+			coluna : form.coluna.value
 		};
 		self.incluir(new Maquina(data));
 	};
@@ -128,6 +165,4 @@ function MaquinasViewModel() {
 			zindex : 1500
 		});
 	};
-
-	self.obterTodos();
 }

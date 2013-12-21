@@ -26,22 +26,33 @@
 	</head>
 	<body>
 		<h3>Maquinas</h3>
-	
+		<form data-bind="submit: listaMaquinas">
+			Informa laboratorio: <input type="text" name="laboratorioId"/>
+			<button type="submit">Lista</button>
+		</form>
+		
+		Inclui uma nova máquina<br/>
 		<form data-bind="submit: incluiMaquina">
-			Inclui novo maquina: <input type="text" name="patrimonio"
-				placeholder="Informa o patrimonio do maquina" />
+			Patrimonio: <input type="text" name="patrimonio"/><br />
+			Laboratorio: <input type="text" name="laboratorioId"/><br />
+			Fila: <input type="text" name="fila"/><br />
+			Coluna: <input type="text" name="coluna"/><br />
 			<button type="submit">Inclui</button>
 		</form>
 	
-		<ul
-			data-bind="foreach: maquinas, visible: maquinas().length > 0">
-			<li><input data-bind="value: patrimonio" /> <a href="#"
-				data-bind="click: $parent.alterar">Altera</a> <a href="#"
-				data-bind="click: $parent.excluir">Exclui</a></li>
+		<ul data-bind="foreach: maquinas, visible: maquinas().length > 0">
+			<li>
+				<input data-bind="value: id" disabled="disabled" />
+				<input data-bind="value: patrimonio" />
+				<input data-bind="value: laboratorioId" />
+				<input data-bind="value: fila" />
+				<input data-bind="value: coluna" />
+				<a href="#" data-bind="click: $parent.alterar">Altera</a>
+				<a href="#" data-bind="click: $parent.excluir">Exclui</a>
+			</li>
 		</ul>
 	
-		Existem
-		<b data-bind="text: maquinas().length">&nbsp;</b> maquinas
+		Existem <b data-bind="text: maquinas().length">&nbsp;</b> maquinas
 	
 		<script type="text/javascript">
 			ko.applyBindings(new MaquinasViewModel());

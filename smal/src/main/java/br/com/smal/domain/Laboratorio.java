@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "laboratorio")
 public class Laboratorio {
@@ -37,6 +39,7 @@ public class Laboratorio {
 		this.nome = nome;
 	}
 
+	@JsonIgnore
 	public List<Posicao> getPosicoes() {
 		return posicoes;
 	}

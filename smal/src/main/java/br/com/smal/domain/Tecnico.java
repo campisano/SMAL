@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "tecnico")
 @DiscriminatorValue("tecnico")
@@ -26,6 +28,7 @@ public class Tecnico extends Usuario {
 		this.senha = senha;
 	}
 
+	@JsonIgnore
 	public List<Chamado> getAtendimentos() {
 		return atendimentos;
 	}

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "chamado")
 public class Chamado {
@@ -72,6 +74,7 @@ public class Chamado {
 		this.descricao = descricao;
 	}
 
+	@JsonIgnore
 	public Usuario getAbridor() {
 		return abridor;
 	}
@@ -80,6 +83,7 @@ public class Chamado {
 		this.abridor = abridor;
 	}
 
+	@JsonIgnore
 	public Tecnico getAtendente() {
 		return atendente;
 	}
@@ -88,6 +92,7 @@ public class Chamado {
 		this.atendente = atendente;
 	}
 
+	@JsonIgnore
 	public Administrador getDesignador() {
 		return designador;
 	}
@@ -104,6 +109,7 @@ public class Chamado {
 		this.status = status;
 	}
 
+	@JsonIgnore
 	public Subproblema getSubproblema() {
 		return subproblema;
 	}

@@ -1,33 +1,29 @@
 package br.com.smal.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import br.com.smal.domain.id.PosicaoId;
+
 @Entity
+@IdClass(PosicaoId.class)
 @Table(name = "posicao")
 public class Posicao {
 
 	@Id
-	@GeneratedValue
-	private Long id;
 	private int fila;
+	@Id
 	private int coluna;
 	@OneToOne(optional = true)
 	private Maquina maquina;
 	@ManyToOne(optional = false)
 	private Laboratorio laboratorio;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public int getFila() {
 		return fila;
@@ -45,6 +41,7 @@ public class Posicao {
 		this.fila = fila;
 	}
 
+	@JsonIgnore
 	public Maquina getMaquina() {
 		return maquina;
 	}
@@ -53,6 +50,7 @@ public class Posicao {
 		this.maquina = maquina;
 	}
 
+	@JsonIgnore
 	public Laboratorio getLaboratorio() {
 		return laboratorio;
 	}
