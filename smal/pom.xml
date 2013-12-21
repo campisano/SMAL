@@ -40,7 +40,7 @@
 		<derby.version>10.10.1.1</derby.version>
 		<hsqldb.version>2.3.1</hsqldb.version>
 		<hibernate-entitymanager.version>3.4.0.GA</hibernate-entitymanager.version>
-		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 
 		<!-- Jersey -->
 		<jersey-server.version>1.17.1</jersey-server.version>
@@ -184,7 +184,7 @@
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>${hibernate-jpa.version}</version>
+			<version>${hibernate-jpa-2.0-api.version}</version>
 			<type>jar</type>
 		</dependency>
 
