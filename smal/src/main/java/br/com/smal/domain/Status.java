@@ -1,5 +1,6 @@
 package br.com.smal.domain;
 
+//TEste 2 
 // status testing merge with git
 
 public enum Status {
