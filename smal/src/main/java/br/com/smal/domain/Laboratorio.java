@@ -17,7 +17,9 @@ public class Laboratorio {
 	@Id
 	@GeneratedValue
 	private Long id;
+
 	private String nome;
+
 	@OneToMany(mappedBy = "laboratorio", fetch = FetchType.LAZY)
 	private List<Posicao> posicoes = new ArrayList<Posicao>();
 

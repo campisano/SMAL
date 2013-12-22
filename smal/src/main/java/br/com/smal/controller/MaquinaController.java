@@ -113,10 +113,7 @@ public class MaquinaController {
 		}
 
 		if (posicao == null) {
-			posicao = new Posicao();
-			posicao.setFila(fila);
-			posicao.setColuna(coluna);
-			posicao.setLaboratorio(lab);
+			posicao = new Posicao(lab.getId(), fila, coluna);
 
 			if (!posicaoRepositorio.incluir(posicao)) {
 				return new OperationResult(false,

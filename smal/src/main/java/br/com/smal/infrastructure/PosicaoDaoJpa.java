@@ -11,17 +11,13 @@ import br.com.smal.persistence.PosicaoDao;
 @Component
 public class PosicaoDaoJpa extends GenericDaoJpa<Posicao> implements PosicaoDao {
 
-	public Posicao obter(int fila, int coluna) {
-		PosicaoId id = new PosicaoId();
-		id.setFila(fila);
-		id.setColuna(coluna);
+	public Posicao obter(Long laboratorio, int fila, int coluna) {
+		PosicaoId id = new PosicaoId(laboratorio, fila, coluna);
 		return obterPorId(Posicao.class, id);
 	}
 
-	public boolean excluir(int fila, int coluna) {
-		PosicaoId id = new PosicaoId();
-		id.setFila(fila);
-		id.setColuna(coluna);
+	public boolean excluir(Long laboratorio, int fila, int coluna) {
+		PosicaoId id = new PosicaoId(laboratorio, fila, coluna);
 		return excluir(Posicao.class, id);
 	}
 
