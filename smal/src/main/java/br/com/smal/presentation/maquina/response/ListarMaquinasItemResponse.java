@@ -1,10 +1,20 @@
-package br.com.smal.presentation.request;
+package br.com.smal.presentation.maquina.response;
 
-public class CadastrarMaquinaRequest {
+public class ListarMaquinasItemResponse {
+
+	private long id;
 	private String patrimonio;
 	private long laboratorioId;
 	private int fila;
 	private int coluna;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getPatrimonio() {
 		return patrimonio;

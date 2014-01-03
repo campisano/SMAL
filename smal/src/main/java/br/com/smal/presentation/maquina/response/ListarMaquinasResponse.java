@@ -1,4 +1,4 @@
-package br.com.smal.presentation.response;
+package br.com.smal.presentation.maquina.response;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -58,42 +58,13 @@ public class MaquinaController {
 
 	public OperationResult cadastrarMaquina(String patrimonio,
 			long laboratorioId, int fila, int coluna) {
-		// RN_01: Máximo 6 filas no laboratório.
-		{
-			if (fila > 6) {
-				return new OperationResult(false,
-						"Erro: Máximo 6 filas no laboratório.");
-			}
-		}
-
-		// RN_08: Patrimonio é um texto não pode ser vazío.
-		{
-			if (patrimonio == null || patrimonio.length() == 0) {
-				return new OperationResult(false,
-						"Erro: patrimonio não pode ser vazío.");
-			}
-		}
-
-		// RN_09: Não pode existir mais que uma máquina com o mesmo patrimonio.
-		{
-			List<Maquina> maquinas = maquinaRepositorio.obterTodos();
-
-			for (Maquina maq : maquinas) {
-				if (maq.getPatrimonio().equals(patrimonio)) {
-					return new OperationResult(false,
-							"Erro: já existe uma máquina com o mesmo patrimonio.");
-				}
-			}
-		}
 
 		Laboratorio lab = laboratorioRepositorio.obter(laboratorioId);
 
-		// RN_10: Laboratório deve existir.
-		{
-			if (lab == null) {
-				return new OperationResult(false,
-						"Erro: laboratório não existe.");
-			}
+		OperationResult check = checkRules(patrimonio, lab, fila, coluna);
+
+		if (!check.isSuccess()) {
+			return check;
 		}
 
 		Posicao posicao = null;
@@ -131,5 +102,104 @@ public class MaquinaController {
 		} else {
 			return new OperationResult(true, "");
 		}
+	}
+
+	public OperationResult alterarMaquina(long id, String patrimonio,
+			long laboratorioId, int fila, int coluna) {
+
+		Laboratorio lab = laboratorioRepositorio.obter(laboratorioId);
+
+		OperationResult check = checkRules(patrimonio, lab, fila, coluna);
+
+		if (!check.isSuccess()) {
+			return check;
+		}
+
+		Maquina maquina = maquinaRepositorio.obter(id);
+
+		Posicao posicao = null;
+
+		// RN_11: Uma posição de um laboratório só pode ter uma máquina.
+		{
+			for (Posicao pos : lab.getPosicoes()) {
+				if (pos.getFila() == fila && pos.getColuna() == coluna) {
+					if (pos.getMaquina() != null && pos.getMaquina() != maquina) {
+						return new OperationResult(false,
+								"Erro: posição já ocupada.");
+					}
+
+					posicao = pos;
+				}
+			}
+		}
+
+		if (posicao == null) {
+			posicao = new Posicao(lab, fila, coluna);
+
+			if (!posicaoRepositorio.incluir(posicao)) {
+				return new OperationResult(false,
+						"Erro: erro interno na inserção da posição.");
+			}
+		}
+
+		maquina.setPatrimonio(patrimonio);
+		maquina.setPosicao(posicao);
+
+		if (!maquinaRepositorio.alterar(maquina)) {
+			return new OperationResult(false,
+					"Erro: erro interno na alteração da máquina.");
+		} else {
+			return new OperationResult(true, "");
+		}
+	}
+
+	public OperationResult excluirMaquina(long id) {
+		if (maquinaRepositorio.excluir(id)) {
+			return new OperationResult(true, "");
+		} else {
+			return new OperationResult(false,
+					"Erro interno na exclusão da máquina.");
+		}
+	}
+
+	private OperationResult checkRules(String patrimonio,
+			Laboratorio laboratorio, int fila, int coluna) {
+		// RN_01: Máximo 6 filas no laboratório.
+		{
+			if (fila > 6) {
+				return new OperationResult(false,
+						"Erro: Máximo 6 filas no laboratório.");
+			}
+		}
+
+		// RN_08: Patrimonio é um texto não pode ser vazío.
+		{
+			if (patrimonio == null || patrimonio.length() == 0) {
+				return new OperationResult(false,
+						"Erro: patrimonio não pode ser vazío.");
+			}
+		}
+
+		// RN_09: Não pode existir mais que uma máquina com o mesmo patrimonio.
+		{
+			List<Maquina> maquinas = maquinaRepositorio.obterTodos();
+
+			for (Maquina maq : maquinas) {
+				if (maq.getPatrimonio().equals(patrimonio)) {
+					return new OperationResult(false,
+							"Erro: já existe uma máquina com o mesmo patrimonio.");
+				}
+			}
+		}
+
+		// RN_10: Laboratório deve existir.
+		{
+			if (laboratorio == null) {
+				return new OperationResult(false,
+						"Erro: laboratório não existe.");
+			}
+		}
+
+		return new OperationResult(true, "");
 	}
 }

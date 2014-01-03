@@ -18,6 +18,7 @@
 
 <!-- page views and models css -->
 <script type="text/javascript" src="model/maquinaModel.js"></script>
+<script type="text/javascript" src="model/laboratorioModel.js"></script>
 <script type="text/javascript" src="controller/maquinasController.js"></script>
 
 <!-- page css -->
@@ -26,14 +27,14 @@
 </head>
 <body>
 	<h3>Maquinas</h3>
-	<form data-bind="submit: listaMaquinas">
+	<form data-bind="submit: actionListarMaquinas">
 		Informa laboratorio: <input type="text" name="laboratorioId" />
 		<button type="submit">Lista</button>
 	</form>
 
 	Inclui uma nova máquina
 	<br />
-	<form data-bind="submit: incluiMaquina">
+	<form data-bind="submit: actionCadastrarMaquina">
 		Patrimonio: <input type="text" name="patrimonio" /><br />
 		Laboratorio: <input type="text" name="laboratorioId" /><br /> Fila:
 		<input type="text" name="fila" /><br /> Coluna: <input type="text"
@@ -46,8 +47,8 @@
 			data-bind="value: patrimonio" /> <input
 			data-bind="value: laboratorioId" /> <input data-bind="value: fila" />
 			<input data-bind="value: coluna" /> <a href="#"
-			data-bind="click: $parent.alterar">Altera</a> <a href="#"
-			data-bind="click: $parent.excluir">Exclui</a></li>
+			data-bind="click: $parent.actionAlterarMaquina">Altera</a> <a
+			href="#" data-bind="click: $parent.actionExcluirMaquina">Exclui</a></li>
 	</ul>
 
 	Existem

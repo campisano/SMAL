@@ -1,4 +1,4 @@
-package br.com.smal.presentation.request;
+package br.com.smal.presentation.maquina.request;
 
 public class ListarMaquinasRequest {
 	private long laboratorioId;
