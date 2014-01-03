@@ -4,7 +4,6 @@ function LaboratoriosViewModel() {
 
 	// BIND DATA
 	self.laboratorios = ko.observableArray([]);
-	self.nomeNovoLaboratorio = ko.observable();
 
 	// ==============
 	// CRUD FUNCTIONS
@@ -108,7 +107,6 @@ function LaboratoriosViewModel() {
 	// ==================
 
 	// incluiLaboratorio
-
 	self.incluiLaboratorio = function(form) {
 		var data = {
 			id : null,

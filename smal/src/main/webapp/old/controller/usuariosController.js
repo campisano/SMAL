@@ -1,10 +1,9 @@
-function UsuarioViewModel() {
+function UsuariosViewModel() {
 	// INTERNAL DATA
 	var self = this;
 
 	// BIND DATA
 	self.usuarios = ko.observableArray([]);
-	self.nomeNovoUsuario = ko.observable();
 
 	// ==============
 	// CRUD FUNCTIONS
@@ -41,8 +40,7 @@ function UsuarioViewModel() {
 			contentType : "application/json",
 			success : function(result) {
 				if (result.sucesso) {
-					var mappedUsuarios = $.map(result.mensagem, function(
-							item) {
+					var mappedUsuarios = $.map(result.mensagem, function(item) {
 						return new Usuario(item);
 					});
 					self.usuarios(mappedUsuarios);
@@ -108,7 +106,6 @@ function UsuarioViewModel() {
 	// ==================
 
 	// incluiUsuario
-
 	self.incluiUsuario = function(form) {
 		var data = {
 			id : null,
@@ -117,13 +114,6 @@ function UsuarioViewModel() {
 		};
 		self.incluir(new Usuario(data));
 	};
-	
-	
-	// alterarUsuario
-	
-
-	
-	
 
 	// notificar
 	self.notificar = function(title, mensagem) {

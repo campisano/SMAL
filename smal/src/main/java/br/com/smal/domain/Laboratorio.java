@@ -43,7 +43,15 @@ public class Laboratorio {
 		return posicoes;
 	}
 
-	public void setPosicao(List<Posicao> posicoes) {
-		this.posicoes = posicoes;
+	// from
+	// http://en.wikibooks.org/wiki/Java_Persistence/OneToMany#Getters_and_Setters
+	public void addPosicao(Posicao posicao) {
+		if (!this.posicoes.contains(posicao)) {
+			this.posicoes.add(posicao);
+		}
+
+		if (posicao.getLaboratorio() != this) {
+			posicao.setLaboratorio(this);
+		}
 	}
 }

@@ -104,7 +104,7 @@ public class MaquinaController {
 				if (pos.getFila() == fila && pos.getColuna() == coluna) {
 					if (pos.getMaquina() != null) {
 						return new OperationResult(false,
-								"Erro: laboratório não existe.");
+								"Erro: posição já ocupada.");
 					}
 
 					posicao = pos;
@@ -113,7 +113,7 @@ public class MaquinaController {
 		}
 
 		if (posicao == null) {
-			posicao = new Posicao(lab.getId(), fila, coluna);
+			posicao = new Posicao(lab, fila, coluna);
 
 			if (!posicaoRepositorio.incluir(posicao)) {
 				return new OperationResult(false,

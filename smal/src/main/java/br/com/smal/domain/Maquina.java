@@ -37,7 +37,15 @@ public class Maquina {
 		return posicao;
 	}
 
+	// from
+	// http://en.wikibooks.org/wiki/Java_Persistence/OneToMany#Getters_and_Setters
 	public void setPosicao(Posicao posicao) {
-		this.posicao = posicao;
+		if (this.posicao != posicao) {
+			this.posicao = posicao;
+		}
+
+		if (posicao.getMaquina() != this) {
+			posicao.setMaquina(this);
+		}
 	}
 }

@@ -17,16 +17,16 @@ public class PosicaoRepositorio {
 		return posicaoDao.incluir(entidade);
 	}
 
-	public Posicao obter(Long laboratorio, int fila, int coluna) {
-		return posicaoDao.obter(laboratorio, fila, coluna);
+	public Posicao obter(long id) {
+		return posicaoDao.obter(id);
 	}
 
 	public boolean alterar(Posicao entidade) {
 		return posicaoDao.alterar(entidade);
 	}
 
-	public boolean excluir(Long laboratorio, int fila, int coluna) {
-		return posicaoDao.excluir(laboratorio, fila, coluna);
+	public boolean excluir(long id) {
+		return posicaoDao.excluir(id);
 	}
 
 	public List<Posicao> obterTodos() {

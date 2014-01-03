@@ -5,19 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import br.com.smal.domain.Posicao;
-import br.com.smal.domain.id.PosicaoId;
 import br.com.smal.persistence.PosicaoDao;
 
 @Component
 public class PosicaoDaoJpa extends GenericDaoJpa<Posicao> implements PosicaoDao {
 
-	public Posicao obter(Long laboratorio, int fila, int coluna) {
-		PosicaoId id = new PosicaoId(laboratorio, fila, coluna);
+	public Posicao obter(long id) {
 		return obterPorId(Posicao.class, id);
 	}
 
-	public boolean excluir(Long laboratorio, int fila, int coluna) {
-		PosicaoId id = new PosicaoId(laboratorio, fila, coluna);
+	public boolean excluir(long id) {
 		return excluir(Posicao.class, id);
 	}
 
