@@ -41,7 +41,7 @@ public class MaquinaController {
 
 		if (maquinas_todas == null) {
 			return new OperationResultObject<List<Maquina>>(false,
-					"Erro: erro interno na inserção da máquina.", null);
+					"Erro: erro interno na listagem das máquinas.", null);
 		} else {
 
 			List<Maquina> maquinas = new ArrayList<Maquina>();
