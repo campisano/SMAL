@@ -67,6 +67,18 @@ public class MaquinaController {
 			return check;
 		}
 
+		// RN_09: Não pode existir mais que uma máquina com o mesmo patrimonio.
+		{
+			List<Maquina> maquinas = maquinaRepositorio.obterTodos();
+
+			for (Maquina maq : maquinas) {
+				if (maq.getPatrimonio().equals(patrimonio)) {
+					return new OperationResult(false,
+							"Erro: já existe uma máquina com o mesmo patrimonio.");
+				}
+			}
+		}
+
 		Posicao posicao = null;
 
 		// RN_11: Uma posição de um laboratório só pode ter uma máquina.
@@ -116,6 +128,18 @@ public class MaquinaController {
 		}
 
 		Maquina maquina = maquinaRepositorio.obter(id);
+
+		// RN_09: Não pode existir mais que uma máquina com o mesmo patrimonio.
+		{
+			List<Maquina> maquinas = maquinaRepositorio.obterTodos();
+
+			for (Maquina maq : maquinas) {
+				if (maq.getPatrimonio().equals(patrimonio) && maq != maquina) {
+					return new OperationResult(false,
+							"Erro: já existe uma máquina com o mesmo patrimonio.");
+				}
+			}
+		}
 
 		Posicao posicao = null;
 
@@ -177,18 +201,6 @@ public class MaquinaController {
 			if (patrimonio == null || patrimonio.length() == 0) {
 				return new OperationResult(false,
 						"Erro: patrimonio não pode ser vazío.");
-			}
-		}
-
-		// RN_09: Não pode existir mais que uma máquina com o mesmo patrimonio.
-		{
-			List<Maquina> maquinas = maquinaRepositorio.obterTodos();
-
-			for (Maquina maq : maquinas) {
-				if (maq.getPatrimonio().equals(patrimonio)) {
-					return new OperationResult(false,
-							"Erro: já existe uma máquina com o mesmo patrimonio.");
-				}
 			}
 		}
 
