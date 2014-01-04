@@ -51,7 +51,7 @@
             }
             var container = $(identifier).parent().parent();
             var shadowAdded = false;
-            container.draggable({
+            /*container.draggable({
                 scroll: false,
                 cancel: ".box_content",
                 containment: "parent",
@@ -65,7 +65,7 @@
                     $(this).removeClass("draggable_box");
                     $(this).parent().removeClass("none_overlay");
                 }
-            });
+            });*/
             overlay = $(identifier).parent().parent().parent();
             container.find(".anchor_close").bind('click',function() { 
                 overlay./*fadeOut("slow",function() { eval(values.onClose()); }).*/removeClass("selected");
