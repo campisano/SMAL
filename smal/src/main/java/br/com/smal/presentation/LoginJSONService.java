@@ -10,9 +10,10 @@ import javax.ws.rs.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.smal.domain.Administrador;
 import br.com.smal.domain.Tecnico;
+import br.com.smal.persistence.AdministradorRepositorio;
 import br.com.smal.persistence.TecnicoRepositorio;
+import br.com.smal.presentation.login.request.LoginRequest;
 import br.com.smal.util.RespostaJSON;
 
 @Component
@@ -21,35 +22,46 @@ public class LoginJSONService {
 
 	@Autowired
 	TecnicoRepositorio tecnicoRepositorio;
+	
+	@Autowired
+	AdministradorRepositorio administradorRepositorio;
 
 	@Path("/logar")
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> logar(Tecnico usuario,
+	public RespostaJSON<Object> logar(LoginRequest login,
 			@Context HttpServletRequest req) {
 
-		if (usuario.getMatricula() != null
-				&& !"".equals(usuario.getMatricula())) {
-			if (usuario instanceof Tecnico) {
-				if (tecnicoRepositorio.existe(usuario)) {
+		if (login.getMatricula() != null && !"".equals(login.getSenha())) {
+	
+			if (administradorRepositorio.existeMatriculaSenha(login.getMatricula(),login.getSenha())) {
+				
+				req.getSession().setAttribute("autorizacao", "autorizado");
+				
+				return new RespostaJSON<Object>(true,administradorRepositorio.getAdministradorPorMatricula(login.getMatricula()));
+				
+				
+			}else{
+				
+				if (tecnicoRepositorio.existeMatriculaSenha(login.getMatricula(),login.getSenha())) {
+				
 					req.getSession().setAttribute("autorizacao", "autorizado");
-					return new RespostaJSON<Object>(true,
-							tecnicoRepositorio.getTecnicoPorMatricula(usuario
-									.getMatricula()));
+					
+					return new RespostaJSON<Object>(true,tecnicoRepositorio.getTecnicoPorMatricula(login.getMatricula()));
+				
 				} else {
-					return new RespostaJSON<Object>(false,
-							"Usuário não existe!");
+					
+					return new RespostaJSON<Object>(false,"não existem dados Cadastrados!");
+				
 				}
 			}
-
-			if (usuario instanceof Administrador) {
-				req.getSession().setAttribute("autorizacao", "autorizado");
-				System.out.println("TESTE");
-			} else {
-				return new RespostaJSON<Object>(false, "Usuário não existe!");
-			}
 		}
+			
+			
+					
+					
+
 		return null;
 	}
 

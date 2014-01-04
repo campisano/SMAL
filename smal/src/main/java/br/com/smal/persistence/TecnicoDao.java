@@ -16,6 +16,8 @@ public interface TecnicoDao {
 	
 	public boolean existe(Tecnico entidade);
 
+	public boolean existeMatriculaSenha(String matricula, String senha);
+	
 	public List<Tecnico> obterTodos();
 	
 	public Tecnico getTecnicoPorMatricula(String matricula);

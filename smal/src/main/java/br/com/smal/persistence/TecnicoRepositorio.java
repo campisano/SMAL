@@ -33,9 +33,9 @@ public class TecnicoRepositorio {
 		return tecnicoDao.obterTodos();
 	}
 	
-	public boolean existe(Tecnico entidade){
+	public boolean existeMatriculaSenha(String matricula , String senha){
 	
-		return tecnicoDao.existe(entidade);
+		return tecnicoDao.existeMatriculaSenha(matricula , senha);
 	}
 
 	public Tecnico getTecnicoPorMatricula(String matricula){

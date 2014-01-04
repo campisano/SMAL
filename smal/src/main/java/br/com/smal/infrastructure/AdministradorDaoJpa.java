@@ -5,42 +5,39 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Component;
-
+import br.com.smal.domain.Administrador;
 import br.com.smal.domain.Tecnico;
-import br.com.smal.persistence.TecnicoDao;
 
-@Component
-public class TecnicoDaoJpa extends GenericDaoJpa<Tecnico> implements TecnicoDao{
-	
+public class AdministradorDaoJpa extends GenericDaoJpa<Administrador> implements AdministradorDao {
+
 	EntityManager em = new JpaUtil().getEntityManager();
 
 
 	@Override
 	public Tecnico obter(long id) {
 		
-	 return obterPorId(Tecnico.class, id);
+	 return obterPorId(Administrador.class, id);
 	 
 	}
 
 	@Override
 	public boolean excluir(long id) {
 		
-		return excluir(Tecnico.class, id);
+		return excluir(Administrador.class, id);
 	}
 
 	@Override
-	public List<Tecnico> obterTodos() {
+	public List<Administrador> obterTodos() {
 		
-		return obterTodos(Tecnico.class);
+		return obterTodos(Administrador.class);
 	}
 
 	@Override
-	public boolean existe(Tecnico entidade) {
+	public boolean existe(Administrador entidade) {
 		
-		Tecnico tecnicoExistente = getTecnicoPorMatricula(entidade.getMatricula());
+		Administrador administradorExistente = getAdministradorPorMatricula(entidade.getMatricula());
 		
-		if(tecnicoExistente!=null){
+		if(administradorExistente!=null){
 			
 		  return true;	
 		
@@ -70,11 +67,11 @@ public class TecnicoDaoJpa extends GenericDaoJpa<Tecnico> implements TecnicoDao{
 	}
 
 
-	public Tecnico getTecnicoPorMatricula(String matricula) {
+	public Administrador getAdministradorPorMatricula(String matricula) {
 		String consulta = "SELECT a from tecnico a WHERE a.matricula = ?";
 		Object array[] = { matricula };
 		return super.obterEntidade(consulta, array);
 	}
 
-	
+
 }
