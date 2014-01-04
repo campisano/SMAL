@@ -1,4 +1,4 @@
-package br.com.smal.presentation;
+package br.com.smal.presentation.laboratorio;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.smal.controller.LaboratorioController;
 import br.com.smal.domain.Laboratorio;
+import br.com.smal.presentation.laboratorio.response.ListarLaboratoriosResponse;
 import br.com.smal.util.OperationResult;
 import br.com.smal.util.OperationResultObject;
 import br.com.smal.util.RespostaJSON;
@@ -69,7 +70,8 @@ public class LaboratorioJSONService {
 					.obterTodos();
 
 			if (result.isSuccess()) {
-				return new RespostaJSON<Object>(true, result.getObject());
+				return new RespostaJSON<Object>(true,
+						new ListarLaboratoriosResponse(result.getObject()));
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}
