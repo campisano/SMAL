@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -20,9 +20,9 @@
 			});
 		});
 
-		$(window).bind('popstate', function () {
-			refreshPage();
-		});
+		/*$(window).bind('popstate', function () {
+		    refreshPage();
+		});*/
 
 		document.onkeydown = function () {
 			switch (event.keyCode) {
@@ -80,34 +80,34 @@
 <body>
 	<header>
 		<div id="logo_wrapper" align="center">
-			<img src="/smal/img/smal.png" />
+			<img src="img/smal.png" />
 		</div>
 		<span id="main_search_wrapper">
 			<input type="search" id="main_search_input" />
-			<input type="image" id="main_search_submit" src="/smal/img/main_search_icon.png" />
+			<input type="image" id="main_search_submit" src="img/main_search_icon.png" />
 		</span>
 		<div id="user_info_wrapper">
 			<span>Pedro Mor</span>
-			<img src="/smal/img/usuario_login_min.png">
+			<img src="img/usuario_login_min.png">
 	   	</div>
 	</header>
 	<div id="main">
 		<aside id="main_menu">
 			<nav>
-				<a class="nav" preload-text="Tickets" preload-img="/smal/img/ticket_icon.png" href="/smal/tickets.html">
-					<img src="/smal/img/ticket_min_icon.png" />
+				<a class="nav" preload-text="Tickets" preload-img="img/ticket_icon.png" href="tickets.html">
+					<img src="img/ticket_min_icon.png" />
 					Tickets
 				</a>
-				<a class="nav" preload-text="Usuários" preload-img="/smal/img/usuario_icon.png" href="/smal/usuarios.html">
-					<img src="/smal/img/usuario_min_icon.png" />
+				<a class="nav" preload-text="Usuários" preload-img="img/usuario_icon.png" href="usuarios.html">
+					<img src="img/usuario_min_icon.png" />
 					Usuários
 				</a>
-				<a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/laboratorios.html">
-					<img src="/smal/img/laboratorio_min_icon.png" />
+				<a class="nav" preload-text="Laboratórios" preload-img="img/laboratorio_icon.png" href="laboratorios.html">
+					<img src="img/laboratorio_min_icon.png" />
 					Laboratórios
 				</a>
-				<a class="nav" preload-text="Laboratórios" preload-img="/smal/img/laboratorio_icon.png" href="/smal/problemas.html">
-					<img src="/smal/img/laboratorio_min_icon.png" />
+				<a class="nav" preload-text="Laboratórios" preload-img="img/laboratorio_icon.png" href="problemas.html">
+					<img src="img/laboratorio_min_icon.png" />
 					Problemas
 				</a>
 			</nav>
@@ -117,7 +117,7 @@
 	</div>
 	<div id="preload">
 		<div>
-			<img src="/smal/img/laboratorio_icon.png" />
+			<img src="img/laboratorio_icon.png" />
 			<h1></h1>
 		</div>
 	</div>
