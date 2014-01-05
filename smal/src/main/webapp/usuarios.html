@@ -10,6 +10,7 @@
     <form data-bind="submit: incluir">
         <input type="text" name="nome" placeholder="Informa o nome"/>
         <input type="text" name="matricula" placeholder="Informa a matricula"/>
+        <select name="tipo" data-bind="options: [ {nome: 'administrador', id: '1'}, {nome: 'técnico', id: '2'}], optionsText: 'nome', optionsValue: 'id'"></select>
         <button type="submit">Inclui</button>
     </form>
     <br/>
@@ -19,16 +20,18 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nome</th>
                 <th>Matricula</th>
+                <th>Nome</th>
+                <th>Tipo</th>
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: usuarios">
             <tr>
                 <td><input data-bind="value: id" disabled="disabled"></input></td>
-                <td><input data-bind="value: nome"></input></td>
                 <td><input data-bind="value: matricula"></input></td>
+                <td><input data-bind="value: nome"></input></td>
+                <td><input data-bind="value: tipo" disabled="disabled"></input></td>
                 <td><a href="#" data-bind="click: $parent.alterar">Altera</a>
                     <a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
             </tr>

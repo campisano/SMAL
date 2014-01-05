@@ -1,6 +1,7 @@
-package br.com.smal.presentation;
+package br.com.smal.presentation.usuario;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import br.com.smal.controller.UsuarioController;
 import br.com.smal.domain.Usuario;
+import br.com.smal.presentation.usuario.request.IncluirRequset;
+import br.com.smal.presentation.usuario.response.ObterTodosResponse;
 import br.com.smal.util.OperationResult;
 import br.com.smal.util.OperationResultObject;
 import br.com.smal.util.RespostaJSON;
@@ -29,18 +32,15 @@ public class UsuarioJSONService {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	public RespostaJSON<Object> incluir(Usuario usuario,
+	public RespostaJSON<Object> incluir(IncluirRequset request,
 			@Context HttpServletRequest req) {
 		try {
-			if (usuario.getId() != null) {
-				return new RespostaJSON<Object>(false,
-						"Erro : para uma inclusão, id deve ser nulo.");
-			}
-
-			OperationResult result = usuarioController.incluir(usuario);
+			OperationResult result = usuarioController.incluir(
+					request.getMatricula(), request.getNome(),
+					request.getTipo());
 
 			if (result.isSuccess()) {
-				return new RespostaJSON<Object>(true, usuario);
+				return new RespostaJSON<Object>(true, "");
 
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
@@ -78,7 +78,8 @@ public class UsuarioJSONService {
 					.obterTodos();
 
 			if (result.isSuccess()) {
-				return new RespostaJSON<Object>(true, result.getObject());
+				return new RespostaJSON<Object>(true, new ObterTodosResponse(
+						result.getObject()));
 			} else {
 				return new RespostaJSON<Object>(false, result.getMessage());
 			}

@@ -8,9 +8,9 @@ function UsuariosViewModel() {
 	
 	self.incluir = function(form) {
 		var incluirRequest = {
-				id : null,
 				nome : form.nome.value,
-				matricula : form.matricula.value
+				matricula : form.matricula.value,
+				tipo : form.tipo.value
 			};
 		self.notificar("Incluindo...", JSON.stringify(ko.toJSON(incluirRequest)));
 		$.ajax("/smal/json/usuario/incluir", {
@@ -27,7 +27,7 @@ function UsuariosViewModel() {
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na inclusão:", JSON.stringify(result));
+				self.notificar("Erro na requisição:", JSON.stringify(result));
 			}
 		});
 	};
@@ -50,19 +50,24 @@ function UsuariosViewModel() {
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na obrenção:", JSON.stringify(result));
+				self.notificar("Erro na requisição:", JSON.stringify(result));
 				self.obterTodos();
 			}
 		});
 	};
 
 	self.alterar = function(usuario) {
-		self.notificar("Alterando...", JSON.stringify(ko.toJSON(usuario)));
+		var alterarRequest = {
+				id : usuario.id,
+				nome : usuario.nome,
+				matricula : usuario.matricula
+			};
+		self.notificar("Alterando...", JSON.stringify(ko.toJSON(alterarRequest)));
 		$.ajax("/smal/json/usuario/alterar", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
-			data : ko.toJSON(usuario),
+			data : ko.toJSON(alterarRequest),
 			success : function(result) {
 				if (result.sucesso) {
 					self.notificar("Alterado:", JSON.stringify(result));
@@ -72,19 +77,22 @@ function UsuariosViewModel() {
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na alteraçaõ:", JSON.stringify(result));
+				self.notificar("Erro na requisição:", JSON.stringify(result));
 				self.obterTodos();
 			}
 		});
 	};
 
 	self.excluir = function(usuario) {
-		self.notificar("Excluindo...", JSON.stringify(ko.toJSON(usuario)));
+		var excluirRequest = {
+				id : usuario.id
+			};
+		self.notificar("Excluindo...", JSON.stringify(ko.toJSON(excluirRequest)));
 		$.ajax("/smal/json/usuario/excluir", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
-			data : ko.toJSON(usuario),
+			data : ko.toJSON(excluirRequest),
 			success : function(result) {
 				if (result.sucesso) {
 					self.notificar("Excluido:", JSON.stringify(result));
@@ -94,7 +102,7 @@ function UsuariosViewModel() {
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na exclusão:", JSON.stringify(result));
+				self.notificar("Erro na requisição:", JSON.stringify(result));
 			}
 		});
 	};
@@ -115,4 +123,14 @@ function ObterTodosResponse(data) {
 	this.id = ko.observable(data.id);
 	this.nome = ko.observable(data.nome);
 	this.matricula = ko.observable(data.matricula);
+	switch (data.tipo) {
+	case 1:
+		this.tipo = ko.observable("administrador");
+		break;
+	case 2:
+		this.tipo = ko.observable("técnico");
+		break;
+	default:
+		this.tipo = ko.observable("usuário");
+	}
 };

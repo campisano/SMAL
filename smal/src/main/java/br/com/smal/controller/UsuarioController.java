@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.smal.domain.Administrador;
+import br.com.smal.domain.Tecnico;
 import br.com.smal.domain.Usuario;
 import br.com.smal.persistence.UsuarioRepositorio;
 import br.com.smal.util.OperationResult;
@@ -15,20 +17,36 @@ public class UsuarioController {
 	@Autowired
 	UsuarioRepositorio usuarioRepositorio;
 
-	public OperationResult incluir(Usuario usuario) {
+	public OperationResult incluir(String matricula, String nome, int tipo) {
 
 		List<Usuario> list = usuarioRepositorio.obterTodos();
 
 		for (Usuario user : list) {
-			if (user.getMatricula().equals(usuario.getMatricula())) {
-				return new OperationResult(false, "Matricula existente.");
+			if (user.getMatricula().equals(matricula)) {
+				return new OperationResult(false, "Erro: matricula existente.");
 			}
 		}
+
+		Usuario usuario = null;
+
+		// RN_XX: só podem ser cadastrados técnicos ou administradores
+		if (tipo == 1) {
+			usuario = new Administrador();
+		} else if (tipo == 2) {
+			usuario = new Tecnico();
+		} else {
+			return new OperationResult(false,
+					"Erro: só podem ser cadastrados técnicos ou administradores.");
+		}
+
+		usuario.setMatricula(matricula);
+		usuario.setNome(nome);
 
 		if (usuarioRepositorio.incluir(usuario)) {
 			return new OperationResult(true, "");
 		} else {
-			return new OperationResult(false, "Erro interno.");
+			return new OperationResult(false,
+					"Erro interno na inclusão do usuário.");
 		}
 	}
 
