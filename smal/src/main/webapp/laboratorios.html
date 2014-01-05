@@ -3,35 +3,33 @@
 <script>
 	$(document).ready(function () {
 		ko.applyBindings(window.app.viewmodel, document.getElementById('laboratorios_view'));
-		$("#novo_laboratorio_trigger").unbind("click");
-		$("#novo_laboratorio_trigger").pBox();
+		window.app.viewmodel.obterTodos();
 	});
 </script>
 <div id="laboratorios_view" class="default_content_wrapper">
-	<nav id="sub_menu">
-		<a id="novo_laboratorio_trigger" class="btn btn_verde btn_add" href="#novo_laboratorio_box">Novo Laboratório</a>
-	</nav>
-	<h1>laboratorios</h1>
-	<table class="default_table" data-bind="foreach: laboratorios">
+	<h1>Inclui novo laboratório:</h1>
+    <form data-bind="submit: incluir">
+        <input type="text" name="nome" placeholder="Informa o nome"/>
+        <button type="submit">Inclui</button>
+    </form>
+    <br/>
+    <hr/>
+    <h1>Laboratórios:</h1>
+	<table class="default_table">
 		<thead>
 			<tr>
-				<th>Laboratório</th>
-				<th></th>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Ação</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody data-bind="foreach: laboratorios">
 			<tr>
-				<td></td>
-				<td></td>
+	            <td><input data-bind="value: id" disabled="disabled"></input></td>
+	            <td><input data-bind="value: nome"></input></td>
+	            <td><a href="#" data-bind="click: $parent.alterar">Altera</a>
+	                <a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
 			</tr>
 		</tbody>
-		<tr>
-			<td><span data-bind="text: nome"></span></td>
-			<td><a>Excluir</a></td>
-		</tr>
 	</table>
-</div>
-
-<div id="novo_laboratorio_box">
-	<input type="text" placeholder="Nome do laboratório"><input type="submit" value="Inserir">
 </div>
