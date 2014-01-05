@@ -1,16 +1,16 @@
-<link href="css/ticket.css" rel="stylesheet" />
-<script src="scripts/app/ticket.datacontext.js"></script>
-<script src="scripts/app/ticket.viewmodel.js"></script>
+<link href="css/chamado.css" rel="stylesheet" />
+<script src="scripts/app/chamado.datacontext.js"></script>
+<script src="scripts/app/chamado.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
-		ko.applyBindings(window.app.viewmodel, document.getElementById('ticket_view'));
+		ko.applyBindings(window.app.viewmodel, document.getElementById('chamado_view'));
 	});
 </script>
-<div id="ticket_view" class="default_content_wrapper">
+<div id="chamado_view" class="default_content_wrapper">
 	<span class="item_status status_red" style="float: right;">Aberto</span>
 	<h1>
-		<img src="/smal/img/ticket_icon.png" />
-		Ticket 0001
+		<img src="/smal/img/chamado_icon.png" />
+		Chamado 0001
 	</h1>
 	<section>
 		Data de Abertura: 23/11/2013 00:22<br />
@@ -21,7 +21,7 @@
 	</section>
 	<section>
 		<h2>Atendimentos</h2>
-		<ul class="comments_list" data-bind="foreach: tickets">
+		<ul class="comments_list" data-bind="foreach: chamados">
 			<li>
 				<div class="comment_item">
 					<span class="comment_user_name" data-bind="text: username"></span><br />
@@ -31,7 +31,7 @@
 		</ul>
 		<div id="new_comment_wrapper">
 			<div id="new_comment_description_wrapper">
-				<textarea id="new_comment_description" placeholder="Descreva aqui o atendimento que foi realizado" data-bind="value: newTicketDescription"></textarea>
+				<textarea id="new_comment_description" placeholder="Descreva aqui o atendimento que foi realizado" data-bind="value: newChamadoDescription"></textarea>
 			</div>
 			<div id="new_comment_options_wrapper">
 				<a class="btn btn_green btn_add" data-bind="click: inserirAtendimento">Novo Atendimento</a>

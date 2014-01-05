@@ -1,17 +1,17 @@
 window.app = window.app || {};
-var ticket = {
+var chamado = {
 	username : "",
 	description : ""
 };
 window.app.viewmodel = function() {
 	var self = this;
-	this.tickets = ko.observableArray();
-	this.newTicketDescription = ko.observable();
+	this.chamados = ko.observableArray();
+	this.newChamadoDescription = ko.observable();
 
 	this.inserirAtendimento = function() {
-		self.tickets.push({
+		self.chamados.push({
 			username : "pedromontemor",
-			description : self.newTicketDescription()
+			description : self.newChamadoDescription()
 		});
 	};
 };

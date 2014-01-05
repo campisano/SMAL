@@ -3,7 +3,7 @@ window.app.datacontext = (function() {
     return {
         obter: obter
     };
-    var ticket = {};
+    var chamado = {};
     function obter(list) {
     }
 })();

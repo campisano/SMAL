@@ -1,16 +1,16 @@
-#new_ticket_wrapper
+#new_chamado_wrapper
 {
     background: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 1px rgba(0,0,0,.08);
 }
 
-#new_ticket_description_wrapper
+#new_chamado_description_wrapper
 {
     padding: 8px;
 }
 
-#new_ticket_description
+#new_chamado_description
 {
     display: block;
     width: auto;
@@ -21,12 +21,12 @@
     width: 100%;
 }
 
-    #new_ticket_description:focus
+    #new_chamado_description:focus
     {
         outline: none;
     }
 
-#new_ticket_options_wrapper
+#new_chamado_options_wrapper
 {
     background: #f9f9f9;
     padding: 8px;

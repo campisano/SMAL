@@ -1,12 +1,12 @@
-<link href="css/tickets.css" rel="stylesheet" />
-<script src="scripts/app/tickets.viewmodel.js"></script>
+<link href="css/chamados.css" rel="stylesheet" />
+<script src="scripts/app/chamados.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
-		ko.applyBindings(window.app.viewmodel, document.getElementById('tickets_view'));
+		ko.applyBindings(window.app.viewmodel, document.getElementById('chamados_view'));
 		window.app.viewmodel.listarChamados();
 	});
 </script>
-<div id="tickets_view" class="default_content_wrapper">
+<div id="chamados_view" class="default_content_wrapper">
     <h1>Abrir chamado:</h1>
     <form data-bind="submit: abrirChamado">
         <input type="text" name="matricula" placeholder="Informe a matricula"/>
@@ -17,7 +17,7 @@
     </form>
     <br/>
     <hr/>
-	<h1><img src="/smal/img/ticket_icon.png"/>Tickets:</h1>
+	<h1><img src="/smal/img/chamado_icon.png"/>Chamados:</h1>
 	<table class="default_table">
 		<thead>
 			<tr>

@@ -112,7 +112,7 @@ body {
         }
 
         
-        .default_table > tbody > tr > td:nth-child(1)/*ticket*/ {
+        .default_table > tbody > tr > td:nth-child(1)/*chamado*/ {
         }
         .default_table > tbody > tr > td:nth-child(2)/*solicitante*/ {
         }

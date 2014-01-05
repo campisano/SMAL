@@ -1,4 +1,4 @@
-#ticket_view
+#chamado_view
 {
     position: absolute;
     left: 100%;
@@ -7,13 +7,13 @@
     overflow: hidden;
 }
 
-    #ticket_view.in
-    {
-        left: 0;
-        right: 0;
-    }
+#chamado_view.in
+{
+    left: 0;
+    right: 0;
+}
 
-#tickets_view
+#chamados_view
 {
     position: absolute;
     right: 0; left: 0;
@@ -21,8 +21,8 @@
     overflow: hidden;
 }
 
-    #tickets_view.out
-    {
-        left: 100%;
-        right: -100%;
-    }
+#chamados_view.out
+{
+    left: 100%;
+    right: -100%;
+}
