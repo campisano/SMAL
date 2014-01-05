@@ -24,7 +24,7 @@
 		    refreshPage();
 		});*/
 
-		document.onkeydown = function () {
+		$(document).keydown(function (event) {
 			switch (event.keyCode) {
 				case 116: //F5 button
 					event.returnValue = false;
@@ -39,7 +39,7 @@
 						return false;
 					}
 			}
-		}
+		});
 
 		function refreshPage() {
 			if(location.pathname != '/smal/index.html') {
