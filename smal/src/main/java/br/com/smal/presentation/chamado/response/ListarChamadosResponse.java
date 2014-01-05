@@ -15,7 +15,6 @@ public class ListarChamadosResponse
 
 		for (Chamado chamado : chamados) {
 			item = new ListarChamadosItemResponse();
-			item.setId(chamado.getId());
 			item.setProtocolo(chamado.getProtocolo());
 			item.setData_hora_abertura(chamado.getDataHoraAbertura());
 			item.setData_hora_fechamento(chamado.getDataHoraFechamento());

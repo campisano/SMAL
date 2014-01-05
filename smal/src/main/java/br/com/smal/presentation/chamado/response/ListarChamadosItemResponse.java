@@ -3,24 +3,17 @@ package br.com.smal.presentation.chamado.response;
 import java.util.Date;
 
 public class ListarChamadosItemResponse {
-	private long id;
 	private long protocolo;
 	private Date data_hora_abertura;
 	private Date data_hora_fechamento;
 	private String descricao;
 	private long abridorId;
-	private long atendenteId;
-	private long designadorId;
+	private Long atendenteId;
+	private Long designadorId;
 	private int status;
 	private long subproblemaId;
 	private long maquinaId;
 
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public long getProtocolo() {
 		return protocolo;
 	}
@@ -51,16 +44,16 @@ public class ListarChamadosItemResponse {
 	public void setAbridorId(long abridorId) {
 		this.abridorId = abridorId;
 	}
-	public long getAtendenteId() {
+	public Long getAtendenteId() {
 		return atendenteId;
 	}
-	public void setAtendenteId(long atendenteId) {
+	public void setAtendenteId(Long atendenteId) {
 		this.atendenteId = atendenteId;
 	}
-	public long getDesignadorId() {
+	public Long getDesignadorId() {
 		return designadorId;
 	}
-	public void setDesignadorId(long designadorId) {
+	public void setDesignadorId(Long designadorId) {
 		this.designadorId = designadorId;
 	}
 	public int getStatus() {

@@ -1,5 +1,6 @@
 package br.com.smal.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,7 @@ public class ChamadoController {
 
 		Chamado chamado = new Chamado();
 		chamado.setAbridor(usuario);
+		chamado.setDataHoraAbertura(new Date());
 		chamado.setSubproblema(subproblema);
 		chamado.setDescricao(descricao);
 		chamado.setMaquina(maquina);
@@ -102,8 +104,8 @@ public class ChamadoController {
 		}
 	}
 
-	public OperationResult designarChamado(long id, long tecnicoId) {
-		Chamado chamado = chamadoRepositorio.obter(id);
+	public OperationResult designarChamado(long protocolo, long tecnicoId) {
+		Chamado chamado = chamadoRepositorio.obter(protocolo);
 
 		// RN_XX: chamado deve existir
 		if (chamado == null) {
@@ -128,8 +130,8 @@ public class ChamadoController {
 		return new OperationResult(true, "");
 	}
 
-	public OperationResult fecharChamado(long id, boolean exito) {
-		Chamado chamado = chamadoRepositorio.obter(id);
+	public OperationResult fecharChamado(long protocolo, boolean exito) {
+		Chamado chamado = chamadoRepositorio.obter(protocolo);
 
 		// RN_XX: chamado deve existir
 		if (chamado == null) {

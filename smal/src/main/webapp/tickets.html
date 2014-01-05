@@ -1,37 +1,53 @@
 <link href="css/tickets.css" rel="stylesheet" />
-<script src="scripts/app/tickets.datacontext.js"></script>
 <script src="scripts/app/tickets.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
 		ko.applyBindings(window.app.viewmodel, document.getElementById('tickets_view'));
-		$(".ticket_anchor").click(function () {
-			changePage(this.href, "", "");
-			return false;
-		});
+		window.app.viewmodel.listarChamados();
 	});
 </script>
 <div id="tickets_view" class="default_content_wrapper">
-	<nav id="sub_menu">
-		<a class="ticket_anchor btn btn_verde btn_add" href="/smal/novo_ticket.html">Novo Ticket</a>
-	</nav>
-	<h1><img src="/smal/img/ticket_icon.png" />Tickets</h1>
+    <h1>Abrir chamado:</h1>
+    <form data-bind="submit: abrirChamado">
+        <input type="text" name="matricula" placeholder="Informe a matricula"/>
+        <input type="text" name="maquinaId" placeholder="Informe a maquina"/>
+        <input type="text" name="subproblemaId" placeholder="Informe o subproblema"/>
+        <input type="text" name="descricao" placeholder="Informe a descrição"/>
+        <button type="submit">Abrir</button>
+    </form>
+    <br/>
+    <hr/>
+	<h1><img src="/smal/img/ticket_icon.png"/>Tickets:</h1>
 	<table class="default_table">
 		<thead>
 			<tr>
-				<th></th>
-				<th>Ticket</th>
+				<th>Protocolo</th>
 				<th>Abertura</th>
-				<th>Responsável</th>
+				<th>Fechamento</th>
+				<th>Descrição</th>
+				<th>Abridor</th>
+				<th>Atendente</th>
+				<th>Designador</th>
 				<th>Status</th>
+				<th>Subproblema</th>
+				<th>Maquina</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
-		<tbody data-bind="foreach: tickets">
+		<tbody data-bind="foreach: chamados">
 			<tr>
-				<td width="32px"><img src="img/ticket_grid_min_icon.png" /></td>
-				<td><a class="ticket_anchor" href="ticket.html">0000001 - Hardware</a></td>
-				<td>22/11/2013</td>
-				<td>Pedro Mor</td>
-				<td><span class="item_status status_vermelho">Aberto</span></td>
+				<td><input data-bind="value: protocolo" disabled="disabled"></input></td>
+                <td><input data-bind="value: data_hora_abertura"></input></td>
+                <td><input data-bind="value: data_hora_fechamento"></input></td>
+                <td><input data-bind="value: descricao"></input></td>
+                <td><input data-bind="value: abridorId"></input></td>
+                <td><input data-bind="value: atendenteId"></input></td>
+                <td><input data-bind="value: designadorId"></input></td>
+                <td><input data-bind="value: status"></input></td>
+                <td><input data-bind="value: subproblemaId"></input></td>
+                <td><input data-bind="value: maquinaId"></input></td>
+                <td><a href="#" data-bind="click: $parent.alterar">Altera</a>
+                    <a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
 			</tr>
 		</tbody>
 	</table>
