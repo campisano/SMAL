@@ -1,11 +1,6 @@
 window.app = window.app || {};
 window.app.viewmodel = new LaboratoriosViewModel();
 
-function Laboratorio(data) {
-	this.id = ko.observable(data.id);
-	this.nome = ko.observable(data.nome);
-};
-
 function LaboratoriosViewModel() {
     var self = this;
 
@@ -21,7 +16,7 @@ function LaboratoriosViewModel() {
 					self.notificar("Listando:", JSON.stringify(result.mensagem));
 					var mappedLaboratorios = $.map(result.mensagem, function(
 							item) {
-						return new Laboratorio(item);
+						return new ObterTodosResponse(item);
 					});
 					self.laboratorios(mappedLaboratorios);
 				} else {
@@ -111,4 +106,9 @@ function LaboratoriosViewModel() {
 			zindex : 1500
 		});
 	};
+};
+
+function ObterTodosResponse(data) {
+	this.id = ko.observable(data.id);
+	this.nome = ko.observable(data.nome);
 };
