@@ -3,16 +3,17 @@ package br.com.smal.persistence;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.smal.domain.Administrador;
 import br.com.smal.domain.Tecnico;
-import br.com.smal.infrastructure.AdministradorDao;
 
+@Component
 public class AdministradorRepositorio {
 
 	@Autowired
 	AdministradorDao administradorDao;
-	
+
 	public boolean incluir(Administrador entidade) {
 		return administradorDao.incluir(entidade);
 	}
@@ -32,20 +33,15 @@ public class AdministradorRepositorio {
 	public List<Administrador> obterTodos() {
 		return administradorDao.obterTodos();
 	}
-	
-	public boolean existeMatriculaSenha(String matricula , String senha){
-	
-		return administradorDao.existeMatriculaSenha(matricula , senha);
+
+	public boolean existeMatriculaSenha(String matricula, String senha) {
+
+		return administradorDao.existeMatriculaSenha(matricula, senha);
 	}
 
-	public Tecnico getAdministradorPorMatricula(String matricula){
-		
+	public Tecnico getAdministradorPorMatricula(String matricula) {
+
 		return administradorDao.getAdministradorPorMatricula(matricula);
 	}
-	
-	
-	
+
 }
-
-	
-
