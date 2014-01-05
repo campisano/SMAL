@@ -5,32 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.smal.domain.Problema;
 import br.com.smal.domain.Subproblema;
 
 @Component
-public class SubProblemaRepositorio {
+public class SubproblemaRepositorio {
 
 	@Autowired
-	SubProblemaDao subProblemaDao;
+	SubproblemaDao subproblemaDao;
 
 	public boolean incluir(Subproblema entidade) {
-		return subProblemaDao.incluir(entidade);
+		return subproblemaDao.incluir(entidade);
 	}
 
 	public Subproblema obter(long id) {
-		return subProblemaDao.obter(id);
+		return subproblemaDao.obter(id);
 	}
 
 	public boolean alterar(Subproblema entidade) {
-		return subProblemaDao.alterar(entidade);
+		return subproblemaDao.alterar(entidade);
 	}
 
 	public boolean excluir(long id) {
-		return subProblemaDao.excluir(id);
+		return subproblemaDao.excluir(id);
 	}
 
 	public List<Subproblema> obterTodos() {
-		return subProblemaDao.obterTodos();
+		return subproblemaDao.obterTodos();
 	}
 }

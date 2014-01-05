@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.smal.domain.Subproblema;
 
-public interface SubProblemaDao {
+public interface SubproblemaDao {
 	public boolean incluir(Subproblema entidade);
 
 	public Subproblema obter(long id);
