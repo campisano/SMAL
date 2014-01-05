@@ -17,6 +17,7 @@ public class Chamado {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@GeneratedValue
 	private Long protocolo;
 	private Date data_hora_abertura;
 	private Date data_hora_fechamento;
@@ -31,6 +32,8 @@ public class Chamado {
 	private Status status;
 	@ManyToOne(optional = false)
 	private Subproblema subproblema;
+	@ManyToOne(optional = false)
+	private Maquina maquina;
 
 	public Long getId() {
 		return id;
@@ -110,5 +113,13 @@ public class Chamado {
 
 	public void setSubproblema(Subproblema subproblema) {
 		this.subproblema = subproblema;
+	}
+
+	public Maquina getMaquina() {
+		return maquina;
+	}
+
+	public void setMaquina(Maquina maquina) {
+		this.maquina = maquina;
 	}
 }
