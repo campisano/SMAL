@@ -1,18 +1,18 @@
 package br.com.smal.presentation.chamado.request;
 
 public class DesignarChamadoRequest {
-	private long id;
-	private long tecnicoId;
-	public long getId() {
-		return id;
+	private long protocolo;
+	private long atendenteId;
+	public long getProtocolo() {
+		return protocolo;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long protocolo) {
+		this.protocolo = protocolo;
 	}
-	public long getTecnicoId() {
-		return tecnicoId;
+	public long getAtendenteId() {
+		return atendenteId;
 	}
-	public void setTecnicoId(long tecnicoId) {
-		this.tecnicoId = tecnicoId;
+	public void setAtendenteId(long atendenteId) {
+		this.atendenteId = atendenteId;
 	}
 }

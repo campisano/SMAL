@@ -104,7 +104,7 @@ public class ChamadoController {
 		}
 	}
 
-	public OperationResult designarChamado(long protocolo, long tecnicoId) {
+	public OperationResult designarChamado(long protocolo, long atendenteId) {
 		Chamado chamado = chamadoRepositorio.obter(protocolo);
 
 		// RN_XX: chamado deve existir
@@ -112,7 +112,7 @@ public class ChamadoController {
 			return new OperationResult(false, "Erro: chamado não existe.");
 		}
 
-		Tecnico tecnico = tecnicoRepositorio.obter(tecnicoId);
+		Tecnico tecnico = tecnicoRepositorio.obter(atendenteId);
 
 		// RN_XX: técnico deve existir
 		if (tecnico == null) {

@@ -51,7 +51,57 @@ function ChamadosViewModel() {
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na inclusão:", JSON.stringify(result));
+				self.notificar("Erro na requisição:", JSON.stringify(result));
+			}
+		});
+	};
+	
+	self.designarChamado = function(mixedFormObject) {
+		var designarChamadoRequest = {
+			protocolo : mixedFormObject.protocolo,
+			atendenteId : mixedFormObject.atendenteInput.value
+		};
+		self.notificar("alterando...", JSON.stringify(ko.toJSON(designarChamadoRequest)));
+		$.ajax("/smal/json/chamado/designarChamado", {
+			cache : false,
+			type : "POST",
+			contentType : "application/json",
+			data : ko.toJSON(designarChamadoRequest),
+			success : function(result) {
+				if (result.sucesso) {
+					self.notificar("Alterado:", JSON.stringify(result));
+					self.listarChamados();
+				} else {
+					self.notificar("Erro na alteração:", result.mensagem);
+				}
+			},
+			failure : function(result) {
+				self.notificar("Erro na requisição:", JSON.stringify(result));
+			}
+		});
+	};
+	
+	self.fecharChamado = function(mixedFormObject) {
+		var fecharChamadoRequest = {
+			protocolo : mixedFormObject.protocolo,
+			exito : (mixedFormObject.statusInput.value == 3) ? true : false
+		};
+		self.notificar("Alterando...", JSON.stringify(ko.toJSON(fecharChamadoRequest)));
+		$.ajax("/smal/json/chamado/fecharChamado", {
+			cache : false,
+			type : "POST",
+			contentType : "application/json",
+			data : ko.toJSON(fecharChamadoRequest),
+			success : function(result) {
+				if (result.sucesso) {
+					self.notificar("Alterando:", JSON.stringify(result));
+					self.listarChamados();
+				} else {
+					self.notificar("Erro na alteração:", result.mensagem);
+				}
+			},
+			failure : function(result) {
+				self.notificar("Erro na requisição:", JSON.stringify(result));
 			}
 		});
 	};

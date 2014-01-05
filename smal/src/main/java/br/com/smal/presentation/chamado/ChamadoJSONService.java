@@ -75,7 +75,7 @@ public class ChamadoJSONService {
 	public RespostaJSON<Object> designarChamado(DesignarChamadoRequest request) {
 		try {
 			OperationResult result = chamadoController.designarChamado(
-					request.getId(), request.getTecnicoId());
+					request.getProtocolo(), request.getAtendenteId());
 
 			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, "");
@@ -94,7 +94,7 @@ public class ChamadoJSONService {
 	public RespostaJSON<Object> fecharChamado(FecharChamadoRequest request) {
 		try {
 			OperationResult result = chamadoController.fecharChamado(
-					request.getId(), request.isExito());
+					request.getProtocolo(), request.isExito());
 
 			if (result.isSuccess()) {
 				return new RespostaJSON<Object>(true, "");
