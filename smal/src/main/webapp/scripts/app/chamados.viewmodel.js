@@ -1,34 +1,37 @@
-window.app = window.app || {};
 window.app.viewmodel = new ChamadosViewModel();
 
 function ChamadosViewModel() {
-    var self = this;
+	var self = this;
 
 	self.chamados = ko.observableArray([]);
-	
+
 	self.listarChamados = function() {
+		window.app.notifyDebug("Listar chamados...", "");
 		$.ajax("/smal/json/chamado/listarChamados", {
 			cache : false,
 			type : "GET",
 			contentType : "application/json",
 			success : function(result) {
 				if (result.sucesso) {
-					self.notificar("Listando:", JSON.stringify(result.mensagem));
-					var mappedChamados = $.map(result.mensagem, function(
-							item) {
-						return new ListarChamadosResponseAndDesignar_Fechar(item);
+					window.app.notifyInfo("Listando:", JSON
+							.stringify(result.mensagem));
+					var mappedChamados = $.map(result.mensagem, function(item) {
+						return new ListarChamadosResponseAndDesignar_Fechar(
+								item);
 					});
 					self.chamados(mappedChamados);
 				} else {
-					self.notificar("Erro na obtenção:", result.mensagem);
+					window.app
+							.notifyError("Erro na obtenção:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na requisição:", JSON.stringify(result));
+				window.app.notifyError("Erro na requisição:", JSON
+						.stringify(result));
 			}
 		});
 	};
-	
+
 	self.abrirChamado = function(form) {
 		var abrirChamadoRequest = {
 			matricula : form.matricula.value,
@@ -36,7 +39,8 @@ function ChamadosViewModel() {
 			subproblemaId : form.subproblemaId.value,
 			descricao : form.descricao.value
 		};
-		self.notificar("Incluindo...", JSON.stringify(ko.toJSON(abrirChamadoRequest)));
+		window.app.notifyDebug("Incluindo...", JSON.stringify(ko
+				.toJSON(abrirChamadoRequest)));
 		$.ajax("/smal/json/chamado/abrirChamado", {
 			cache : false,
 			type : "POST",
@@ -44,24 +48,27 @@ function ChamadosViewModel() {
 			data : ko.toJSON(abrirChamadoRequest),
 			success : function(result) {
 				if (result.sucesso) {
-					self.notificar("Incluido:", JSON.stringify(result));
+					window.app.notifyInfo("Incluido:", JSON.stringify(result));
 					self.listarChamados();
 				} else {
-					self.notificar("Erro na inclusão:", result.mensagem);
+					window.app
+							.notifyError("Erro na inclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na requisição:", JSON.stringify(result));
+				window.app.notifyError("Erro na requisição:", JSON
+						.stringify(result));
 			}
 		});
 	};
-	
+
 	self.designarChamado = function(form) {
 		var designarChamadoRequest = {
 			protocolo : form.protocolo,
 			atendenteId : form.atendenteInput
 		};
-		self.notificar("alterando...", JSON.stringify(ko.toJSON(designarChamadoRequest)));
+		window.app.notifyDebug("alterando...", JSON.stringify(ko
+				.toJSON(designarChamadoRequest)));
 		$.ajax("/smal/json/chamado/designarChamado", {
 			cache : false,
 			type : "POST",
@@ -69,59 +76,58 @@ function ChamadosViewModel() {
 			data : ko.toJSON(designarChamadoRequest),
 			success : function(result) {
 				if (result.sucesso) {
-					self.notificar("Alterado:", JSON.stringify(result));
+					window.app.notifyInfo("Alterado:", JSON.stringify(result));
 					self.listarChamados();
 				} else {
-					self.notificar("Erro na alteração:", result.mensagem);
+					window.app.notifyError("Erro na alteração:",
+							result.mensagem);
 				}
 			},
 			failure : function(result) {
-				self.notificar("Erro na requisição:", JSON.stringify(result));
-			}
-		});
-	};
-	
-	self.fecharChamado = function(form) {
-		var fecharChamadoRequest = {
-			protocolo : form.protocolo,
-			exito : (ko.utils.unwrapObservable(form.statusInput) == 3) ? true : false
-		};
-		self.notificar("Alterando...", JSON.stringify(ko.toJSON(fecharChamadoRequest)));
-		$.ajax("/smal/json/chamado/fecharChamado", {
-			cache : false,
-			type : "POST",
-			contentType : "application/json",
-			data : ko.toJSON(fecharChamadoRequest),
-			success : function(result) {
-				if (result.sucesso) {
-					self.notificar("Alterando:", JSON.stringify(result));
-					self.listarChamados();
-				} else {
-					self.notificar("Erro na alteração:", result.mensagem);
-				}
-			},
-			failure : function(result) {
-				self.notificar("Erro na requisição:", JSON.stringify(result));
+				window.app.notifyError("Erro na requisição:", JSON
+						.stringify(result));
 			}
 		});
 	};
 
-	self.notificar = function(title, mensagem) {
-		$.notific8(mensagem, {
-			life : 5000,
-			heading : title,
-			theme : "ebony",
-			horizontalEdge : "bottom",
-			verticalEdge : "right",
-			zindex : 1500
-		});
+	self.fecharChamado = function(form) {
+		var fecharChamadoRequest = {
+			protocolo : form.protocolo,
+			exito : (ko.utils.unwrapObservable(form.statusInput) == 3) ? true
+					: false
+		};
+		window.app.notifyDebug("Alterando...", JSON.stringify(ko
+				.toJSON(fecharChamadoRequest)));
+		$.ajax("/smal/json/chamado/fecharChamado",
+				{
+					cache : false,
+					type : "POST",
+					contentType : "application/json",
+					data : ko.toJSON(fecharChamadoRequest),
+					success : function(result) {
+						if (result.sucesso) {
+							window.app.notifyInfo("Alterando:", JSON
+									.stringify(result));
+							self.listarChamados();
+						} else {
+							window.app.notifyError("Erro na alteração:",
+									result.mensagem);
+						}
+					},
+					failure : function(result) {
+						window.app.notifyError("Erro na requisição:", JSON
+								.stringify(result));
+					}
+				});
 	};
 };
 
 function ListarChamadosResponseAndDesignar_Fechar(data) {
 	this.protocolo = ko.observable(data.protocolo);
 	this.data_hora_abertura = ko.observable(new Date(data.data_hora_abertura));
-	this.data_hora_fechamento = ko.observable((data.data_hora_fechamento != null) ? new Date(data.data_hora_fechamento) : "");
+	this.data_hora_fechamento = ko
+			.observable((data.data_hora_fechamento != null) ? new Date(
+					data.data_hora_fechamento) : "");
 	this.descricao = ko.observable(data.descricao);
 	this.abridorId = ko.observable(data.abridorId);
 	this.atendenteId = ko.observable(data.atendenteId);
@@ -144,8 +150,8 @@ function ListarChamadosResponseAndDesignar_Fechar(data) {
 	}
 	this.subproblemaId = ko.observable(data.subproblemaId);
 	this.maquinaId = ko.observable(data.maquinaId);
-	
-	//Designar_Fechar
+
+	// Designar_Fechar
 	this.atendenteInput = ko.observable();
 	this.statusInput = ko.observable();
 };

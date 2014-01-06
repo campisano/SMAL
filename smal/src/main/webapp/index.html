@@ -13,8 +13,13 @@
 	<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
 	<script type="text/javascript" src="scripts/notific8/jquery.notific8.min.js"></script>
 	<link rel="Stylesheet" href="scripts/notific8/jquery.notific8.min.css" />
+	
+	<script src="scripts/app/window.app.js"></script>
 
 	<script>
+		window.app = window.app || new WindowApp();
+		window.app.verbose = info_verbose;
+		
 		$(document).ready(function () {
 			$("a.nav").click(function (e) {
 				var that = $(this);
