@@ -1,26 +1,35 @@
-<script src="scripts/app/problemas.datacontext.js"></script>
 <script src="scripts/app/problemas.viewmodel.js"></script>
 <script>
-	$(document).ready(function () {
-		ko.applyBindings(window.app.viewmodel, document.getElementById('problemas_view'));
-	});
+	$(document).ready(
+			function() {
+				ko.applyBindings(window.app.viewmodel, document
+						.getElementById('problemas_view'));
+				window.app.viewmodel.listarProblemas();
+			});
 </script>
 <div id="problemas_view" class="default_content_wrapper">
-		<nav id="sub_menu">
-		<a class="chamado_anchor btn btn_verde btn_add" href="/smal/novo_chamado.html">Novo Problema</a>
-	</nav>
-	<h1>Problemas</h1>
+	<h1>Inclui novo problema:</h1>
+	<form data-bind="submit: cadastrarProblema">
+		<input type="text" name="nome" placeholder="Informa o nome" />
+		<button type="submit">Inclui</button>
+	</form>
+	<br />
+	<hr />
+	<h1>Problemas:</h1>
 	<table class="default_table">
 		<thead>
 			<tr>
-				<th>Problema</th>
-				<th></th>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody data-bind="foreach: problemas">
 			<tr>
-				<td><span data-bind=""></span></td>
-				<td><a></a></td>
+				<td><input data-bind="value: id" disabled="disabled"></input></td>
+				<td><input data-bind="value: nome"></input></td>
+				<td><a href="#" data-bind="click: $parent.alterarProblema">Altera</a>
+					<a href="#" data-bind="click: $parent.excluirProblema">Exclui</a></td>
 			</tr>
 		</tbody>
 	</table>

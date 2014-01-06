@@ -1,14 +1,14 @@
 package br.com.smal.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +21,8 @@ public class Subproblema {
 	private String nome;
 	@ManyToOne
 	private Problema problema;
-	@OneToMany(mappedBy = "subproblema", fetch = FetchType.LAZY)
-	private List<Chamado> chamados = new ArrayList<Chamado>();
+	//@OneToMany(mappedBy = "subproblema", fetch = FetchType.LAZY)
+	//private List<Chamado> chamados = new ArrayList<Chamado>();
 
 	public Long getId() {
 		return id;
@@ -48,11 +48,11 @@ public class Subproblema {
 		this.problema = problema;
 	}
 
-	public List<Chamado> getChamados() {
-		return chamados;
-	}
+	//public List<Chamado> getChamados() {
+	//	return chamados;
+	//}
 
-	public void setChamados(List<Chamado> chamados) {
-		this.chamados = chamados;
-	}
+	//public void setChamados(List<Chamado> chamados) {
+	//	this.chamados = chamados;
+	//}
 }

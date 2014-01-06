@@ -1,4 +1,4 @@
-package br.com.smal.presentation;
+package br.com.smal.presentation.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;

@@ -1,13 +1,13 @@
-window.app.viewmodel = new ProblemasViewModel();
+window.app.viewmodel = new SubproblemasViewModel();
 
-function ProblemasViewModel() {
+function SubproblemasViewModel() {
 	var self = this;
 
-	self.problemas = ko.observableArray([]);
+	self.subproblemas = ko.observableArray([]);
 
-	self.listarProblemas = function() {
+	self.listarSubproblemas = function() {
 		window.app.notifyDebug("Obtendo todos...", "");
-		$.ajax("/smal/json/problema/listarProblemas", {
+		$.ajax("/smal/json/subproblema/listarSubproblemas", {
 			cache : false,
 			type : "GET",
 			contentType : "application/json",
@@ -16,9 +16,9 @@ function ProblemasViewModel() {
 					window.app.notifyInfo("Listando:", JSON
 							.stringify(result.mensagem));
 					var mappedObjects = $.map(result.mensagem, function(item) {
-						return new ListarProblemasResponse(item);
+						return new ListarSubproblemasResponse(item);
 					});
-					self.problemas(mappedObjects);
+					self.subproblemas(mappedObjects);
 				} else {
 					window.app
 							.notifyError("Erro na obtenção:", result.mensagem);
@@ -31,13 +31,14 @@ function ProblemasViewModel() {
 		});
 	};
 
-	self.cadastrarProblema = function(form) {
+	self.cadastrarSubproblema = function(form) {
 		var request = {
-			nome : form.nome.value
+			nome : form.nome.value,
+			problemaId : form.problemaId.value
 		};
 		window.app.notifyDebug("Incluindo...", JSON.stringify(ko
 				.toJSON(request)));
-		$.ajax("/smal/json/problema/cadastrarProblema", {
+		$.ajax("/smal/json/subproblema/cadastrarSubproblema", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
@@ -45,7 +46,7 @@ function ProblemasViewModel() {
 			success : function(result) {
 				if (result.sucesso) {
 					window.app.notifyInfo("Incluido:", JSON.stringify(result));
-					self.listarProblemas();
+					self.listarSubproblemas();
 				} else {
 					window.app
 							.notifyError("Erro na inclusão:", result.mensagem);
@@ -58,14 +59,15 @@ function ProblemasViewModel() {
 		});
 	};
 
-	self.alterarProblema = function(problema) {
+	self.alterarSubproblema = function(subproblema) {
 		var request = {
-			id : problema.id,
-			nome : problema.nome
+			id : subproblema.id,
+			nome : subproblema.nome,
+			problemaId : subproblema.problemaId
 		};
 		window.app.notifyDebug("Alterando...", JSON.stringify(ko
 				.toJSON(request)));
-		$.ajax("/smal/json/problema/alterarProblema", {
+		$.ajax("/smal/json/subproblema/alterarSubproblema", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
@@ -73,7 +75,7 @@ function ProblemasViewModel() {
 			success : function(result) {
 				if (result.sucesso) {
 					window.app.notifyInfo("Alterado:", JSON.stringify(result));
-					self.listarProblemas();
+					self.listarSubproblemas();
 				} else {
 					window.app.notifyError("Erro na alteração:",
 							result.mensagem);
@@ -86,13 +88,13 @@ function ProblemasViewModel() {
 		});
 	};
 
-	self.excluirProblema = function(problema) {
+	self.excluirSubproblema = function(subproblema) {
 		var request = {
-			id : problema.id
+			id : subproblema.id
 		};
 		window.app.notifyDebug("Excluindo...", JSON.stringify(ko
 				.toJSON(request)));
-		$.ajax("/smal/json/problema/excluirProblema", {
+		$.ajax("/smal/json/subproblema/excluirSubproblema", {
 			cache : false,
 			type : "POST",
 			contentType : "application/json",
@@ -100,7 +102,7 @@ function ProblemasViewModel() {
 			success : function(result) {
 				if (result.sucesso) {
 					window.app.notifyInfo("Excluido:", JSON.stringify(result));
-					self.listarProblemas();
+					self.listarSubproblemas();
 				} else {
 					window.app
 							.notifyError("Erro na exclusão:", result.mensagem);
@@ -114,7 +116,8 @@ function ProblemasViewModel() {
 	};
 };
 
-function ListarProblemasResponse(data) {
+function ListarSubproblemasResponse(data) {
 	this.id = ko.observable(data.id);
 	this.nome = ko.observable(data.nome);
+	this.problemaId = ko.observable(data.problemaId);
 };

@@ -1,0 +1,39 @@
+<script src="scripts/app/subproblemas.viewmodel.js"></script>
+<script>
+	$(document).ready(
+			function() {
+				ko.applyBindings(window.app.viewmodel, document
+						.getElementById('subproblemas_view'));
+				window.app.viewmodel.listarSubproblemas();
+			});
+</script>
+<div id="subproblemas_view" class="default_content_wrapper">
+	<h1>Inclui novo subproblema:</h1>
+	<form data-bind="submit: cadastrarSubproblema">
+		<input type="text" name="nome" placeholder="Informa o nome" /> <input
+			type="text" name="problemaId" placeholder="Informa o problema pai" />
+		<button type="submit">Inclui</button>
+	</form>
+	<br />
+	<hr />
+	<h1>Subproblemas:</h1>
+	<table class="default_table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Problema</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: subproblemas">
+			<tr>
+				<td><input data-bind="value: id" disabled="disabled"></input></td>
+				<td><input data-bind="value: nome"></input></td>
+				<td><input data-bind="value: problemaId"></input></td>
+				<td><a href="#" data-bind="click: $parent.alterarSubproblema">Altera</a>
+					<a href="#" data-bind="click: $parent.excluirSubproblema">Exclui</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

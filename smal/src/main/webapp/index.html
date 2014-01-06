@@ -18,7 +18,7 @@
 
 	<script>
 		window.app = window.app || new WindowApp();
-		window.app.verbose = info_verbose;
+		window.app.verbose = debug_verbose;
 		
 		$(document).ready(function () {
 			$("a.nav").click(function (e) {
@@ -104,10 +104,6 @@
 	<div id="main">
 		<aside id="main_menu">
 			<nav>
-				<a class="nav" preload-text="Chamados" preload-img="img/chamado_icon.png" href="chamados.html">
-					<img src="img/chamado_min_icon.png" />
-					Chamados
-				</a>
 				<a class="nav" preload-text="Usuários" preload-img="img/usuario_icon.png" href="usuarios.html">
 					<img src="img/usuario_min_icon.png" />
 					Usuários
@@ -123,6 +119,14 @@
 				<a class="nav" preload-text="Problemas" preload-img="img/problema_icon.png" href="problemas.html">
 					<img src="img/problema_min_icon.png" />
 					Problemas
+				</a>
+				<a class="nav" preload-text="Subproblemas" preload-img="img/subproblema_icon.png" href="subproblemas.html">
+					<img src="img/subproblema_min_icon.png" />
+					Subproblemas
+				</a>
+				<a class="nav" preload-text="Chamados" preload-img="img/chamado_icon.png" href="chamados.html">
+					<img src="img/chamado_min_icon.png" />
+					Chamados
 				</a>
 			</nav>
 		</aside>
