@@ -16,7 +16,7 @@ function ChamadosViewModel() {
 					self.notificar("Listando:", JSON.stringify(result.mensagem));
 					var mappedChamados = $.map(result.mensagem, function(
 							item) {
-						return new ListarChamadosResponse(item);
+						return new ListarChamadosResponseAndDesignar_Fechar(item);
 					});
 					self.chamados(mappedChamados);
 				} else {
@@ -56,10 +56,10 @@ function ChamadosViewModel() {
 		});
 	};
 	
-	self.designarChamado = function(mixedFormObject) {
+	self.designarChamado = function(form) {
 		var designarChamadoRequest = {
-			protocolo : mixedFormObject.protocolo,
-			atendenteId : mixedFormObject.atendenteInput.value
+			protocolo : form.protocolo,
+			atendenteId : form.atendenteInput
 		};
 		self.notificar("alterando...", JSON.stringify(ko.toJSON(designarChamadoRequest)));
 		$.ajax("/smal/json/chamado/designarChamado", {
@@ -81,10 +81,10 @@ function ChamadosViewModel() {
 		});
 	};
 	
-	self.fecharChamado = function(mixedFormObject) {
+	self.fecharChamado = function(form) {
 		var fecharChamadoRequest = {
-			protocolo : mixedFormObject.protocolo,
-			exito : (mixedFormObject.statusInput.value == 3) ? true : false
+			protocolo : form.protocolo,
+			exito : (ko.utils.unwrapObservable(form.statusInput) == 3) ? true : false
 		};
 		self.notificar("Alterando...", JSON.stringify(ko.toJSON(fecharChamadoRequest)));
 		$.ajax("/smal/json/chamado/fecharChamado", {
@@ -118,7 +118,7 @@ function ChamadosViewModel() {
 	};
 };
 
-function ListarChamadosResponse(data) {
+function ListarChamadosResponseAndDesignar_Fechar(data) {
 	this.protocolo = ko.observable(data.protocolo);
 	this.data_hora_abertura = ko.observable(new Date(data.data_hora_abertura));
 	this.data_hora_fechamento = ko.observable((data.data_hora_fechamento != null) ? new Date(data.data_hora_fechamento) : "");
@@ -144,4 +144,8 @@ function ListarChamadosResponse(data) {
 	}
 	this.subproblemaId = ko.observable(data.subproblemaId);
 	this.maquinaId = ko.observable(data.maquinaId);
+	
+	//Designar_Fechar
+	this.atendenteInput = ko.observable();
+	this.statusInput = ko.observable();
 };

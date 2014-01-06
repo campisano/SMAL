@@ -36,7 +36,7 @@
 		</thead>
 		<tbody data-bind="foreach: chamados">
 			<tr>
-				<td><span data-bind="text: protocolo" disabled="disabled"></span></td>
+				<td><span data-bind="text: protocolo"></span></td>
                 <td><span data-bind="text: data_hora_abertura"></span></td>
                 <td><span data-bind="text: data_hora_fechamento"></span></td>
                 <td><span data-bind="text: descricao"></span></td>
@@ -46,8 +46,8 @@
                 <td><span data-bind="text: status"></span></td>
                 <td><span data-bind="text: subproblemaId"></span></td>
                 <td><span data-bind="text: maquinaId"></span></td>
-                <td><a href="#" data-bind="click: $parent.designarChamado">Designar</a><input type="text" name="atendenteInput" title="Id atendente"/></td>
-                <td><a href="#" data-bind="click: $parent.fecharChamado">Fechar</a><select name="statusInput" data-bind="options: [ {nome: 'resolvido', id: '3'}, {nome: 'não resolvido', id: '4'}], optionsText: 'nome', optionsValue: 'id'"></select></td>
+                <td><a href="#" data-bind="click: $parent.designarChamado">Designar</a><input data-bind="value: atendenteInput" title="Id atendente"/></td>
+                <td><a href="#" data-bind="click: $parent.fecharChamado">Fechar</a><select data-bind="value: statusInput, options: [ {nome: 'resolvido', id: 3}, {nome: 'não resolvido', id: 4}], optionsText: 'nome', optionsValue: 'id'"></select></td>
 			</tr>
 		</tbody>
 	</table>
