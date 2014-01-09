@@ -1,31 +1,28 @@
-window.app.viewmodel = new ProblemasViewModel();
-
-function ProblemasViewModel() {
+function ProblemasViewModel(app) {
 	var self = this;
-
+	self.app = app;
 	self.problemas = ko.observableArray([]);
 
 	self.listarProblemas = function() {
-		window.app.notifyDebug("Obtendo todos...", "");
+		self.app.notifyDebug("Obtendo todos...", "");
 		$.ajax("/smal/json/problema/listarProblemas", {
 			cache : false,
 			type : "GET",
 			contentType : "application/json",
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Listando:", JSON
+					self.app.notifyInfo("Listando:", JSON
 							.stringify(result.mensagem));
 					var mappedObjects = $.map(result.mensagem, function(item) {
 						return new ListarProblemasResponse(item);
 					});
 					self.problemas(mappedObjects);
 				} else {
-					window.app
-							.notifyError("Erro na obtenção:", result.mensagem);
+					self.app.notifyError("Erro na obtenção:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na requisição:", JSON
+				self.app.notifyError("Erro na requisição:", JSON
 						.stringify(result));
 			}
 		});
@@ -35,8 +32,8 @@ function ProblemasViewModel() {
 		var request = {
 			nome : form.nome.value
 		};
-		window.app.notifyDebug("Incluindo...", JSON.stringify(ko
-				.toJSON(request)));
+		self.app
+				.notifyDebug("Incluindo...", JSON.stringify(ko.toJSON(request)));
 		$.ajax("/smal/json/problema/cadastrarProblema", {
 			cache : false,
 			type : "POST",
@@ -44,15 +41,14 @@ function ProblemasViewModel() {
 			data : ko.toJSON(request),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Incluido:", JSON.stringify(result));
+					self.app.notifyInfo("Incluido:", JSON.stringify(result));
 					self.listarProblemas();
 				} else {
-					window.app
-							.notifyError("Erro na inclusão:", result.mensagem);
+					self.app.notifyError("Erro na inclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na inclusão:", JSON
+				self.app.notifyError("Erro na inclusão:", JSON
 						.stringify(result));
 			}
 		});
@@ -63,35 +59,37 @@ function ProblemasViewModel() {
 			id : problema.id,
 			nome : problema.nome
 		};
-		window.app.notifyDebug("Alterando...", JSON.stringify(ko
-				.toJSON(request)));
-		$.ajax("/smal/json/problema/alterarProblema", {
-			cache : false,
-			type : "POST",
-			contentType : "application/json",
-			data : ko.toJSON(request),
-			success : function(result) {
-				if (result.sucesso) {
-					window.app.notifyInfo("Alterado:", JSON.stringify(result));
-					self.listarProblemas();
-				} else {
-					window.app.notifyError("Erro na alteração:",
-							result.mensagem);
-				}
-			},
-			failure : function(result) {
-				window.app.notifyError("Erro na alteraçaõ:", JSON
-						.stringify(result));
-			}
-		});
+		self.app
+				.notifyDebug("Alterando...", JSON.stringify(ko.toJSON(request)));
+		$.ajax("/smal/json/problema/alterarProblema",
+				{
+					cache : false,
+					type : "POST",
+					contentType : "application/json",
+					data : ko.toJSON(request),
+					success : function(result) {
+						if (result.sucesso) {
+							self.app.notifyInfo("Alterado:", JSON
+									.stringify(result));
+							self.listarProblemas();
+						} else {
+							self.app.notifyError("Erro na alteração:",
+									result.mensagem);
+						}
+					},
+					failure : function(result) {
+						self.app.notifyError("Erro na alteraçaõ:", JSON
+								.stringify(result));
+					}
+				});
 	};
 
 	self.excluirProblema = function(problema) {
 		var request = {
 			id : problema.id
 		};
-		window.app.notifyDebug("Excluindo...", JSON.stringify(ko
-				.toJSON(request)));
+		self.app
+				.notifyDebug("Excluindo...", JSON.stringify(ko.toJSON(request)));
 		$.ajax("/smal/json/problema/excluirProblema", {
 			cache : false,
 			type : "POST",
@@ -99,15 +97,14 @@ function ProblemasViewModel() {
 			data : ko.toJSON(request),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Excluido:", JSON.stringify(result));
+					self.app.notifyInfo("Excluido:", JSON.stringify(result));
 					self.listarProblemas();
 				} else {
-					window.app
-							.notifyError("Erro na exclusão:", result.mensagem);
+					self.app.notifyError("Erro na exclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na exclusão:", JSON
+				self.app.notifyError("Erro na exclusão:", JSON
 						.stringify(result));
 			}
 		});

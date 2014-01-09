@@ -2,6 +2,7 @@
 <script>
 	$(document).ready(
 			function() {
+				window.app.viewmodel = new ProblemasViewModel(window.app);
 				ko.applyBindings(window.app.viewmodel, document
 						.getElementById('problemas_view'));
 				window.app.viewmodel.listarProblemas();

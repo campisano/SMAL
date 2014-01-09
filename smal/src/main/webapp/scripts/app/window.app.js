@@ -6,6 +6,7 @@ var debug_verbose = 4;
 function WindowApp() {
 	var self = this;
 
+	self.username = ko.observable("Guest");
 	self.verbose = debug_verbose;
 
 	self.notifyError = function(title, mensagem) {
@@ -36,5 +37,39 @@ function WindowApp() {
 			});
 		}
 		;
+	};
+
+	self.refreshPage = function() {
+		if (location.pathname != '/smal/index.html') {
+			var preload = $('#preload');
+			var content = $("#content");
+			preload.addClass('in');
+			setTimeout(function() {
+				$.get(location.pathname, function(data) {
+					content.html(data);
+					preload.removeClass('in');
+				});
+			}, 800);
+		} else {
+			self.changePage('/smal/chamados.html', undefined, undefined);
+		}
+	};
+
+	self.changePage = function(url, text, image) {
+		if (url != '/smal/index.html') {
+			var content = $("#content");
+			var preload = $('#preload');
+			if (image != undefined)
+				preload.find("img").attr('src', image);
+			if (text != undefined)
+				preload.find('h1').text(text);
+			preload.addClass('in');
+			setTimeout(function() {
+				$.get(url, function(data) {
+					content.html(data);
+					preload.removeClass('in');
+				});
+			}, 800);
+		}
 	};
 };

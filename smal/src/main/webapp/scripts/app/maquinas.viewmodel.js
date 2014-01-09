@@ -1,15 +1,13 @@
-window.app.viewmodel = new MaquinasViewModel();
-
-function MaquinasViewModel() {
+function MaquinasViewModel(app) {
 	var self = this;
-
+	self.app = app;
 	self.maquinas = ko.observableArray([]);
 
-	self.listarMaquinas = function(form) {
+	self.listarMaquinas = function(laboratorioId) {
 		var listarMaquinasRequest = {
-			laboratorioId : form.laboratorioId.value
+			laboratorioId : laboratorioId
 		};
-		window.app.notifyDebug("Listar máquinas de laboratório...", JSON
+		self.app.notifyDebug("Listar máquinas de laboratório...", JSON
 				.stringify(ko.toJSON(listarMaquinasRequest)));
 		$.ajax("/smal/json/maquina/listarMaquinas", {
 			cache : false,
@@ -18,19 +16,18 @@ function MaquinasViewModel() {
 			data : ko.toJSON(listarMaquinasRequest),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Listando:", JSON
+					self.app.notifyInfo("Listando:", JSON
 							.stringify(result.mensagem));
 					var mappedMaquinas = $.map(result.mensagem, function(item) {
-						return new ObterTodosResponse(item);
+						return new ListarMaquinasResponse(item);
 					});
 					self.maquinas(mappedMaquinas);
 				} else {
-					window.app
-							.notifyError("Erro na obtenção:", result.mensagem);
+					self.app.notifyError("Erro na obtenção:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na requisição:", JSON
+				self.app.notifyError("Erro na requisição:", JSON
 						.stringify(result));
 			}
 		});
@@ -43,7 +40,7 @@ function MaquinasViewModel() {
 			fila : form.fila.value,
 			coluna : form.coluna.value
 		};
-		window.app.notifyDebug("Incluindo...", JSON.stringify(ko
+		self.app.notifyDebug("Incluindo...", JSON.stringify(ko
 				.toJSON(cadastrarMaquinaRequest)));
 		$.ajax("/smal/json/maquina/cadastrarMaquina", {
 			cache : false,
@@ -52,48 +49,49 @@ function MaquinasViewModel() {
 			data : ko.toJSON(cadastrarMaquinaRequest),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Incluido:", JSON.stringify(result));
+					self.app.notifyInfo("Incluido:", JSON.stringify(result));
 				} else {
-					window.app
-							.notifyError("Erro na inclusão:", result.mensagem);
+					self.app.notifyError("Erro na inclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na inclusão:", JSON
+				self.app.notifyError("Erro na inclusão:", JSON
 						.stringify(result));
 			}
 		});
 	};
 
 	self.alterarMaquina = function(maquina) {
-		window.app.notifyDebug("Alterando...", JSON.stringify(ko
-				.toJSON(maquina)));
-		$.ajax("/smal/json/maquina/alterarMaquina", {
-			cache : false,
-			type : "POST",
-			contentType : "application/json",
-			data : ko.toJSON(maquina),
-			success : function(result) {
-				if (result.sucesso) {
-					window.app.notifyInfo("Alterado:", JSON.stringify(result));
-				} else {
-					window.app.notifyError("Erro na alteração:",
-							result.mensagem);
-				}
-			},
-			failure : function(result) {
-				window.app.notifyError("Erro na alteraçaõ:", JSON
-						.stringify(result));
-			}
-		});
+		self.app
+				.notifyDebug("Alterando...", JSON.stringify(ko.toJSON(maquina)));
+		$.ajax("/smal/json/maquina/alterarMaquina",
+				{
+					cache : false,
+					type : "POST",
+					contentType : "application/json",
+					data : ko.toJSON(maquina),
+					success : function(result) {
+						if (result.sucesso) {
+							self.app.notifyInfo("Alterado:", JSON
+									.stringify(result));
+						} else {
+							self.app.notifyError("Erro na alteração:",
+									result.mensagem);
+						}
+					},
+					failure : function(result) {
+						self.app.notifyError("Erro na alteraçaõ:", JSON
+								.stringify(result));
+					}
+				});
 	};
 
 	self.excluirMaquina = function(maquina) {
 		var request = {
 			maquinaId : maquina.id
 		};
-		window.app.notifyDebug("Excluindo...", JSON.stringify(ko
-				.toJSON(request)));
+		self.app
+				.notifyDebug("Excluindo...", JSON.stringify(ko.toJSON(request)));
 		$.ajax("/smal/json/maquina/excluirMaquina", {
 			cache : false,
 			type : "POST",
@@ -101,21 +99,20 @@ function MaquinasViewModel() {
 			data : ko.toJSON(request),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Excluido:", JSON.stringify(result));
+					self.app.notifyInfo("Excluido:", JSON.stringify(result));
 				} else {
-					window.app
-							.notifyError("Erro na exclusão:", result.mensagem);
+					self.app.notifyError("Erro na exclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na exclusão:", JSON
+				self.app.notifyError("Erro na exclusão:", JSON
 						.stringify(result));
 			}
 		});
 	};
 };
 
-function ObterTodosResponse(data) {
+function ListarMaquinasResponse(data) {
 	this.id = ko.observable(data.id);
 	this.patrimonio = ko.observable(data.patrimonio);
 	this.laboratorioId = ko.observable(data.laboratorioId);

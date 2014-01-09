@@ -2,21 +2,22 @@
 <script src="scripts/app/chamados.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
+		window.app.viewmodel = new ChamadosViewModel(window.app);
 		ko.applyBindings(window.app.viewmodel, document.getElementById('chamados_view'));
 		window.app.viewmodel.listarChamados();
 	});
 </script>
 <div id="chamados_view" class="default_content_wrapper">
-    <h1>Abrir chamado:</h1>
-    <form data-bind="submit: abrirChamado">
-        <input type="text" name="matricula" placeholder="Informe a matricula"/>
-        <input type="text" name="maquinaId" placeholder="Informe a maquina"/>
-        <input type="text" name="subproblemaId" placeholder="Informe o subproblema"/>
-        <input type="text" name="descricao" placeholder="Informe a descrição"/>
-        <button type="submit">Abrir</button>
-    </form>
-    <br/>
-    <hr/>
+	<h1>Abrir chamado:</h1>
+	<form data-bind="submit: abrirChamado">
+		<input type="text" name="matricula" placeholder="Informe a matricula"/>
+		<input type="text" name="maquinaId" placeholder="Informe a maquina"/>
+		<input type="text" name="subproblemaId" placeholder="Informe o subproblema"/>
+		<input type="text" name="descricao" placeholder="Informe a descrição"/>
+		<button type="submit">Abrir</button>
+	</form>
+	<br/>
+	<hr/>
 	<h1><img src="/smal/img/chamado_icon.png"/>Chamados:</h1>
 	<table class="default_table">
 		<thead>
@@ -37,17 +38,17 @@
 		<tbody data-bind="foreach: chamados">
 			<tr>
 				<td><span data-bind="text: protocolo"></span></td>
-                <td><span data-bind="text: data_hora_abertura"></span></td>
-                <td><span data-bind="text: data_hora_fechamento"></span></td>
-                <td><span data-bind="text: descricao"></span></td>
-                <td><span data-bind="text: abridorId"></span></td>
-                <td><span data-bind="text: atendenteId"></span></td>
-                <td><span data-bind="text: designadorId"></span></td>
-                <td><span data-bind="text: status"></span></td>
-                <td><span data-bind="text: subproblemaId"></span></td>
-                <td><span data-bind="text: maquinaId"></span></td>
-                <td><a href="#" data-bind="click: $parent.designarChamado">Designar</a><input data-bind="value: atendenteInput" title="Id atendente"/></td>
-                <td><a href="#" data-bind="click: $parent.fecharChamado">Fechar</a><select data-bind="value: statusInput, options: [ {nome: 'resolvido', id: 3}, {nome: 'não resolvido', id: 4}], optionsText: 'nome', optionsValue: 'id'"></select></td>
+				<td><span data-bind="text: data_hora_abertura"></span></td>
+				<td><span data-bind="text: data_hora_fechamento"></span></td>
+				<td><span data-bind="text: descricao"></span></td>
+				<td><span data-bind="text: abridorId"></span></td>
+				<td><span data-bind="text: atendenteId"></span></td>
+				<td><span data-bind="text: designadorId"></span></td>
+				<td><span data-bind="text: status"></span></td>
+				<td><span data-bind="text: subproblemaId"></span></td>
+				<td><span data-bind="text: maquinaId"></span></td>
+				<td><a href="#" data-bind="click: $parent.designarChamado">Designar</a><input data-bind="value: atendenteInput" title="Id atendente"/></td>
+				<td><a href="#" data-bind="click: $parent.fecharChamado">Fechar</a><select data-bind="value: statusInput, options: [ {nome: 'resolvido', id: 3}, {nome: 'não resolvido', id: 4}], optionsText: 'nome', optionsValue: 'id'"></select></td>
 			</tr>
 		</tbody>
 	</table>

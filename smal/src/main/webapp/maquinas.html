@@ -1,48 +1,49 @@
 <script src="scripts/app/maquinas.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
+		window.app.viewmodel = new MaquinasViewModel(window.app);
 		ko.applyBindings(window.app.viewmodel, document.getElementById('maquinas_view'));
 	});
 </script>
 <div id="maquinas_view" class="default_content_wrapper">
-    <h1>Listar máquinas</h1>
-    <form data-bind="submit: listarMaquinas">
-        <input type="text" name="laboratorioId" placeholder="Informe o laboratorio"/>
-        <button type="submit">Listar</button>
-    </form>
-    <br/>
-    <hr/>
+	<h1>Listar máquinas</h1>
+	<form data-bind="submit: listarMaquinas">
+		<input type="text" name="laboratorioId" placeholder="Informe o laboratorio"/>
+		<button type="submit">Listar</button>
+	</form>
+	<br/>
+	<hr/>
 	<h1>Inclui nova máquina:</h1>
-    <form data-bind="submit: cadastrarMaquina">
-        <input type="text" name="patrimonio" placeholder="Informe o patrimonio"/>
-        <input type="text" name="laboratorioId" placeholder="Informe o laboratorio"/>
-        <input type="text" name="fila" placeholder="Informe a fila"/>
-        <input type="text" name="coluna" placeholder="Informe a coluna"/>
-        <button type="submit">Inclui</button>
-    </form>
-    <br/>
-    <hr/>
-    <h1>Máquinas:</h1>
+	<form data-bind="submit: cadastrarMaquina">
+		<input type="text" name="patrimonio" placeholder="Informe o patrimonio"/>
+		<input type="text" name="laboratorioId" placeholder="Informe o laboratorio"/>
+		<input type="text" name="fila" placeholder="Informe a fila"/>
+		<input type="text" name="coluna" placeholder="Informe a coluna"/>
+		<button type="submit">Inclui</button>
+	</form>
+	<br/>
+	<hr/>
+	<h1>Máquinas:</h1>
 	<table class="default_table">
 		<thead>
 			<tr>
-                <th>Id</th>
-                <th>Patrimonio</th>
-                <th>Laboratório</th>
-                <th>Fila</th>
-                <th>Coluna</th>
-                <th>Ação</th>
+				<th>Id</th>
+				<th>Patrimonio</th>
+				<th>Laboratório</th>
+				<th>Fila</th>
+				<th>Coluna</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody data-bind="foreach: maquinas">
 			<tr>
-	            <td><input data-bind="value: id" disabled="disabled"></input></td>
-                <td><input data-bind="value: patrimonio"></input></td>
-                <td><input data-bind="value: laboratorioId"></input></td>
-                <td><input data-bind="value: fila"></input></td>
-                <td><input data-bind="value: coluna"></input></td>
-	            <td><a href="#" data-bind="click: $parent.alterarMaquina">Altera</a>
-	                <a href="#" data-bind="click: $parent.excluirMaquina">Exclui</a></td>
+				<td><input data-bind="value: id" disabled="disabled"></input></td>
+				<td><input data-bind="value: patrimonio"></input></td>
+				<td><input data-bind="value: laboratorioId"></input></td>
+				<td><input data-bind="value: fila"></input></td>
+				<td><input data-bind="value: coluna"></input></td>
+				<td><a href="#" data-bind="click: $parent.alterarMaquina">Altera</a>
+					<a href="#" data-bind="click: $parent.excluirMaquina">Exclui</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -22,6 +22,10 @@ hr {
     border-bottom: 1px solid #e0e0e0;
 }
 
+#header_nav {
+	text-align: center;
+}
+
 #lab_nav {
     line-height: 36px;
     background: #3498db;
@@ -129,7 +133,7 @@ hr {
     -webkit-transition: border .2s ease-in-out;
     -webkit-appearance: none;
     position: relative;
-    background: url('/img/arrow_down_select.png') no-repeat right #fff;
+    background: url('/smal/img/arrow_down_select.png') no-repeat right #fff;
     background-size: 28px 28px;
     padding-right: 28px;
     width: 100%;

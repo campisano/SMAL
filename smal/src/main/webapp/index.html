@@ -1,143 +1,105 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>SMAL</title>
-	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-	<link href="css/layout.css" rel="stylesheet" />
-	
-	<!-- core -->
-	<script src="scripts/jquery-1.10.2.min.js"></script>
-	<script src="scripts/knockout-3.0.0.js"></script>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>SMAL</title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link href="css/layout.css" rel="stylesheet" />
 
-	<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
-	<script type="text/javascript" src="scripts/notific8/jquery.notific8.min.js"></script>
-	<link rel="Stylesheet" href="scripts/notific8/jquery.notific8.min.css" />
-	
-	<script src="scripts/app/window.app.js"></script>
+		<!-- core -->
+		<script src="scripts/jquery-1.10.2.min.js"></script>
+		<script src="scripts/knockout-3.0.0.js"></script>
 
-	<script>
-		window.app = window.app || new WindowApp();
-		window.app.verbose = debug_verbose;
-		
-		$(document).ready(function () {
-			$("a.nav").click(function (e) {
-				var that = $(this);
-				changePage(this.href, that.attr("preload-text"), that.attr("preload-img"));
-				return false;
-			});
-		});
+		<!-- Notify library https://github.com/willsteinmetz/jquery-notific8/ -->
+		<script type="text/javascript" src="scripts/notific8/jquery.notific8.min.js"></script>
+		<link rel="Stylesheet" href="scripts/notific8/jquery.notific8.min.css" />
 
-		/*$(window).bind('popstate', function () {
-		    refreshPage();
-		});*/
+		<script src="scripts/app/window.app.js"></script>
 
-		$(document).keydown(function (event) {
-			switch (event.keyCode) {
-				case 116: //F5 button
-					event.returnValue = false;
-					event.keyCode = 0;
-					refreshPage();
+		<script>
+			$(document).ready(function () {
+				$("a.nav").click(function (e) {
+					var that = $(this);
+					window.app.changePage(this.href, that.attr("preload-text"), that.attr("preload-img"));
 					return false;
-				case 82: //R button
-					if (event.ctrlKey) {
-						event.returnValue = false;
-						event.keyCode = 0;
-						refreshPage();
-						return false;
+				});
+
+				$(document).keydown(function (event) {
+					switch (event.keyCode) {
+						case 116: //F5 button
+							event.returnValue = false;
+							event.keyCode = 0;
+							win.app.refreshPage();
+							return false;
+						case 82: //R button
+							if (event.ctrlKey) {
+								event.returnValue = false;
+								event.keyCode = 0;
+								win.app.refreshPage();
+								return false;
+							}
 					}
-			}
-		});
+				});
 
-		function refreshPage() {
-			if(location.pathname != '/smal/index.html') {
-				var preload = $('#preload');
-				var content = $("#content");
-				preload.addClass('in');
-				setTimeout(function () {
-					$.get(location.pathname, function (data) {
-						content.html(data);
-						preload.removeClass('in');
-					});
-				}, 800);
-			}
-			else {
-				changePage('/smal/chamados.html',undefined,undefined);
-			}
-		}
-
-		function changePage(url, text, image) {
-			if(url != '/smal/index.html') {
-				var content = $("#content");
-				var preload = $('#preload');
-				if (image != undefined)
-					preload.find("img").attr('src', image);
-				if (text != undefined)
-					preload.find('h1').text(text);
-				preload.addClass('in');
-				setTimeout(function () {
-					$.get(url, function (data) {
-						content.html(data);
-						preload.removeClass('in');
-					});
-				}, 800);
-			}
-		}
-	</script>
-</head>
-<body>
-	<header>
-		<div id="logo_wrapper" align="center">
-			<img src="img/smal.png" />
+				window.app = window.app || new WindowApp();
+				window.app.verbose = debug_verbose;
+				ko.applyBindings(window.app);
+			});
+		</script>
+	</head>
+	<body>
+		<header>
+			<div id="logo_wrapper" align="center">
+				<img src="img/smal.png" />
+			</div>
+			<!-- 
+			<span id="main_search_wrapper">
+				<input type="search" id="main_search_input" />
+				<input type="image" id="main_search_submit" src="img/main_search_icon.png" />
+			</span>
+			 -->
+			<div id="user_info_wrapper">
+				<span data-bind="text: username"></span>
+				<img src="img/usuario_login_min.png">
+			</div>
+		</header>
+		<div id="main">
+			<aside id="main_menu">
+				<nav>
+					<a class="nav" preload-text="Usuários" preload-img="img/usuario_icon.png" href="usuarios.html">
+						<img src="img/usuario_min_icon.png" />
+						Usuários
+					</a>
+					<a class="nav" preload-text="Laboratórios" preload-img="img/laboratorio_icon.png" href="laboratorios.html">
+						<img src="img/laboratorio_min_icon.png" />
+						Laboratórios
+					</a>
+					<a class="nav" preload-text="Máquinas" preload-img="img/maquina_icon.png" href="maquinas.html">
+						<img src="img/maquina_min_icon.png" />
+						Máquinas
+					</a>
+					<a class="nav" preload-text="Problemas" preload-img="img/problema_icon.png" href="problemas.html">
+						<img src="img/problema_min_icon.png" />
+						Problemas
+					</a>
+					<a class="nav" preload-text="Subproblemas" preload-img="img/subproblema_icon.png" href="subproblemas.html">
+						<img src="img/subproblema_min_icon.png" />
+						Subproblemas
+					</a>
+					<a class="nav" preload-text="Chamados" preload-img="img/chamado_icon.png" href="chamados.html">
+						<img src="img/chamado_min_icon.png" />
+						Chamados
+					</a>
+				</nav>
+			</aside>
+			<div id="content">
+			</div>
 		</div>
-		<!-- 
-		<span id="main_search_wrapper">
-			<input type="search" id="main_search_input" />
-			<input type="image" id="main_search_submit" src="img/main_search_icon.png" />
-		</span>
-		 -->
-		<div id="user_info_wrapper">
-			<span>Pedro Mor</span>
-			<img src="img/usuario_login_min.png">
-	   	</div>
-	</header>
-	<div id="main">
-		<aside id="main_menu">
-			<nav>
-				<a class="nav" preload-text="Usuários" preload-img="img/usuario_icon.png" href="usuarios.html">
-					<img src="img/usuario_min_icon.png" />
-					Usuários
-				</a>
-				<a class="nav" preload-text="Laboratórios" preload-img="img/laboratorio_icon.png" href="laboratorios.html">
-					<img src="img/laboratorio_min_icon.png" />
-					Laboratórios
-				</a>
-				<a class="nav" preload-text="Máquinas" preload-img="img/maquina_icon.png" href="maquinas.html">
-					<img src="img/maquina_min_icon.png" />
-					Máquinas
-				</a>
-				<a class="nav" preload-text="Problemas" preload-img="img/problema_icon.png" href="problemas.html">
-					<img src="img/problema_min_icon.png" />
-					Problemas
-				</a>
-				<a class="nav" preload-text="Subproblemas" preload-img="img/subproblema_icon.png" href="subproblemas.html">
-					<img src="img/subproblema_min_icon.png" />
-					Subproblemas
-				</a>
-				<a class="nav" preload-text="Chamados" preload-img="img/chamado_icon.png" href="chamados.html">
-					<img src="img/chamado_min_icon.png" />
-					Chamados
-				</a>
-			</nav>
-		</aside>
-		<div id="content">
+		<div id="preload">
+			<div>
+				<img src="img/laboratorio_icon.png" />
+				<h1></h1>
+			</div>
 		</div>
-	</div>
-	<div id="preload">
-		<div>
-			<img src="img/laboratorio_icon.png" />
-			<h1></h1>
-		</div>
-	</div>
-</body>
+	</body>
 </html>

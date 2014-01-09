@@ -1,40 +1,41 @@
 <script src="scripts/app/usuarios.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
+		window.app.viewmodel = new UsuariosViewModel(window.app);
 		ko.applyBindings(window.app.viewmodel, document.getElementById('usuarios_view'));
-        window.app.viewmodel.obterTodos();
+		window.app.viewmodel.obterTodos();
 	});
 </script>
 <div id="usuarios_view" class="default_content_wrapper">
-    <h1>Inclui novo usuário:</h1>
-    <form data-bind="submit: incluir">
-        <input type="text" name="nome" placeholder="Informa o nome"/>
-        <input type="text" name="matricula" placeholder="Informa a matricula"/>
-        <select name="tipo" data-bind="options: [ {nome: 'administrador', id: '1'}, {nome: 'técnico', id: '2'}], optionsText: 'nome', optionsValue: 'id'"></select>
-        <button type="submit">Inclui</button>
-    </form>
-    <br/>
-    <hr/>
-    <h1>Usuários</h1>
+	<h1>Inclui novo usuário:</h1>
+	<form data-bind="submit: incluir">
+		<input type="text" name="nome" placeholder="Informa o nome"/>
+		<input type="text" name="matricula" placeholder="Informa a matricula"/>
+		<select name="tipo" data-bind="options: [ {nome: 'administrador', id: '1'}, {nome: 'técnico', id: '2'}], optionsText: 'nome', optionsValue: 'id'"></select>
+		<button type="submit">Inclui</button>
+	</form>
+	<br/>
+	<hr/>
+	<h1>Usuários</h1>
 	<table class="default_table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Matricula</th>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: usuarios">
-            <tr>
-                <td><input data-bind="value: id" disabled="disabled"></input></td>
-                <td><input data-bind="value: matricula"></input></td>
-                <td><input data-bind="value: nome"></input></td>
-                <td><input data-bind="value: tipo" disabled="disabled"></input></td>
-                <td><a href="#" data-bind="click: $parent.alterar">Altera</a>
-                    <a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
-            </tr>
-        </tbody>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Matricula</th>
+				<th>Nome</th>
+				<th>Tipo</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: usuarios">
+			<tr>
+				<td><input data-bind="value: id" disabled="disabled"></input></td>
+				<td><input data-bind="value: matricula"></input></td>
+				<td><input data-bind="value: nome"></input></td>
+				<td><input data-bind="value: tipo" disabled="disabled"></input></td>
+				<td><a href="#" data-bind="click: $parent.alterar">Altera</a>
+					<a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
+			</tr>
+		</tbody>
 	</table>
 </div>

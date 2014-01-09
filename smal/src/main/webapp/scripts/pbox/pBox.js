@@ -4,7 +4,7 @@
     (function ($) {
         $.fn.pBox = function (options) {
         var defaults = {
-            icon: "/pbox/img/alerta.png",
+            icon: "/smal/scripts/pbox/img/alerta.png",
             title: "box title",
             width : "auto",
             height : "auto",
@@ -35,7 +35,7 @@
         var parent = $(identifier).parent();
         if(parent.attr('class') != 'box_content') {
             $(identifier).wrap("<div class='box_overlay'></div>").wrap("<div class='box_container'></div>").wrap("<div class='box_content'></div>");
-            $(identifier).parent().before("<div class='box_header'><img src='" + values.icon + "' class='box_icon'><h1>" + values.title + "</h1><a class='anchor_close'><img src='/pbox/img/fechar.png'></a></div>");
+            $(identifier).parent().before("<div class='box_header'><img src='" + values.icon + "' class='box_icon'><h1>" + values.title + "</h1><a class='anchor_close'><img src='/smal/scripts/pbox/img/fechar.png'></a></div>");
         }
         var container = $(identifier).parent().parent();
         var shadowAdded = false;

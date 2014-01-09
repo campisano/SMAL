@@ -1,33 +1,34 @@
 <script src="scripts/app/laboratorios.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
+		window.app.viewmodel = new LaboratoriosViewModel(window.app);
 		ko.applyBindings(window.app.viewmodel, document.getElementById('laboratorios_view'));
 		window.app.viewmodel.obterTodos();
 	});
 </script>
 <div id="laboratorios_view" class="default_content_wrapper">
 	<h1>Inclui novo laboratório:</h1>
-    <form data-bind="submit: incluir">
-        <input type="text" name="nome" placeholder="Informa o nome"/>
-        <button type="submit">Inclui</button>
-    </form>
-    <br/>
-    <hr/>
-    <h1>Laboratórios:</h1>
+	<form data-bind="submit: incluir">
+		<input type="text" name="nome" placeholder="Informa o nome"/>
+		<button type="submit">Inclui</button>
+	</form>
+	<br/>
+	<hr/>
+	<h1>Laboratórios:</h1>
 	<table class="default_table">
 		<thead>
 			<tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Ação</th>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody data-bind="foreach: laboratorios">
 			<tr>
-	            <td><input data-bind="value: id" disabled="disabled"></input></td>
-	            <td><input data-bind="value: nome"></input></td>
-	            <td><a href="#" data-bind="click: $parent.alterar">Altera</a>
-	                <a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
+				<td><input data-bind="value: id" disabled="disabled"></input></td>
+				<td><input data-bind="value: nome"></input></td>
+				<td><a href="#" data-bind="click: $parent.alterar">Altera</a>
+					<a href="#" data-bind="click: $parent.excluir">Exclui</a></td>
 			</tr>
 		</tbody>
 	</table>

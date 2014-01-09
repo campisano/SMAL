@@ -1,19 +1,17 @@
-window.app.viewmodel = new ChamadosViewModel();
-
-function ChamadosViewModel() {
+function ChamadosViewModel(app) {
 	var self = this;
-
+	self.app = app;
 	self.chamados = ko.observableArray([]);
 
 	self.listarChamados = function() {
-		window.app.notifyDebug("Listar chamados...", "");
+		self.app.notifyDebug("Listar chamados...", "");
 		$.ajax("/smal/json/chamado/listarChamados", {
 			cache : false,
 			type : "GET",
 			contentType : "application/json",
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Listando:", JSON
+					self.app.notifyInfo("Listando:", JSON
 							.stringify(result.mensagem));
 					var mappedChamados = $.map(result.mensagem, function(item) {
 						return new ListarChamadosResponseAndDesignar_Fechar(
@@ -21,12 +19,11 @@ function ChamadosViewModel() {
 					});
 					self.chamados(mappedChamados);
 				} else {
-					window.app
-							.notifyError("Erro na obtenção:", result.mensagem);
+					self.app.notifyError("Erro na obtenção:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na requisição:", JSON
+				self.app.notifyError("Erro na requisição:", JSON
 						.stringify(result));
 			}
 		});
@@ -39,7 +36,7 @@ function ChamadosViewModel() {
 			subproblemaId : form.subproblemaId.value,
 			descricao : form.descricao.value
 		};
-		window.app.notifyDebug("Incluindo...", JSON.stringify(ko
+		self.app.notifyDebug("Incluindo...", JSON.stringify(ko
 				.toJSON(abrirChamadoRequest)));
 		$.ajax("/smal/json/chamado/abrirChamado", {
 			cache : false,
@@ -48,15 +45,14 @@ function ChamadosViewModel() {
 			data : ko.toJSON(abrirChamadoRequest),
 			success : function(result) {
 				if (result.sucesso) {
-					window.app.notifyInfo("Incluido:", JSON.stringify(result));
+					self.app.notifyInfo("Incluido:", JSON.stringify(result));
 					self.listarChamados();
 				} else {
-					window.app
-							.notifyError("Erro na inclusão:", result.mensagem);
+					self.app.notifyError("Erro na inclusão:", result.mensagem);
 				}
 			},
 			failure : function(result) {
-				window.app.notifyError("Erro na requisição:", JSON
+				self.app.notifyError("Erro na requisição:", JSON
 						.stringify(result));
 			}
 		});
@@ -67,27 +63,29 @@ function ChamadosViewModel() {
 			protocolo : form.protocolo,
 			atendenteId : form.atendenteInput
 		};
-		window.app.notifyDebug("alterando...", JSON.stringify(ko
+		self.app.notifyDebug("alterando...", JSON.stringify(ko
 				.toJSON(designarChamadoRequest)));
-		$.ajax("/smal/json/chamado/designarChamado", {
-			cache : false,
-			type : "POST",
-			contentType : "application/json",
-			data : ko.toJSON(designarChamadoRequest),
-			success : function(result) {
-				if (result.sucesso) {
-					window.app.notifyInfo("Alterado:", JSON.stringify(result));
-					self.listarChamados();
-				} else {
-					window.app.notifyError("Erro na alteração:",
-							result.mensagem);
-				}
-			},
-			failure : function(result) {
-				window.app.notifyError("Erro na requisição:", JSON
-						.stringify(result));
-			}
-		});
+		$.ajax("/smal/json/chamado/designarChamado",
+				{
+					cache : false,
+					type : "POST",
+					contentType : "application/json",
+					data : ko.toJSON(designarChamadoRequest),
+					success : function(result) {
+						if (result.sucesso) {
+							self.app.notifyInfo("Alterado:", JSON
+									.stringify(result));
+							self.listarChamados();
+						} else {
+							self.app.notifyError("Erro na alteração:",
+									result.mensagem);
+						}
+					},
+					failure : function(result) {
+						self.app.notifyError("Erro na requisição:", JSON
+								.stringify(result));
+					}
+				});
 	};
 
 	self.fecharChamado = function(form) {
@@ -96,7 +94,7 @@ function ChamadosViewModel() {
 			exito : (ko.utils.unwrapObservable(form.statusInput) == 3) ? true
 					: false
 		};
-		window.app.notifyDebug("Alterando...", JSON.stringify(ko
+		self.app.notifyDebug("Alterando...", JSON.stringify(ko
 				.toJSON(fecharChamadoRequest)));
 		$.ajax("/smal/json/chamado/fecharChamado",
 				{
@@ -106,16 +104,16 @@ function ChamadosViewModel() {
 					data : ko.toJSON(fecharChamadoRequest),
 					success : function(result) {
 						if (result.sucesso) {
-							window.app.notifyInfo("Alterando:", JSON
+							self.app.notifyInfo("Alterando:", JSON
 									.stringify(result));
 							self.listarChamados();
 						} else {
-							window.app.notifyError("Erro na alteração:",
+							self.app.notifyError("Erro na alteração:",
 									result.mensagem);
 						}
 					},
 					failure : function(result) {
-						window.app.notifyError("Erro na requisição:", JSON
+						self.app.notifyError("Erro na requisição:", JSON
 								.stringify(result));
 					}
 				});
