@@ -61,12 +61,11 @@
 @ECHO .
 @ECHO .
 @ECHO .
-@ECHO Ready to run in http://localhost:8080/smal/ ...
+@ECHO Ready to gerate war archive ...
 @PAUSE
 @CD smal
-mvn.bat clean compile tomcat:run
+mvn.bat clean compile war:war
 @IF ERRORLEVEL 1 GOTO ERROR
-
 
 
 

@@ -9,27 +9,27 @@
 	<name>Smal</name>
 	<url>http://maven.apache.org</url>
 
-
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.6</java.version>
 
-		<!-- Optional deploy -->
-		<catalina.version>6.0.37</catalina.version>
+		<java.version>1.6</java.version>
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 
 		<!-- Optional testing -->
 		<junit.version>4.11</junit.version>
 		<spring-test.version>3.2.5.RELEASE</spring-test.version>
 
+		<!-- Tomcat -->
+		<catalina.version>6.0.37</catalina.version>
+
 		<!-- Spring -->
-		<spring-core.version>3.2.5.RELEASE</spring-core.version>
-		<spring-context.version>3.2.5.RELEASE</spring-context.version>
-		<spring-web.version>3.2.5.RELEASE</spring-web.version>
-		<spring-orm.version>3.2.5.RELEASE</spring-orm.version>
-		<spring-tx.version>3.2.5.RELEASE</spring-tx.version>
-		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
+		<spring-core.version>4.0.0.RELEASE</spring-core.version>
+		<spring-context.version>4.0.0.RELEASE</spring-context.version>
+		<spring-web.version>4.0.0.RELEASE</spring-web.version>
+		<spring-orm.version>4.0.0.RELEASE</spring-orm.version>
+		<spring-tx.version>4.0.0.RELEASE</spring-tx.version>
+		<spring-data-jpa.version>1.4.3.RELEASE</spring-data-jpa.version>
 
 		<!-- Logging -->
 		<log4j.version>1.2.17</log4j.version>
@@ -43,12 +43,12 @@
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 
 		<!-- Jersey -->
-		<jersey-server.version>1.17.1</jersey-server.version>
-		<jersey-servlet.version>1.17.1</jersey-servlet.version>
-		<jersey-json.version>1.17.1</jersey-json.version>
+		<jersey-server.version>1.18</jersey-server.version>
+		<jersey-servlet.version>1.18</jersey-servlet.version>
+		<jersey-json.version>1.18</jersey-json.version>
 
 		<!-- Jersey + Spring -->
-		<jersey-spring.version>1.17.1</jersey-spring.version>
+		<jersey-spring.version>1.18</jersey-spring.version>
 	</properties>
 
 	<build>
@@ -58,6 +58,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -68,21 +69,11 @@
 
 	<dependencies>
 
-		<!-- Optional deploy -->
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>catalina</artifactId>
-			<version>${catalina.version}</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- Optional testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 
@@ -90,8 +81,14 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring-test.version}</version>
-			<type>jar</type>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Tomcat -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>catalina</artifactId>
+			<version>${catalina.version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -99,42 +96,36 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring-core.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring-context.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring-web.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-orm.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring-tx.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring-data-jpa.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<!-- Logging -->
@@ -142,21 +133,18 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-api.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j-simple.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<!-- Database -->
@@ -164,28 +152,24 @@
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>${derby.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate-entitymanager.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>${hibernate-jpa-2.0-api.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<!-- Jersey -->
@@ -193,21 +177,18 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>${jersey-server.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
 			<version>${jersey-servlet.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey-json.version}</version>
-			<type>jar</type>
 		</dependency>
 
 		<!-- Jersey + Spring -->
