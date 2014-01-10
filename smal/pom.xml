@@ -10,15 +10,12 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<java.version>1.6</java.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-
-		<!-- Optional testing -->
-		<junit.version>4.11</junit.version>
-		<spring-test.version>3.2.5.RELEASE</spring-test.version>
 
 		<!-- Tomcat -->
 		<catalina.version>6.0.37</catalina.version>
@@ -30,6 +27,7 @@
 		<spring-orm.version>4.0.0.RELEASE</spring-orm.version>
 		<spring-tx.version>4.0.0.RELEASE</spring-tx.version>
 		<spring-data-jpa.version>1.4.3.RELEASE</spring-data-jpa.version>
+		<spring-test.version>3.2.5.RELEASE</spring-test.version>
 
 		<!-- Logging -->
 		<log4j.version>1.2.17</log4j.version>
@@ -44,11 +42,16 @@
 
 		<!-- Jersey -->
 		<jersey-server.version>1.18</jersey-server.version>
-		<jersey-servlet.version>1.18</jersey-servlet.version>
+		<jersey-core.version>1.18</jersey-core.version>
 		<jersey-json.version>1.18</jersey-json.version>
+		<jersey-multipart.version>1.18</jersey-multipart.version>
 
 		<!-- Jersey + Spring -->
 		<jersey-spring.version>1.18</jersey-spring.version>
+
+		<!-- JUnit -->
+		<junit.version>4.11</junit.version>
+
 	</properties>
 
 	<build>
@@ -69,26 +72,12 @@
 
 	<dependencies>
 
-		<!-- Optional testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring-test.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- Tomcat -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>catalina</artifactId>
 			<version>${catalina.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring -->
@@ -181,14 +170,20 @@
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
-			<version>${jersey-servlet.version}</version>
+			<artifactId>jersey-core</artifactId>
+			<version>${jersey-core.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey-json.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>${jersey-multipart.version}</version>
 		</dependency>
 
 		<!-- Jersey + Spring -->
@@ -222,6 +217,21 @@
 					<artifactId>spring-aop</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- Optional testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-test.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
