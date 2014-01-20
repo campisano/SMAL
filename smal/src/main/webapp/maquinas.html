@@ -2,17 +2,17 @@
 <script src="scripts/app/maquinas.viewmodel.js"></script>
 <script>
 	$(document).ready(function () {
-        window.app.labviewmodel = new LaboratoriosViewModel(window.app);
-        window.app.maqviewmodel = new MaquinasViewModel(window.app);
+		window.app.labviewmodel = new LaboratoriosViewModel(window.app);
+		window.app.maqviewmodel = new MaquinasViewModel(window.app);
 		ko.applyBindings(window.app, document.getElementById('maquinas_view'));
-        window.app.labviewmodel.obterTodos();
+		window.app.labviewmodel.obterTodos();
 	});
 </script>
 <div id="maquinas_view" class="default_content_wrapper">
 	<h1>Listar máquinas</h1>
-        <nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
-            <button data-bind="click:  function () { $parent.maqviewmodel.listarMaquinas(id) }"><span data-bind="text: nome"></span></button>
-        </nav>
+		<nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
+			<button data-bind="click:  function () { $parent.maqviewmodel.listarMaquinas(id) }"><span data-bind="text: nome"></span></button>
+		</nav>
 	<br/>
 	<hr/>
 	<h1>Inclui nova máquina:</h1>

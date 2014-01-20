@@ -1,0 +1,103 @@
+<script src="scripts/CLEditor1_4_1/jquery.cleditor.min.js"></script>
+<link href="scripts/CLEditor1_4_1/jquery.cleditor.css" rel="stylesheet" />
+
+<script src="scripts/tipTipv13/jquery.tipTip.minified.js"></script>
+<link href="scripts/tipTipv13/tipTip.css" rel="stylesheet" />
+
+<script src="scripts/pbox/pBox.js"></script>
+<link href="scripts/pbox/pBox.css" rel="stylesheet" />
+
+<link href="css/aluno.css" rel="stylesheet" />
+<script src="scripts/app/laboratorios.viewmodel.js"></script>
+<script src="scripts/app/maquinas.viewmodel.js"></script>
+<script>
+	$(document).ready(function () {
+		$("*[title]").tipTip({ delay: 0, maxWidth: 'auto' });
+		$("#lab_nav > a").click(function () {
+			$(this).parent().find('.selected').removeClass('selected');
+			$(this).attr('class', 'selected');
+			$(".lab_wrapper").fadeOut("medium", function () {
+				setTimeout(function () { $(".lab_wrapper").fadeIn("medium"); }, 200);
+			});
+		});
+		$("#add_ticket_trigger").pBox({ title: "Abrir Ticket" });
+		$("#txtProblema").cleditor();
+
+		window.app.labviewmodel = new LaboratoriosViewModel(window.app);
+		window.app.maqviewmodel = new MaquinasViewModel(window.app);
+		ko.applyBindings(window.app, document.getElementById('maquinas_view'));
+		window.app.labviewmodel.obterTodos();
+
+		window.app.maqviewmodel.displayMaquina = function(maquina) {
+			var top_start = -150;
+			var left_start = -150;
+			var top_size = 150;
+			var left_size = 180;
+			
+			return "<div style=\"position:fixed; margin-top:" + (maquina.fila() * top_size + top_start) + "px;margin-left:" + (maquina.coluna() * left_size + left_start) + "px;\" class=\"computer_wrapper\" onclick=\"showHideBox('#add_ticket_box');\">" +
+						"<div class=\"computer_problems\">" +
+							 "<img src=\"img/network.png\" class=\"computer_problem\" title=\"Driver de CD não abre\" />" +
+							 "<img src=\"img/network.png\" class=\"computer_problem\" title=\"Sem acesso a internet\" />" +
+						"</div>" +
+						"<div class=\"computer_content\">" +
+							"<img src=\"img/pc_icon.png\" class=\"pc_icon\" /><br/>" +
+							"<span>" + maquina.id() + " (f" + maquina.fila() + " c" + maquina.coluna() + ")</span>" +
+						"</div>" +
+					"</div>";
+		}
+	});
+	
+</script>
+<div id="maquinas_view" class="default_content_wrapper">
+	<div id="header_nav">
+		<nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
+			<a href="#" data-bind="click:  function () { $parent.maqviewmodel.listarMaquinas(id) }">
+			<span data-bind="text: nome"></span></a>
+		</nav>
+	</div>
+	<div class="lab_wrapper" align="left">
+		<div class="lab_table">
+			<div data-bind="foreach: maqviewmodel.maquinas" style="overflow:auto;">
+				<div data-bind="html: $parent.maqviewmodel.displayMaquina($data)"></div>
+			</div>
+		</div>
+	</div>
+	<a id="add_ticket_trigger" href="#add_ticket_box"></a>
+	<div id="add_ticket_box">
+		<h1>Lab 03 - Máquina 01</h1>
+		<table>
+			<tr>
+				<td>Problema:</td>
+				<td>
+					<select class="ddl">
+						<option>Rede</option>
+						<option>Hardware</option>
+						<option>Software</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Tipo de Problema:</td>
+				<td>
+					<select class="ddl">
+						<option>Rede</option>
+						<option>Hardware</option>
+						<option>Software</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea id="txtProblema"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="button" value="Abrir" class="btn" />
+					<a class="btn red">Cancelar</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
