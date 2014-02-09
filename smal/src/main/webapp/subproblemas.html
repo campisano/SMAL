@@ -1,22 +1,37 @@
+<script src="scripts/app/problemas.viewmodel.js"></script>
 <script src="scripts/app/subproblemas.viewmodel.js"></script>
 <script>
-	$(document).ready(
-			function() {
-				window.app.viewmodel = new SubproblemasViewModel(window.app);
-				ko.applyBindings(window.app.viewmodel, document
-						.getElementById('subproblemas_view'));
-				window.app.viewmodel.listarSubproblemas();
-			});
+	$(document).ready( function() {
+
+		window.app.problemasviewmodel = new ProblemasViewModel(window.app);
+		window.app.subproblemasviewmodel = new SubproblemasViewModel(window.app);
+
+		window.app.subproblemasviewmodel.getProblemasSelectOptions = function() {
+			var arr_probs =  window.app.problemasviewmodel.problemas();
+			var arr_probs_select_opts = [];
+
+			for(var i = 0; i <arr_probs.length; ++i) {
+				arr_probs_select_opts.push( { id: arr_probs[i].id(), nome: arr_probs[i].nome()});
+			}
+			
+			return arr_probs_select_opts;
+		};
+		
+		ko.applyBindings(window.app, document.getElementById('subproblemas_view'));
+		window.app.problemasviewmodel.listarProblemas();
+		window.app.subproblemasviewmodel.listarSubproblemas();
+	});
 </script>
 <div id="subproblemas_view" class="default_content_wrapper">
 	<h1>Inclui novo subproblema:</h1>
-	<form data-bind="submit: cadastrarSubproblema">
-		<input type="text" name="nome" placeholder="Informa o nome" /> <input
-			type="text" name="problemaId" placeholder="Informa o problema pai" />
+	<form data-bind="submit: subproblemasviewmodel.cadastrarSubproblema">
+		<input type="text" name="nome" placeholder="Informa o nome" />
+		<select name="problemaId" data-bind="options: subproblemasviewmodel.getProblemasSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
 		<button type="submit">Inclui</button>
 	</form>
 	<br />
 	<hr />
+	<br />
 	<h1>Subproblemas:</h1>
 	<table class="default_table">
 		<thead>
@@ -27,13 +42,13 @@
 				<th>Ação</th>
 			</tr>
 		</thead>
-		<tbody data-bind="foreach: subproblemas">
+		<tbody data-bind="foreach: subproblemasviewmodel.subproblemas">
 			<tr>
 				<td><input data-bind="value: id" disabled="disabled"></input></td>
 				<td><input data-bind="value: nome"></input></td>
 				<td><input data-bind="value: problemaId"></input></td>
-				<td><a href="#" data-bind="click: $parent.alterarSubproblema">Altera</a>
-					<a href="#" data-bind="click: $parent.excluirSubproblema">Exclui</a></td>
+				<td><a href="#" data-bind="click: $parent.subproblemasviewmodel.alterarSubproblema">Altera</a>
+					<a href="#" data-bind="click: $parent.subproblemasviewmodel.excluirSubproblema">Exclui</a></td>
 			</tr>
 		</tbody>
 	</table>
