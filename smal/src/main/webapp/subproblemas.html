@@ -5,18 +5,6 @@
 
 		window.app.problemasviewmodel = new ProblemasViewModel(window.app);
 		window.app.subproblemasviewmodel = new SubproblemasViewModel(window.app);
-
-		window.app.subproblemasviewmodel.getProblemasSelectOptions = function() {
-			var arr_probs =  window.app.problemasviewmodel.problemas();
-			var arr_probs_select_opts = [];
-
-			for(var i = 0; i <arr_probs.length; ++i) {
-				arr_probs_select_opts.push( { id: arr_probs[i].id(), nome: arr_probs[i].nome()});
-			}
-			
-			return arr_probs_select_opts;
-		};
-		
 		ko.applyBindings(window.app, document.getElementById('subproblemas_view'));
 		window.app.problemasviewmodel.listarProblemas();
 		window.app.subproblemasviewmodel.listarSubproblemas();
@@ -26,7 +14,7 @@
 	<h1>Inclui novo subproblema:</h1>
 	<form data-bind="submit: subproblemasviewmodel.cadastrarSubproblema">
 		<input type="text" name="nome" placeholder="Informa o nome" />
-		<select name="problemaId" data-bind="options: subproblemasviewmodel.getProblemasSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
+		<select name="problemaId" data-bind="options: problemasviewmodel.obterProblemasSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
 		<button type="submit">Inclui</button>
 	</form>
 	<br />

@@ -4,18 +4,6 @@
 	$(document).ready(function () {
 		window.app.labviewmodel = new LaboratoriosViewModel(window.app);
 		window.app.maqviewmodel = new MaquinasViewModel(window.app);
-		
-		window.app.maqviewmodel.getLaboratoriosSelectOptions = function() {
-			var arr_labs =  window.app.labviewmodel.laboratorios();
-			var arr_labs_select_opts = [];
-
-			for(var i = 0; i <arr_labs.length; ++i) {
-				arr_labs_select_opts.push( { id: arr_labs[i].id(), nome: arr_labs[i].nome()});
-			}
-			
-			return arr_labs_select_opts;
-		};
-		
 		ko.applyBindings(window.app, document.getElementById('maquinas_view'));
 		window.app.labviewmodel.obterTodos();
 	});
@@ -24,7 +12,7 @@
 	<h1>Inclui nova máquina:</h1>
 	<form data-bind="submit: maqviewmodel.cadastrarMaquina">
 		<input type="text" name="patrimonio" placeholder="Informe o patrimonio"/>
-		<select name="laboratorioId" data-bind="options: maqviewmodel.getLaboratoriosSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
+		<select name="laboratorioId" data-bind="options: labviewmodel.obterLaboratoriosSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
 		<input type="text" name="fila" placeholder="fila" size="3"/>
 		<input type="text" name="coluna" placeholder="coluna" size="3"/>
 		<button type="submit">Inclui</button>
