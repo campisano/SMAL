@@ -4,27 +4,41 @@
 	$(document).ready(function () {
 		window.app.labviewmodel = new LaboratoriosViewModel(window.app);
 		window.app.maqviewmodel = new MaquinasViewModel(window.app);
+		
+		window.app.maqviewmodel.getLaboratoriosSelectOptions = function() {
+			var arr_labs =  window.app.labviewmodel.laboratorios();
+			var arr_labs_select_opts = [];
+
+			for(var i = 0; i <arr_labs.length; ++i) {
+				arr_labs_select_opts.push( { id: arr_labs[i].id(), nome: arr_labs[i].nome()});
+			}
+			
+			return arr_labs_select_opts;
+		};
+		
 		ko.applyBindings(window.app, document.getElementById('maquinas_view'));
 		window.app.labviewmodel.obterTodos();
 	});
 </script>
 <div id="maquinas_view" class="default_content_wrapper">
-	<h1>Listar máquinas</h1>
-		<nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
-			<button data-bind="click:  function () { $parent.maqviewmodel.listarMaquinas(id) }"><span data-bind="text: nome"></span></button>
-		</nav>
-	<br/>
-	<hr/>
 	<h1>Inclui nova máquina:</h1>
 	<form data-bind="submit: maqviewmodel.cadastrarMaquina">
 		<input type="text" name="patrimonio" placeholder="Informe o patrimonio"/>
-		<input type="text" name="laboratorioId" placeholder="Informe o laboratorio"/>
-		<input type="text" name="fila" placeholder="Informe a fila"/>
-		<input type="text" name="coluna" placeholder="Informe a coluna"/>
+		<select name="laboratorioId" data-bind="options: maqviewmodel.getLaboratoriosSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
+		<input type="text" name="fila" placeholder="fila" size="3"/>
+		<input type="text" name="coluna" placeholder="coluna" size="3"/>
 		<button type="submit">Inclui</button>
 	</form>
 	<br/>
 	<hr/>
+	<br/>
+	<h1>Listar máquinas</h1>
+		<nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
+			<button data-bind="click: function () { $parent.maqviewmodel.listarMaquinas(id); }"><span data-bind="text: nome"></span></button>
+		</nav>
+	<br/>
+	<hr/>
+	<br/>
 	<h1>Máquinas:</h1>
 	<table class="default_table">
 		<thead>
@@ -42,8 +56,8 @@
 				<td><input data-bind="value: id" disabled="disabled"></input></td>
 				<td><input data-bind="value: patrimonio"></input></td>
 				<td><input data-bind="value: laboratorioId"></input></td>
-				<td><input data-bind="value: fila"></input></td>
-				<td><input data-bind="value: coluna"></input></td>
+				<td><input data-bind="value: fila" size="3"></input></td>
+				<td><input data-bind="value: coluna" size="3"></input></td>
 				<td><a href="#" data-bind="click: $parent.maqviewmodel.alterarMaquina">Altera</a>
 					<a href="#" data-bind="click: $parent.maqviewmodel.excluirMaquina">Exclui</a></td>
 			</tr>
