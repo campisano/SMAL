@@ -45,10 +45,13 @@ function WindowApp() {
 			var content = $("#content");
 			preload.addClass('in');
 			setTimeout(function() {
-				$.get(location.pathname, function(data) {
-					content.html(data);
-					preload.removeClass('in');
-				});
+				content.html($.ajax({
+					type : "GET",
+					url : location.pathname,
+					async : false,
+					cache : false
+				}).responseText);
+				preload.removeClass('in');
 			}, 800);
 		} else {
 			self.changePage('/smal/chamados.html', undefined, undefined);
@@ -65,10 +68,13 @@ function WindowApp() {
 				preload.find('h1').text(text);
 			preload.addClass('in');
 			setTimeout(function() {
-				$.get(url, function(data) {
-					content.html(data);
-					preload.removeClass('in');
-				});
+				content.html($.ajax({
+					type : "GET",
+					url : url,
+					async : false,
+					cache : false
+				}).responseText);
+				preload.removeClass('in');
 			}, 800);
 		}
 	};
