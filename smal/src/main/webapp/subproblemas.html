@@ -2,7 +2,6 @@
 <script src="scripts/app/subproblemas.viewmodel.js"></script>
 <script>
 	$(document).ready( function() {
-
 		window.app.problemasviewmodel = new ProblemasViewModel(window.app);
 		window.app.subproblemasviewmodel = new SubproblemasViewModel(window.app);
 		ko.applyBindings(window.app, document.getElementById('subproblemas_view'));
@@ -14,7 +13,7 @@
 	<h1>Inclui novo subproblema:</h1>
 	<form data-bind="submit: subproblemasviewmodel.cadastrarSubproblema">
 		<input type="text" name="nome" placeholder="Informa o nome" />
-		<select name="problemaId" data-bind="options: problemasviewmodel.obterProblemasSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
+		<select name="problemaId" data-bind="options: problemasviewmodel.problemas, optionsText: 'nome', optionsValue: 'id', optionsCaption: 'selecione o subproblema'"></select>
 		<button type="submit">Inclui</button>
 	</form>
 	<br />

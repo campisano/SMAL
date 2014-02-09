@@ -12,7 +12,7 @@
 	<h1>Inclui nova máquina:</h1>
 	<form data-bind="submit: maqviewmodel.cadastrarMaquina">
 		<input type="text" name="patrimonio" placeholder="Informe o patrimonio"/>
-		<select name="laboratorioId" data-bind="options: labviewmodel.obterLaboratoriosSelectOptions(), optionsText: 'nome', optionsValue: 'id'"></select>
+		<select name="laboratorioId" data-bind="options: labviewmodel.laboratorios, optionsText: 'nome', optionsValue: 'id', optionsCaption: 'selecione o laboratório'"></select>
 		<input type="text" name="fila" placeholder="fila" size="3"/>
 		<input type="text" name="coluna" placeholder="coluna" size="3"/>
 		<button type="submit">Inclui</button>
@@ -22,7 +22,7 @@
 	<br/>
 	<h1>Listar máquinas</h1>
 		<nav id="lab_nav" data-bind="foreach: labviewmodel.laboratorios">
-			<button data-bind="click: function () { $parent.maqviewmodel.listarMaquinas(id); }"><span data-bind="text: nome"></span></button>
+			<button data-bind="click: function () { $parent.maqviewmodel.listarMaquinas(id()); }"><span data-bind="text: nome"></span></button>
 		</nav>
 	<br/>
 	<hr/>

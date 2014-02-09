@@ -104,17 +104,6 @@ function LaboratoriosViewModel(app) {
 			}
 		});
 	};
-
-	self.obterLaboratoriosSelectOptions = function() {
-		var arr_data =  self.laboratorios();
-		var arr_select_opts = [];
-
-		for(var i = 0; i <arr_data.length; ++i) {
-			arr_select_opts.push( { id: arr_data[i].id(), nome: arr_data[i].nome()});
-		}
-		
-		return arr_select_opts;
-	};
 };
 
 function ObterTodosResponse(data) {

@@ -1,12 +1,10 @@
 <script src="scripts/app/problemas.viewmodel.js"></script>
 <script>
-	$(document).ready(
-			function() {
-				window.app.viewmodel = new ProblemasViewModel(window.app);
-				ko.applyBindings(window.app.viewmodel, document
-						.getElementById('problemas_view'));
-				window.app.viewmodel.listarProblemas();
-			});
+	$(document).ready(function() {
+		window.app.viewmodel = new ProblemasViewModel(window.app);
+		ko.applyBindings(window.app.viewmodel, document.getElementById('problemas_view'));
+		window.app.viewmodel.listarProblemas();
+	});
 </script>
 <div id="problemas_view" class="default_content_wrapper">
 	<h1>Inclui novo problema:</h1>
